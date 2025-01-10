@@ -10,16 +10,17 @@ export default {
     extend: {
       colors: {
         'text': 'hsl(268, 42%, 94%)',
-        'background': 'hsl(270, 33%, 2%)',
+        'background': 'hsl(250, 53%, 8%)',
         'primary': 'hsl(272, 62%, 71%)',
         'secondary': 'hsl(270, 78%, 32%)',
         'accent': 'hsl(68, 64%, 55%)',
       },
-      backgroundImage: {
-        'hero-mobile': "url('/hero-mobile.jpg')",
-        'hero-tablet': "url('/hero-tablet.jpg')",
-        'hero-desktop': "url('/hero-desktop.jpg')",
-
+      screens: {
+        'xs': "550px",
+      },
+      fontWeight: {
+        'regular': "400",
+        'bold': "700",
       },
     },
   },
