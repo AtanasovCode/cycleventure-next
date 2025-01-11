@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import CycleventureLogo from "@/app/ui/cycleventure-logo";
 
 export default function Home() {
@@ -13,15 +14,16 @@ export default function Home() {
             Explore, Experience, Enjoy Life!
           </div>
           <div className="text-left text-base">
-            Whether it's on pavement, on gravel or off-road, we have you covered.
+            Whether it&apos;s on pavement, on gravel or off-road, we have you covered.
             With the best bikes and equipment, you can make your adventure your own.
           </div>
           <div className="w-full flex items-center justify-center">
-            <input
-              type="button"
-              value="Shop Now!"
-              className="w-full px-12 py-4 bg-accent text-black font-medium rounded-xl cursor-pointer"
-            />
+            <Link
+              href="/products"
+              className="w-full px-12 py-4 bg-accent text-black font-bold rounded-xl cursor-pointer flex items-center justify-center"
+            >
+              Shop Now!
+            </Link>
           </div>
         </div>
         <div className="flex items-center justify-center rounded-xl overflow-hidden md:w-2/3  lg:w-1/2">
