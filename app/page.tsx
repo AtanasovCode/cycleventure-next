@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import CycleventureLogo from "@/app/ui/cycleventure-logo";
 
-export default function Home() {
+export default function Page() {
   return (
     <div className="min-h-dvh flex flex-col items-center justify-start gap-24 py-8 bg-background text-text">
       <div className="w-full flex items-center justify-center z-50">
