@@ -1,9 +1,8 @@
-import { db } from "@vercel/postgres";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@/utils/supabase/server';
 
-export async function fetchProducts() {
+export async function fetchAllProducts() {
     const supabase = await createClient();
     const { data: products } = await supabase.from("products").select();
 
-    return products;
+    return (JSON.stringify(products, null, 2));
 }
