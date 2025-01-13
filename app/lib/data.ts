@@ -1,8 +1,22 @@
-import { createClient } from '@/utils/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 
-export async function fetchAllProducts() {
-    const supabase = await createClient();
-    const { data: products } = await supabase.from("products").select();
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
-    return (JSON.stringify(products, null, 2));
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+export default async function fetchProducts() {
+    try {
+        // Fetch all items from the "products" table
+        const { data, error } = await supabase.from('products').select('*');
+
+        if (error) {
+            console.error('Error fetching products:', error.message);
+            return [];
+        }
+        return data;
+    } catch (err) {
+        console.error('Unexpected error:', err);
+        return [];
+    }
 }
