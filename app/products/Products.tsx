@@ -3,29 +3,49 @@
 import { useEffect, useState } from "react";
 import fetchProducts from "../lib/data";
 
+type Products = {
+    id: string;
+    name: string;
+    photos: string[];
+    price: number;
+}
+
 export default function Products() {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState<Products[]>([]);
+    const [page, setPage] = useState<number>(1);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(3);
+    const [totalPages, setTotalPages] = useState<number>(0);
 
     useEffect(() => {
         const getProducts = async () => {
-            console.log("Fetching data...");
-            const data = await fetchProducts(); // Wait for the data to resolve
-            console.log("Data:", data);         // Log the actual data
-            setProducts(data);                 // Update state if needed
-            console.log("Data fetch complete.");
+            const { data, totalPages } = await fetchProducts(page, itemsPerPage); // Wait for the data to resolve
+            setProducts(data);
+            setTotalPages(totalPages)
         };
 
         getProducts(); // Call the async function
-    }, []);
+    }, [page, itemsPerPage]);
 
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center gap-6">
             <h1>Products Page</h1>
             <ul>
                 {products?.map((product) => (
                     <li key={product.id}>{product.name}</li>
                 ))}
             </ul>
+            <div className="flex items-center justify-start gap-2">
+                {Array.from({ length: totalPages }, (_, i) => (
+                    <div
+                        key={i} // Always use a key when rendering lists in React
+                        className="text-xs cursor-pointer w-8 aspect-square flex items-center justify-center border border-slate-500 rounded-full"
+                        onClick={() => setPage(i + 1)} // Adjust index for page number
+                    >
+                        {i + 1} {/* Display the correct page number */}
+                    </div>
+                ))}
+            </div>
+
         </div>
     );
 }
