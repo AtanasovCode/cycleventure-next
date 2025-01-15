@@ -12,19 +12,35 @@ type Products = {
 
 export default function Products() {
     const [products, setProducts] = useState<Products[]>([]);
+    const [filter, setFilter] = useState<string>("");
     const [page, setPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(3);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(9);
     const [totalPages, setTotalPages] = useState<number>(0);
+
+    const filters = [
+        {
+            value: "hardtail",
+            name: "Hardtail"
+        },
+        {
+            value: "full-suspension",
+            name: "Full Suspension"
+        },
+        {
+            value: "electric",
+            name: "Electric MTB"
+        },
+    ]
 
     useEffect(() => {
         const getProducts = async () => {
-            const { data, totalPages } = await fetchProducts(page, itemsPerPage); // Wait for the data to resolve
+            const { data, totalPages } = await fetchProducts(page, itemsPerPage, filter); // Wait for the data to resolve
             setProducts(data);
             setTotalPages(totalPages)
         };
 
         getProducts(); // Call the async function
-    }, [page, itemsPerPage]);
+    }, [page, itemsPerPage, filter]);
 
     return (
         <div className="flex flex-col items-center justify-center gap-6">
@@ -45,7 +61,20 @@ export default function Products() {
                     </div>
                 ))}
             </div>
-
+            <div className="flex flex-col items-start justify-center gap-4">
+                {
+                    filters.map((filter) => {
+                        return (
+                            <div 
+                                key={filter.name}
+                                onClick={() => setFilter(filter.value)}
+                            >
+                                {filter.name}
+                            </div>
+                        );
+                    })
+                }
+            </div>
         </div>
     );
 }
