@@ -5,9 +5,11 @@ import CycleventureLogo from "@/app/ui/cycleventure-logo";
 
 export default function SideFilters({ setFilter }: SideFiltersProps) {
     return (
-        <div className="h-[100dvh] min-w-64 overflow-y-auto flex flex-col items-start justify-start gap-12">
-            <CycleventureLogo />
-            <div className="text-center mb-8 font-bold text-lg">
+        <div className="hidden md:flex h-[100dvh] min-w-64 overflow-y-auto flex-col items-start justify-start gap-10">
+            <div className="text-text font-bold text-lg md:text-xl lg:text-2xl">
+                cycleventure
+            </div>
+            <div className="text-center -mb-6 font-bold text-lg">
                 Filters
             </div>
             <FilterWrapper title="Mountain Bikes" filters={mtbFilters} />
