@@ -29,3 +29,22 @@ export const frameFilters: Filter[] = [
         value: "alloy"
     },
 ]
+
+export const roadBikes: Filter[] = [
+    {
+        name: "Road",
+        value: "road"
+    },
+    {
+        name: "Gravel",
+        value: "gravel"
+    },
+    {
+        name: "Electric",
+        value: "road-electric"
+    },
+    {
+        name: "Triathlon",
+        value: "triathlon"
+    },
+]

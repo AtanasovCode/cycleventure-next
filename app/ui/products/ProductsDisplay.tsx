@@ -37,7 +37,7 @@ export default function ProductsDisplay({ filter }: ProductProps) {
             {loading ? (
                 <ProductsDisplaySkeleton />
             ) : (
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                     {products?.map((product) => (
                         <Card key={product.id} product={product} />
                     ))}
