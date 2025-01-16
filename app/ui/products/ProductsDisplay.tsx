@@ -33,11 +33,11 @@ export default function ProductsDisplay({ filter }: ProductProps) {
     }, [page, itemsPerPage, filter]);
 
     return (
-        <div className="w-full flex flex-col items-center justify-center gap-6">
+        <div className="w-full flex flex-col items-center justify-center gap-6 px-16">
             {loading ? (
                 <ProductsDisplaySkeleton />
             ) : (
-                <div className="w-full grid grid-cols-3 gap-6">
+                <div className="w-full grid grid-cols-3 gap-8">
                     {products?.map((product) => (
                         <Card key={product.id} product={product} />
                     ))}
