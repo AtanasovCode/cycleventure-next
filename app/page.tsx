@@ -22,7 +22,7 @@ export default function Page() {
               href="/products"
               className="w-full px-12 py-4 bg-accent text-black font-bold rounded-xl cursor-pointer flex items-center justify-center"
             >
-              Shop Now!
+              Shop All Bikes!
             </Link>
           </div>
         </div>

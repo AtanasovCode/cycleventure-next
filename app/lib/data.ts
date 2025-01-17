@@ -1,5 +1,4 @@
 import { createClient } from '@supabase/supabase-js';
-
 import { Product } from "@/app/types/Product";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -7,10 +6,16 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+type Filters = {
+    category?: string[];
+    frameType?: string[];
+    brand?: string[];
+};
+
 export default async function fetchProducts(
     page: number,
     itemsPerPage: number,
-    filter: string
+    filters: Filters
 ): Promise<{ totalPages: number; data: Product[] }> {
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage - 1;
@@ -21,8 +26,15 @@ export default async function fetchProducts(
             .select('*', { count: 'exact' })
             .range(start, end);
 
-        if (filter !== '') {
-            query = query.eq('category', filter);
+        // Apply filters dynamically
+        if (filters.category?.length) {
+            query = query.in('category', filters.category);
+        }
+        if (filters.frameType?.length) {
+            query = query.in('frameType', filters.frameType);
+        }
+        if (filters.brand?.length) {
+            query = query.in('brand', filters.brand);
         }
 
         const { data, error, count } = await query;
