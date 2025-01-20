@@ -1,13 +1,13 @@
-import { Filters } from "@/app/types/Filters";
+import { DifferentFilters } from "@/app/types/Filters";
 
-export const brandFilters: Filters[] = [
+export const brandFilters: DifferentFilters[] = [
     {
         name: "Trek",
         value: "trek"
     },
 ];
 
-export const mtbFilters: Filters[] = [
+export const mtbFilters: DifferentFilters[] = [
     {
         name: "Full Suspension",
         value: "full-suspension"
@@ -22,7 +22,7 @@ export const mtbFilters: Filters[] = [
     },
 ]
 
-export const frameFilters: Filters[] = [
+export const frameFilters: DifferentFilters[] = [
     {
         name: "Carbon",
         value: "carbon"
@@ -37,7 +37,7 @@ export const frameFilters: Filters[] = [
     },
 ]
 
-export const roadBikes: Filters[] = [
+export const roadBikes: DifferentFilters[] = [
     {
         name: "Road",
         value: "road"

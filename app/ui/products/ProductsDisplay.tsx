@@ -1,26 +1,23 @@
 import { useEffect, useState } from "react";
 import fetchProducts from "@/app/lib/data";
+import { Filters } from "@/app/types/Filters";
 import Card from "@/app/ui/products/Card";
 import Pages from "@/app/ui/products/Pages";
 import { ProductsDisplaySkeleton } from "@/app/ui/Skeletons";
 
 import { Product } from "@/app/types/Product";
 
-type ProductProps = {
-    filters: {
-        category?: string[];   // Optional array of strings for category filters
-        frameType?: string[]; // Optional array of strings for frame type filters
-        brand?: string[];     // Optional array of strings for brand filters
-    };
+type ProductsDisplayProps = {
+    filters: Filters;
 };
 
 
-export default function ProductsDisplay({ filters }: ProductProps) {
+export default function ProductsDisplay({ filters }: ProductsDisplayProps) {
 
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(9);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(12);
     const [totalPages, setTotalPages] = useState<number>(0);
 
 

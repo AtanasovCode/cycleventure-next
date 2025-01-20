@@ -1,9 +1,9 @@
 export function CardSkeleton() {
     return (
-        <div className="w-full flex flex-col items-start justify-center gap-6">
+        <div className="w-full flex flex-col items-start justify-center gap-2">
             <div className="w-full aspect-[3/2] bg-secondary" />
-            <div className="w-48 h-8 bg-secondary" />
-            <div className="w-28 h-8 bg-secondary" />
+            <div className="w-36 h-6 bg-secondary" />
+            <div className="w-20 h-6 bg-secondary" />
         </div>
     );
 }

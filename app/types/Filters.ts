@@ -1,9 +1,13 @@
-export type SideFiltersProps = {
-  setFilters: React.Dispatch<React.SetStateAction<{ category?: string[]; frameType?: string[]; brand?: string[] }>>;
+
+export type Filters = {
+  category: string[];
+  frameType: string[];
+  brand: string[];
 };
 
-// used for filters, i.e mtbFilters
-export type Filters = {
+
+// used for the different filters (i.e mtbFilters, frame type filters, imported from @/app/lib/filters)
+export type DifferentFilters = {
   name: string;
   value: string;
 }
