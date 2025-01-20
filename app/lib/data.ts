@@ -12,18 +12,20 @@ type Filters = {
     brand?: string[];
 };
 
+// Fetches products to display as preview cards in the products page
 export default async function fetchProducts(
     page: number,
     itemsPerPage: number,
     filters: Filters
 ): Promise<{ totalPages: number; data: Product[] }> {
-    const start = (page - 1) * itemsPerPage;
-    const end = start + itemsPerPage - 1;
+
+    const start = Math.max(0, (page - 1) * itemsPerPage);
+    const end = Math.max(start + itemsPerPage - 1, 0);
 
     try {
         let query = supabase
             .from('products')
-            .select('*', { count: 'exact' })
+            .select('id, name, brand, category, price, frameType, photos', { count: 'exact' })
             .range(start, end);
 
         // Apply filters dynamically
@@ -40,6 +42,11 @@ export default async function fetchProducts(
         const { data, error, count } = await query;
 
         if (error || !data) {
+            console.error("Something went wrong", error);
+            return { totalPages: 0, data: [] };
+        }
+
+        if (!data || count === 0) {
             return { totalPages: 0, data: [] };
         }
 
