@@ -20,7 +20,10 @@ export default function Products() {
     return (
         <div className="min-h-dvh w-full flex flex-col lg:flex-row items-start justify-start text-text gap-16">
             <div className="relative w-full lg:w-auto">
-                <MobileNav setShowFilters={setShowFilters} />
+                <MobileNav
+                    setShowFilters={setShowFilters}
+                    showFilters={showFilters}
+                />
                 <SideFilters
                     filters={filters}
                     setFilters={setFilters}

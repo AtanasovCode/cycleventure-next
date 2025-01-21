@@ -51,21 +51,17 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
     return (
         <div
             className={clsx(
-                "min-h-dvh w-dvw lg:w-auto bg-background z-50 flex-col items-start justify-start gap-8 transition-transform duration-300 ease-in p-12",
+                "fixed lg:relative min-h-dvh w-dvw lg:w-auto bg-background z-50 flex flex-col items-start justify-start gap-10 transform transition-transform duration-300 ease-in-out p-12",
                 {
-                    "-translate-x-full hidden lg:flex lg:translate-x-0": showFilters === false,
-                    "translate-x-0 flex fixed top-0 left-0 lg:relative": showFilters === true,
+                    "-translate-x-full lg:translate-x-0": !showFilters, // Hidden state
+                    "translate-x-0 fixed lg:relative": showFilters,   // Visible state
                 }
             )}
         >
-            <Close 
-                className="w-8 h-8 block absolute top-[3%] right-[3%] lg:hidden text-red-500"
-                onClick={() => setShowFilters(false)}
-            />
-            <div className="text-text font-bold text-lg md:text-xl lg:text-2xl">
+            <div className="text-text hidden lg:block font-bold text-lg md:text-xl lg:text-2xl">
                 cycleventure
             </div>
-            <div className="text-center -mb-5 font-bold text-lg">
+            <div className="text-left -mb-4 font-bold text-lg">
                 Filters
             </div>
             <div className="flex flex-col items-start justify-center gap-5">
