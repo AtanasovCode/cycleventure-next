@@ -10,22 +10,22 @@ type FilterWrapperProps = {
 export default function FilterWrapper({ title, differentFilters, handleFilterChange, checkFilter }: FilterWrapperProps) {
     return (
         <div className="flex flex-col items-start justify-start gap-4">
-            <div className="font-bold text-base">
+            <div className="font-bold text-xl lg:text-base">
                 {title}
             </div>
-            <div className="w-full flex flex-col items-start justify-start gap-2">
+            <div className="w-full flex flex-col items-start justify-start gap-4">
                 {differentFilters.map((filter) => {
                     return (
                         <div
                             key={filter.value}
-                            className="w-full flex items-center justify-start gap-2 cursor-pointer ml-2"
+                            className="w-full flex items-center justify-start gap-3 cursor-pointer ml-2"
                             onClick={() => handleFilterChange(filter.value)}
                         >
                             <div
-                                className="w-3 aspect-square border border-text rounded-sm"
+                                className="w-5 lg:w-4 aspect-square border border-text rounded-sm"
                                 style={{ backgroundColor: checkFilter(filter.value) ? "white" : undefined }}
                             />
-                            <div className="text-sm">{filter.name}</div>
+                            <div className="text-xl lg:text-sm">{filter.name}</div>
                         </div>
                     );
                 })}

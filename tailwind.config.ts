@@ -10,10 +10,13 @@ export default {
     extend: {
       colors: {
         'text': 'hsl(268, 42%, 94%)',
-        'background': 'hsl(250, 53%, 8%)',
+        'background': 'hsl(170, 28%, 10%)', // 'hsl(250, 53%, 8%)',
         'primary': 'hsl(272, 62%, 71%)',
-        'secondary': 'hsl(270, 28%, 17%)',
+        'secondary': 'hsl(170, 28%, 13%)',
         'accent': 'hsl(68, 64%, 55%)',
+      },
+      backgroundImage: {
+        'image-gradient': 'linear-gradient(to right, #D19B91, #D7895E)',
       },
       screens: {
         'xs': "550px",

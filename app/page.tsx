@@ -26,28 +26,31 @@ export default function Page() {
             </Link>
           </div>
         </div>
-        <div className="flex items-center justify-center rounded-xl overflow-hidden md:w-2/3  lg:w-1/2">
-          <Image
-            src="/hero-mobile.jpg"
-            width={640}
-            height={427}
-            alt="hero image mobile"
-            className="block md:hidden"
-          />
-          <Image
-            src="/hero-tablet.jpg"
-            width={1920}
-            height={1280}
-            alt="hero image mobile"
-            className="hidden md:block xl:hidden"
-          />
-          <Image
-            src="/hero-desktop.jpg"
-            width={2400}
-            height={1600}
-            alt="hero image mobile"
-            className="hidden xl:block"
-          />
+        <div className="md:w-2/3 lg:w-1/2 relative">
+          <div className="flex items-center justify-center rounded-xl overflow-hidden z-50">
+            <Image
+              src="/hero-mobile.jpg"
+              width={640}
+              height={427}
+              alt="hero image mobile"
+              className="block md:hidden"
+            />
+            <Image
+              src="/hero-tablet.jpg"
+              width={1920}
+              height={1280}
+              alt="hero image mobile"
+              className="hidden md:block xl:hidden"
+            />
+            <Image
+              src="/hero-desktop.jpg"
+              width={2400}
+              height={1600}
+              alt="hero image mobile"
+              className="hidden xl:block"
+            />
+          </div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-image-gradient z-[-1] blur-xl" />
         </div>
       </div>
     </div >
