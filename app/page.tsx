@@ -50,7 +50,7 @@ export default function Page() {
               className="hidden xl:block"
             />
           </div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-image-gradient z-[-1] blur-xl" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-image-gradient z-[-1] blur-xl" />
         </div>
       </div>
     </div >

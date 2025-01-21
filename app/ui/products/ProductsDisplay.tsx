@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
+import clsx from "clsx";
 import fetchProducts from "@/app/lib/data";
 import { Filters } from "@/app/types/Filters";
 import Card from "@/app/ui/products/Card";
@@ -11,10 +12,11 @@ import { Product } from "@/app/types/Product";
 
 type ProductsDisplayProps = {
     filters: Filters;
+    showFilters: boolean;
 };
 
 
-export default function ProductsDisplay({ filters }: ProductsDisplayProps) {
+export default function ProductsDisplay({ filters, showFilters }: ProductsDisplayProps) {
 
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -36,7 +38,14 @@ export default function ProductsDisplay({ filters }: ProductsDisplayProps) {
     }, [page, itemsPerPage, filters]);
 
     return (
-        <div className="w-full flex flex-col items-center justify-center gap-6 p-6">
+        <div 
+            className={clsx(
+                "min-h-dvh w-full flex flex-col items-center justify-center gap-6 p-6",
+                {
+                    "h-full overflow-hidden": showFilters
+                }
+            )}
+        >
             {loading ? (
                 <ProductsDisplaySkeleton />
             ) : (
