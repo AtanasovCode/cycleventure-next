@@ -34,7 +34,7 @@ export default function ProductsDisplay({ filters }: ProductsDisplayProps) {
     }, [page, itemsPerPage, filters]);
 
     return (
-        <div className="w-full flex flex-col items-center justify-center gap-6 px-16">
+        <div className="w-full flex flex-col items-center justify-center gap-6">
             {loading ? (
                 <ProductsDisplaySkeleton />
             ) : (

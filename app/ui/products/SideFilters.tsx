@@ -1,9 +1,13 @@
+
+import { useEffect, useState } from "react";
 import { Filters, DifferentFilters } from "@/app/types/Filters";
 import FilterWrapper from "@/app/ui/products/FilterWrapper";
+import clsx from "clsx";
 
 type SideFiltersProps = {
     filters: Filters;
     setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+    showFilters: boolean;
 };
 
 import {
@@ -13,7 +17,7 @@ import {
     brandFilters,
 } from "@/app/lib/filters";
 
-export default function SideFilters({ filters, setFilters }: SideFiltersProps) {
+export default function SideFilters({ filters, setFilters, showFilters }: SideFiltersProps) {
 
     const addOrRemoveFilter = (filterName: string, filterType: keyof Filters) => {
         setFilters((prevFilters) => {
@@ -32,9 +36,27 @@ export default function SideFilters({ filters, setFilters }: SideFiltersProps) {
         return filters[filterType]?.some((filter) => filter === filterName) ?? false;
     };
 
+    const returnAllFilters = () => {
+        const category = filters.category || [];
+        const brand = filters.brand || [];
+        const frame = filters.frameType || [];
+
+        // Combine all selected filters into a single array
+        const allFilters = [...category, ...brand, ...frame];
+
+        return allFilters;
+    };
 
     return (
-        <div className="hidden md:flex h-[100dvh] min-w-64 overflow-y-auto flex-col items-start justify-start gap-8">
+        <div
+            className={clsx(
+                "min-h-dvh w-dvw bg-background z-50 lg:w-auto flex-col items-start justify-start gap-8 transition-transform duration-300 ease-in p-12",
+                {
+                    "-translate-x-full hidden": showFilters === false,
+                    "translate-x-0 flex fixed top-0 left-0": showFilters === true,
+                }
+            )}
+        >
             <div className="text-text font-bold text-lg md:text-xl lg:text-2xl">
                 cycleventure
             </div>
@@ -67,6 +89,6 @@ export default function SideFilters({ filters, setFilters }: SideFiltersProps) {
                     handleFilterChange={(filterName) => addOrRemoveFilter(filterName, "frameType")}
                 />
             </div>
-        </div>
+        </div >
     );
 }

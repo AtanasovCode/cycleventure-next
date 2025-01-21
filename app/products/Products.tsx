@@ -13,10 +13,11 @@ export default function Products() {
         frameType: [],
         brand: [],
     });
+    const [showFilters, setShowFilters] = useState<boolean>(true);
 
     return (
-        <div className="min-h-dvh w-full flex items-start justify-start gap-6 text-text p-4 md:p-8 lg:p-16">
-            <SideFilters filters={filters} setFilters={setFilters} />
+        <div className="min-h-dvh w-full flex items-start justify-start text-text gap-16">
+            <SideFilters filters={filters} setFilters={setFilters} showFilters={showFilters} />
             <ProductsDisplay filters={filters} />
         </div>
     );
