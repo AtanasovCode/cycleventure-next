@@ -51,7 +51,7 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
     return (
         <div
             className={clsx(
-                "fixed lg:relative h-dvh overflow-y-scroll pt-28 lg:overflow-y-clip lg:min-h-dvh w-dvw lg:w-auto bg-secondary z-40 flex flex-col items-start justify-start gap-10 transform transition-transform duration-300 ease-in-out p-12",
+                "fixed lg:relative h-dvh overflow-y-scroll pt-28 lg:pt-12 lg:overflow-y-clip lg:min-h-dvh w-dvw lg:w-auto bg-secondary lg:bg-background z-40 flex flex-col items-start justify-start gap-10 transform transition-transform duration-300 ease-in-out p-12",
                 {
                     "-translate-x-full lg:translate-x-0": !showFilters, // Hidden state
                     "translate-x-0 fixed lg:relative": showFilters,   // Visible state

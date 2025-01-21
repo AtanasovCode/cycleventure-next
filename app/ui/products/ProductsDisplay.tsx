@@ -24,6 +24,22 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
     const [itemsPerPage, setItemsPerPage] = useState<number>(12);
     const [totalPages, setTotalPages] = useState<number>(0);
 
+    const pageForward = () => {
+        if(page === totalPages) {
+            return;
+        }
+
+        setPage(page + 1);
+    }
+
+    const pageBack = () => {
+        if(page === 1) {
+            return;
+        }
+
+        setPage(page - 1);
+    }
+
 
     useEffect(() => {
         setLoading(true);
@@ -40,7 +56,7 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
     return (
         <div 
             className={clsx(
-                "min-h-dvh w-full flex flex-col items-center justify-center gap-6 p-6",
+                "min-h-dvh w-full flex flex-col items-center justify-center gap-16 p-6",
                 {
                     "h-full overflow-hidden": showFilters
                 }
@@ -55,7 +71,13 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
                     ))}
                 </div>
             )}
-            <Pages page={page} setPage={setPage} totalPages={totalPages} />
+            <Pages 
+                page={page} 
+                setPage={setPage} 
+                totalPages={totalPages}
+                pageForward={pageForward} 
+                pageBack={pageBack}
+            />
         </div>
     );
 
