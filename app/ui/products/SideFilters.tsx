@@ -1,13 +1,14 @@
 
-import { useEffect, useState } from "react";
 import { Filters, DifferentFilters } from "@/app/types/Filters";
 import FilterWrapper from "@/app/ui/products/FilterWrapper";
 import clsx from "clsx";
+import Close from "@/app/assets/icons/close.svg";
 
 type SideFiltersProps = {
     filters: Filters;
     setFilters: React.Dispatch<React.SetStateAction<Filters>>;
     showFilters: boolean;
+    setShowFilters: (value: boolean) => void;
 };
 
 import {
@@ -17,7 +18,7 @@ import {
     brandFilters,
 } from "@/app/lib/filters";
 
-export default function SideFilters({ filters, setFilters, showFilters }: SideFiltersProps) {
+export default function SideFilters({ filters, setFilters, showFilters, setShowFilters }: SideFiltersProps) {
 
     const addOrRemoveFilter = (filterName: string, filterType: keyof Filters) => {
         setFilters((prevFilters) => {
@@ -50,13 +51,17 @@ export default function SideFilters({ filters, setFilters, showFilters }: SideFi
     return (
         <div
             className={clsx(
-                "min-h-dvh w-dvw bg-background z-50 lg:w-auto flex-col items-start justify-start gap-8 transition-transform duration-300 ease-in p-12",
+                "min-h-dvh w-dvw lg:w-auto bg-background z-50 flex-col items-start justify-start gap-8 transition-transform duration-300 ease-in p-12",
                 {
-                    "-translate-x-full hidden": showFilters === false,
-                    "translate-x-0 flex fixed top-0 left-0": showFilters === true,
+                    "-translate-x-full hidden lg:flex lg:translate-x-0": showFilters === false,
+                    "translate-x-0 flex fixed top-0 left-0 lg:relative": showFilters === true,
                 }
             )}
         >
+            <Close 
+                className="w-8 h-8 block absolute top-[3%] right-[3%] lg:hidden text-red-500"
+                onClick={() => setShowFilters(false)}
+            />
             <div className="text-text font-bold text-lg md:text-xl lg:text-2xl">
                 cycleventure
             </div>

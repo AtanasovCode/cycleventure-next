@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from "react";
 import fetchProducts from "@/app/lib/data";
 import { Filters } from "@/app/types/Filters";
@@ -34,12 +36,12 @@ export default function ProductsDisplay({ filters }: ProductsDisplayProps) {
     }, [page, itemsPerPage, filters]);
 
     return (
-        <div className="w-full flex flex-col items-center justify-center gap-6">
+        <div className="w-full flex flex-col items-center justify-center gap-6 p-6">
             {loading ? (
                 <ProductsDisplaySkeleton />
             ) : (
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
-                    {products?.map((product) => (
+                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16">
+                    {products?.map((product:any) => (
                         <Card key={product.id} product={product} />
                     ))}
                 </div>
