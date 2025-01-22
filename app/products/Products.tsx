@@ -5,6 +5,7 @@ import { Filters } from "@/app/types/Filters";
 import ProductsDisplay from "@/app/ui/products/ProductsDisplay";
 import MobileNav from "@/app/ui/products/MobileNav";
 import SideFilters from "@/app/ui/products/SideFilters";
+import ProductsHeader from "@/app/ui/products/ProductsHeader";
 import clsx from "clsx";
 
 
@@ -18,7 +19,7 @@ export default function Products() {
     const [showFilters, setShowFilters] = useState<boolean>(false);
 
     return (
-        <div className="w-full flex flex-col lg:flex-row items-start justify-start text-text gap-16">
+        <div className="w-full flex flex-col lg:flex-row items-start justify-start text-text gap-16 py-16">
             <div className="relative w-full lg:w-auto">
                 <MobileNav
                     setShowFilters={setShowFilters}
@@ -31,7 +32,10 @@ export default function Products() {
                     setShowFilters={setShowFilters}
                 />
             </div>
-            <ProductsDisplay filters={filters} showFilters={showFilters} />
+            <div className="px-6">
+                <ProductsHeader />
+                <ProductsDisplay filters={filters} showFilters={showFilters} />
+            </div>
         </div>
     );
 }

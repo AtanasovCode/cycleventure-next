@@ -2,7 +2,6 @@
 import { Filters, DifferentFilters } from "@/app/types/Filters";
 import FilterWrapper from "@/app/ui/products/FilterWrapper";
 import clsx from "clsx";
-import Close from "@/app/assets/icons/close.svg";
 
 type SideFiltersProps = {
     filters: Filters;
@@ -51,7 +50,7 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
     return (
         <div
             className={clsx(
-                "fixed lg:relative h-dvh overflow-y-scroll pt-28 lg:pt-12 lg:overflow-y-clip lg:min-h-dvh w-dvw lg:w-auto bg-secondary lg:bg-background z-40 flex flex-col items-start justify-start gap-10 transform transition-transform duration-300 ease-in-out p-12",
+                "fixed lg:relative h-dvh overflow-y-scroll pt-28 lg:pt-0 lg:overflow-y-clip lg:min-h-dvh w-dvw lg:w-auto bg-secondary lg:bg-background z-40 flex flex-col items-start justify-start gap-10 transform transition-transform duration-300 ease-in-out p-12",
                 {
                     "-translate-x-full lg:translate-x-0": !showFilters, // Hidden state
                     "translate-x-0 fixed lg:relative": showFilters,   // Visible state
@@ -82,12 +81,6 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
                     differentFilters={roadBikes}
                     checkFilter={(filterName) => checkIfFilterIsSelected(filterName, "category")}
                     handleFilterChange={(filterName) => addOrRemoveFilter(filterName, "category")}
-                />
-                <FilterWrapper
-                    title="Frame Type"
-                    differentFilters={frameFilters}
-                    checkFilter={(filterName) => checkIfFilterIsSelected(filterName, "frameType")}
-                    handleFilterChange={(filterName) => addOrRemoveFilter(filterName, "frameType")}
                 />
                 <FilterWrapper
                     title="Frame Type"

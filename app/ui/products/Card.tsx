@@ -9,7 +9,7 @@ export default function Card({ product }: CardType) {
     return (
         <div
             key={product.id}
-            className="flex flex-col items-start justify-center"
+            className="flex flex-col items-start justify-center cursor-pointer"
         >
             <Image
                 src={product.photos[0]}

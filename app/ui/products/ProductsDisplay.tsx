@@ -56,7 +56,7 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
     return (
         <div 
             className={clsx(
-                "min-h-dvh w-full flex flex-col items-center justify-center gap-16 p-6",
+                "min-h-dvh w-full flex flex-col items-center justify-center gap-16",
                 {
                     "h-full overflow-hidden": showFilters
                 }
