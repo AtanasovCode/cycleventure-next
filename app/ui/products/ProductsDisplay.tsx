@@ -21,13 +21,16 @@ type ProductsDisplayProps = {
 export default function ProductsDisplay({ filters, showFilters }: ProductsDisplayProps) {
 
     const sortOptions: SortOptions[] = [
+        { name: "Position", value: "position" },
+        { name: "Top rated", value: "top-rated" },
         { name: "Price (low to high)", value: "price-low-to-high" },
         { name: "Price (high to low)", value: "price-high-to-low" },
         { name: "A-Z", value: "a-z" },
+        { name: "Z-A", value: "z-a" },
     ];
 
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedSortingOption, setSelectedSortingOption] = useState<SortOptions>({name: "Price (low to high)", value: "price-low-to-high"})
+    const [selectedSortingOption, setSelectedSortingOption] = useState<SortOptions>({ name: "Position", value: "position" })
     const [loading, setLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(12);
@@ -62,6 +65,10 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
         getProducts(); // Call the async function
     }, [page, itemsPerPage, filters]);
 
+    const sortProducts = () => {
+
+    }
+
     return (
         <div
             className={clsx(
@@ -76,15 +83,17 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
                 setSelectedSortingOption={setSelectedSortingOption}
                 sortOptions={sortOptions}
             />
-            {loading ? (
-                <ProductsDisplaySkeleton />
-            ) : (
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16">
-                    {products?.map((product: any) => (
-                        <Card key={product.id} product={product} />
-                    ))}
-                </div>
-            )}
+            <div className="w-full min-h-[80dvh]">
+                {loading ? (
+                    <ProductsDisplaySkeleton />
+                ) : (
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16">
+                        {products?.map((product: any) => (
+                            <Card key={product.id} product={product} />
+                        ))}
+                    </div>
+                )}
+            </div>
             <Pages
                 page={page}
                 setPage={setPage}
