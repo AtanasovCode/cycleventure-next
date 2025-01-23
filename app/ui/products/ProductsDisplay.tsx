@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import fetchProducts from "@/app/lib/data";
 import { Filters } from "@/app/types/Filters";
+import { DropdownTypes, SortOptions } from "@/app/types/sort";
 import Card from "@/app/ui/products/Card";
+import ProductsHeader from "@/app/ui/products/ProductsHeader";
 import Pages from "@/app/ui/products/Pages";
 import { ProductsDisplaySkeleton } from "@/app/ui/Skeletons";
 
@@ -18,14 +20,21 @@ type ProductsDisplayProps = {
 
 export default function ProductsDisplay({ filters, showFilters }: ProductsDisplayProps) {
 
+    const sortOptions: SortOptions[] = [
+        { name: "Price (low to high)", value: "price-low-to-high" },
+        { name: "Price (high to low)", value: "price-high-to-low" },
+        { name: "A-Z", value: "a-z" },
+    ];
+
     const [products, setProducts] = useState<Product[]>([]);
+    const [selectedSortingOption, setSelectedSortingOption] = useState<SortOptions>({name: "Price (low to high)", value: "price-low-to-high"})
     const [loading, setLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(12);
     const [totalPages, setTotalPages] = useState<number>(0);
 
     const pageForward = () => {
-        if(page === totalPages) {
+        if (page === totalPages) {
             return;
         }
 
@@ -33,7 +42,7 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
     }
 
     const pageBack = () => {
-        if(page === 1) {
+        if (page === 1) {
             return;
         }
 
@@ -54,7 +63,7 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
     }, [page, itemsPerPage, filters]);
 
     return (
-        <div 
+        <div
             className={clsx(
                 "min-h-dvh w-full flex flex-col items-center justify-center gap-16",
                 {
@@ -62,20 +71,25 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
                 }
             )}
         >
+            <ProductsHeader
+                selectedSortingOption={selectedSortingOption}
+                setSelectedSortingOption={setSelectedSortingOption}
+                sortOptions={sortOptions}
+            />
             {loading ? (
                 <ProductsDisplaySkeleton />
             ) : (
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16">
-                    {products?.map((product:any) => (
+                    {products?.map((product: any) => (
                         <Card key={product.id} product={product} />
                     ))}
                 </div>
             )}
-            <Pages 
-                page={page} 
-                setPage={setPage} 
+            <Pages
+                page={page}
+                setPage={setPage}
                 totalPages={totalPages}
-                pageForward={pageForward} 
+                pageForward={pageForward}
                 pageBack={pageBack}
             />
         </div>

@@ -5,7 +5,6 @@ import { Filters } from "@/app/types/Filters";
 import ProductsDisplay from "@/app/ui/products/ProductsDisplay";
 import MobileNav from "@/app/ui/products/MobileNav";
 import SideFilters from "@/app/ui/products/SideFilters";
-import ProductsHeader from "@/app/ui/products/ProductsHeader";
 import clsx from "clsx";
 
 
@@ -32,8 +31,7 @@ export default function Products() {
                     setShowFilters={setShowFilters}
                 />
             </div>
-            <div className="px-6">
-                <ProductsHeader />
+            <div className="px-6 w-full">
                 <ProductsDisplay filters={filters} showFilters={showFilters} />
             </div>
         </div>
