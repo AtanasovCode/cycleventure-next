@@ -22,10 +22,10 @@ export default function DropdownSort({
             </div>
             <div
                 className={clsx(
-                    "w-full flex flex-col bg-secondary absolute left-0 border border-slate-600 border-t-transparent z-[100] transition-all ease-in-out duration-300",
+                    "w-full flex flex-col bg-secondary overflow-hidden absolute left-0 translate-y-[9%] border border-slate-600 rounded-xl z-[100] transition-all ease-in-out duration-300",
                     {
-                        "translate-y-[10%]": showSort,
-                        "-translate-y-[300%] h-0 opacity-0": !showSort,
+                        "max-h-0 pointer-events-none border-none": !showSort, // Hidden
+                        "max-h-64 pointer-events-auto": showSort, // Visible
                     }
                 )}
             >
