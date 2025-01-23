@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import { Product } from "@/app/types/Product";
+import { SortOptions } from "@/app/types/sort";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -16,7 +17,8 @@ type Filters = {
 export default async function fetchProducts(
     page: number,
     itemsPerPage: number,
-    filters: Filters
+    filters: Filters,
+    sort: string,
 ): Promise<{ totalPages: number; data: Product[] }> {
 
     const start = Math.max(0, (page - 1) * itemsPerPage);
@@ -25,8 +27,31 @@ export default async function fetchProducts(
     try {
         let query = supabase
             .from('products')
-            .select('id, name, brand, category, price, frameType, photos', { count: 'exact' })
+            .select('id, name, brand, category, price, frameType, numberOfReviews, photos', { count: 'exact' })
             .range(start, end);
+
+        // sort the products based on the sorting filter selected
+        switch (sort) {
+            case "position":
+                break;
+            case "top-rated":
+                query = query.order("numberOfReviews", { ascending: false });
+                break;
+            case "price-low-to-high":
+                query = query.order("price", { ascending: true });
+                break;
+            case "price-high-to-low":
+                query = query.order("price", { ascending: false });
+                break;
+            case "a-z":
+                query = query.order("name", { ascending: true });
+                break;
+            case "z-a":
+                query = query.order("name", { ascending: false });
+                break;
+            default:
+                break;
+        }
 
         // Apply filters dynamically
         if (filters.category?.length) {

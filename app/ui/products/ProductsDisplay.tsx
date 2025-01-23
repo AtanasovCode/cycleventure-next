@@ -56,18 +56,14 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
     useEffect(() => {
         setLoading(true);
         const getProducts = async () => {
-            const { data, totalPages } = await fetchProducts(page, itemsPerPage, filters); // Wait for the data to resolve
+            const { data, totalPages } = await fetchProducts(page, itemsPerPage, filters, selectedSortingOption["value"]); // Wait for the data to resolve
             setProducts(data);
             setTotalPages(totalPages)
             setLoading(false);
         };
 
         getProducts(); // Call the async function
-    }, [page, itemsPerPage, filters]);
-
-    const sortProducts = () => {
-
-    }
+    }, [page, itemsPerPage, filters, selectedSortingOption]);
 
     return (
         <div

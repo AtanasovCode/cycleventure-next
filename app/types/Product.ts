@@ -7,5 +7,7 @@ export type Product = {
     photos: string[];
     price: number;
     sizes: string[];
+    rating: number;
+    numberOfReviews: number;
     frameType: string;
 };
