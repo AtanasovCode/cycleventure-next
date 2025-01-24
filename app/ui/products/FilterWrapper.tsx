@@ -1,4 +1,6 @@
-import { Filters, DifferentFilters } from "@/app/types/Filters";
+import { DifferentFilters } from "@/app/types/Filters";
+import Checkmark from "@/app/assets/icons/checkmark.svg";
+import clsx from "clsx";
 
 type FilterWrapperProps = {
     title: string;
@@ -25,9 +27,24 @@ export default function FilterWrapper({ title, differentFilters, handleFilterCha
                             }}
                         >
                             <div
-                                className="w-5 lg:w-4 aspect-square border border-text rounded-sm"
-                                style={{ backgroundColor: checkFilter(filter.value) ? "white" : undefined }}
-                            />
+                                className={clsx(
+                                    "w-5 lg:w-4 aspect-square overflow-hidden border border-text rounded-sm flex items-center justify-center",
+                                    {
+                                        "bg-white": checkFilter(filter.value),
+                                        "bg-transparent": checkFilter(filter.value)
+                                    }
+                                )}
+                            >
+                                <Checkmark 
+                                    className={clsx(
+                                        "w-[90%] h-[90%]",
+                                        {
+                                            "hidden": !checkFilter(filter.value),
+                                            "inline-block": checkFilter(filter.value)
+                                        }
+                                    )}
+                                />
+                            </div>
                             <div className="text-xl lg:text-sm">{filter.name}</div>
                         </div>
                     );
