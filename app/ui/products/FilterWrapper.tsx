@@ -19,7 +19,10 @@ export default function FilterWrapper({ title, differentFilters, handleFilterCha
                         <div
                             key={filter.value}
                             className="w-full flex items-center justify-start gap-3 cursor-pointer ml-2"
-                            onClick={() => handleFilterChange(filter.value)}
+                            onClick={() => {
+                                handleFilterChange(filter.value)
+                                window.scrollTo(0, 0)
+                            }}
                         >
                             <div
                                 className="w-5 lg:w-4 aspect-square border border-text rounded-sm"
