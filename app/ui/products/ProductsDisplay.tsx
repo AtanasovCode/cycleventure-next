@@ -65,6 +65,15 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
         getProducts(); // Call the async function
     }, [page, itemsPerPage, filters, selectedSortingOption]);
 
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
+
+    useEffect(() => {
+        scrollToTop();
+    }, [page]);
+
+
     return (
         <div
             className={clsx(
