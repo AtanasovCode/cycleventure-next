@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { Filters } from "@/app/types/Filters";
 import ProductsDisplay from "@/app/ui/products/ProductsDisplay";
-import MobileNav from "@/app/ui/products/MobileNav";
+import Navigation from "@/app/ui/Navigation";
 import SideFilters from "@/app/ui/products/SideFilters";
-import clsx from "clsx";
-
 
 export default function Products() {
 
@@ -18,21 +16,20 @@ export default function Products() {
     const [showFilters, setShowFilters] = useState<boolean>(false);
 
     return (
-        <div className="w-full flex flex-col lg:flex-row items-start justify-start text-text gap-16 py-16">
-            <div className="relative w-full lg:w-auto">
-                <MobileNav
-                    setShowFilters={setShowFilters}
-                    showFilters={showFilters}
-                />
+        <div className="w-full flex flex-col items-start justify-start text-text gap-4 pb-6">
+            <Navigation />
+            <div className="flex flex-col lg:flex-row px-6 items-center justify-center lg:items-start">
                 <SideFilters
                     filters={filters}
                     setFilters={setFilters}
                     showFilters={showFilters}
                     setShowFilters={setShowFilters}
                 />
-            </div>
-            <div className="px-6 w-full">
-                <ProductsDisplay filters={filters} showFilters={showFilters} />
+                <ProductsDisplay
+                    filters={filters}
+                    showFilters={showFilters}
+                    setShowFilters={setShowFilters}
+                />
             </div>
         </div>
     );

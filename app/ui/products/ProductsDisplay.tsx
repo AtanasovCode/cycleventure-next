@@ -15,10 +15,15 @@ import { Product } from "@/app/types/Product";
 type ProductsDisplayProps = {
     filters: Filters;
     showFilters: boolean;
+    setShowFilters: (value: boolean) => void;
 };
 
 
-export default function ProductsDisplay({ filters, showFilters }: ProductsDisplayProps) {
+export default function ProductsDisplay({ 
+    filters, 
+    showFilters,
+    setShowFilters,
+}: ProductsDisplayProps) {
 
     const sortOptions: SortOptions[] = [
         { name: "Position", value: "position" },
@@ -87,6 +92,8 @@ export default function ProductsDisplay({ filters, showFilters }: ProductsDispla
                 selectedSortingOption={selectedSortingOption}
                 setSelectedSortingOption={setSelectedSortingOption}
                 sortOptions={sortOptions}
+                showFilters={showFilters}
+                setShowFilters={setShowFilters}
             />
             <div className="w-full min-h-[80dvh]">
                 {loading ? (

@@ -1,6 +1,6 @@
 export default function CycleventureLogo() {
     return (
-        <div className="text-text font-bold text-2xl md:text-3xl lg:text-4xl">
+        <div className="text-text font-bold text-base md:text-lg lg:text-3xl">
             cycleventure
         </div>
     );

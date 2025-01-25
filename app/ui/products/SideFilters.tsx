@@ -50,17 +50,14 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
     return (
         <div
             className={clsx(
-                "fixed lg:relative h-dvh overflow-y-scroll pt-28 lg:pt-0 lg:overflow-y-clip lg:min-h-dvh w-dvw lg:w-auto bg-secondary lg:bg-background z-40 flex flex-col items-start justify-start gap-10 transform transition-transform duration-300 ease-in-out p-12",
+                "fixed lg:relative h-screen overflow-y-auto lg:overflow-y-clip lg:min-h-dvh w-dvw lg:w-auto lg:min-w-64 bg-secondary lg:bg-background z-50 lg:z-auto flex flex-col items-start justify-start gap-6 transition-transform duration-300 ease-in-out p-12 lg:pt-0",
                 {
                     "-translate-x-full lg:translate-x-0": !showFilters, // Hidden state
-                    "translate-x-0 fixed lg:relative": showFilters,   // Visible state
+                    "translate-x-0 lg:relative": showFilters,   // Visible state
                 }
             )}
         >
-            <div className="text-text hidden lg:block font-bold text-lg md:text-xl lg:text-2xl">
-                cycleventure
-            </div>
-            <div className="text-left -mb-4 font-bold text-2xl lg:text-lg">
+            <div className="text-left font-bold text-lg p-4">
                 Filters
             </div>
             <div className="flex flex-col items-start justify-center gap-5">

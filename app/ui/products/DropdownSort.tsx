@@ -13,7 +13,7 @@ export default function DropdownSort({
 
     return (
         <div
-            className="relative p-4 bg-secondary rounded-xl text-sm cursor-pointer border border-slate-600 min-w-44"
+            className="relative p-4 bg-secondary rounded-xl text-xs md:text-sm cursor-pointer border border-slate-600 min-w-32 lg:min-w-40"
             onClick={() => setShowSort(!showSort)}
         >
             <div className="w-full flex items-center justify-between gap-2">
