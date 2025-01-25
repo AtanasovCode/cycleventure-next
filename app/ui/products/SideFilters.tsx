@@ -59,12 +59,12 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
             )}
         >
             <div 
-                className="absolute top-[3%] right-[3%] cursor-pointer"
+                className="absolute top-[3%] right-[3%] cursor-pointer xl:hidden"
                 onClick={() => setShowFilters(false)}
             >
                 <CloseIcon className="w-8 h-8" />
             </div>
-            <div className="text-left font-bold text-lg py-4">
+            <div className="text-left font-bold text-lg py-2">
                 Filters
             </div>
             <div className="flex flex-col items-start justify-center gap-5">

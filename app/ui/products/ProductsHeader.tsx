@@ -30,9 +30,9 @@ export default function ProductsHeader({
                 )}
                 onClick={() => setShowFilters(!showFilters)}
             />
-            <div className="flex items-center justify-center gap-4">
-                <div className="font-xs md:font-sm">
-                    Sort By:
+            <div className="flex items-center justify-center gap-2">
+                <div className="text-xs md:text-sm">
+                    Sort by
                 </div>
                 <DropdownSort
                     selectedSortingOption={selectedSortingOption}
