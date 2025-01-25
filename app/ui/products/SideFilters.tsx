@@ -1,7 +1,8 @@
 
-import { Filters, DifferentFilters } from "@/app/types/Filters";
-import FilterWrapper from "@/app/ui/products/FilterWrapper";
 import clsx from "clsx";
+import { Filters } from "@/app/types/Filters";
+import FilterWrapper from "@/app/ui/products/FilterWrapper";
+import CloseIcon from "@/app/assets/icons/close.svg";
 
 type SideFiltersProps = {
     filters: Filters;
@@ -50,13 +51,19 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
     return (
         <div
             className={clsx(
-                "fixed lg:relative h-screen overflow-y-auto lg:overflow-y-clip lg:min-h-dvh w-dvw lg:w-auto lg:min-w-64 bg-secondary lg:bg-background z-50 lg:z-auto flex flex-col items-start justify-start gap-6 transition-transform duration-300 ease-in-out p-12 lg:pt-0",
+                "fixed top-0 left-0 xl:relative h-dvh overflow-y-auto border-none xs:border-r-2 border-slate-700 xl:overflow-y-clip xl:min-h-screen w-screen xs:w-2/3 md:w-1/3 xl:w-auto xl:min-w-64 bg-secondary xl:bg-background z-50 flex flex-col items-start justify-start gap-6 transition-transform duration-300 ease-in-out p-12 xl:pt-0",
                 {
-                    "-translate-x-full lg:translate-x-0": !showFilters, // Hidden state
-                    "translate-x-0 lg:relative": showFilters,   // Visible state
+                    "-translate-x-full xl:translate-x-0": !showFilters, // Hidden state
+                    "translate-x-0 xl:relative": showFilters,   // Visible state
                 }
             )}
         >
+            <div 
+                className="absolute top-[3%] right-[3%] cursor-pointer"
+                onClick={() => setShowFilters(false)}
+            >
+                <CloseIcon className="w-8 h-8" />
+            </div>
             <div className="text-left font-bold text-lg py-4">
                 Filters
             </div>

@@ -19,10 +19,10 @@ export default function ProductsHeader({
     setShowFilters,
 }: HeaderTypes) {
     return (
-        <div className="w-full flex items-center justify-start gap-6">
+        <div className="w-full flex items-center justify-between gap-6">
             <Filter
                 className={clsx(
-                    "w-6 h-6 lg:hidden",
+                    "w-6 h-6 xl:hidden cursor-pointer",
                     {
                         "fill-white": showFilters,
                         "fill-transparent": !showFilters,
