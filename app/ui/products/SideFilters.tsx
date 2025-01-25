@@ -57,7 +57,7 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
                 }
             )}
         >
-            <div className="text-left font-bold text-lg p-4">
+            <div className="text-left font-bold text-lg py-4">
                 Filters
             </div>
             <div className="flex flex-col items-start justify-center gap-5">

@@ -99,7 +99,7 @@ export default function ProductsDisplay({
                 {loading ? (
                     <ProductsDisplaySkeleton />
                 ) : (
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-16">
+                    <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-4 lg:gap-16">
                         {products?.map((product: any) => (
                             <Card key={product.id} product={product} />
                         ))}
