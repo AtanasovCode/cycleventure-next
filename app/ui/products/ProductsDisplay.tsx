@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import fetchProducts from "@/app/lib/data";
 import { Filters } from "@/app/types/Filters";
-import { DropdownTypes, SortOptions } from "@/app/types/sort";
+import { SortOptions } from "@/app/types/sort";
 import Card from "@/app/ui/products/Card";
 import ProductsHeader from "@/app/ui/products/ProductsHeader";
 import Pages from "@/app/ui/products/Pages";
@@ -16,6 +16,9 @@ type ProductsDisplayProps = {
     filters: Filters;
     showFilters: boolean;
     setShowFilters: (value: boolean) => void;
+    sortOptions: SortOptions[];
+    selectedSortingOption: SortOptions;
+    setSelectedSortingOption: (value: SortOptions) => void;
 };
 
 
@@ -23,19 +26,12 @@ export default function ProductsDisplay({
     filters, 
     showFilters,
     setShowFilters,
+    sortOptions,
+    selectedSortingOption,
+    setSelectedSortingOption,
 }: ProductsDisplayProps) {
 
-    const sortOptions: SortOptions[] = [
-        { name: "Position", value: "position" },
-        { name: "Top rated", value: "top-rated" },
-        { name: "Price (low to high)", value: "price-low-to-high" },
-        { name: "Price (high to low)", value: "price-high-to-low" },
-        { name: "A-Z", value: "a-z" },
-        { name: "Z-A", value: "z-a" },
-    ];
-
     const [products, setProducts] = useState<Product[]>([]);
-    const [selectedSortingOption, setSelectedSortingOption] = useState<SortOptions>({ name: "Position", value: "position" })
     const [loading, setLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(12);
