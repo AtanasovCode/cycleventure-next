@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Filters } from "@/app/types/Filters";
 import { SortOptions } from "@/app/types/sort";
@@ -13,14 +13,18 @@ export default function Products() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const sortOptions: SortOptions[] = [
-        { name: "Position", value: "position" },
-        { name: "Top rated", value: "top-rated" },
-        { name: "Price (low to high)", value: "price-low-to-high" },
-        { name: "Price (high to low)", value: "price-high-to-low" },
-        { name: "A-Z", value: "a-z" },
-        { name: "Z-A", value: "z-a" },
-    ];
+    const sortOptions = useMemo(
+        () => [
+            { name: "Position", value: "position" },
+            { name: "Top rated", value: "top-rated" },
+            { name: "Price (low to high)", value: "price-low-to-high" },
+            { name: "Price (high to low)", value: "price-high-to-low" },
+            { name: "A-Z", value: "a-z" },
+            { name: "Z-A", value: "z-a" },
+        ],
+        []
+    );
+    
     const [filters, setFilters] = useState<Filters>({
         category: [],
         frameType: [],
@@ -52,8 +56,8 @@ export default function Products() {
         const frameTypes = searchParams.get("frameType")?.split(",") || [];
         const brands = searchParams.get("brand")?.split(",") || [];
         const sort = searchParams.get("sort");
-        const selectedSort = sortOptions.find((i) => i.value === sort) || {name: "Position", value: "position"};
-        
+        const selectedSort = sortOptions.find((i) => i.value === sort) || { name: "Position", value: "position" };
+
 
         setFilters({
             category: categories,
