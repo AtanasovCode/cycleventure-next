@@ -1,3 +1,4 @@
+import Link from "next/link";
 import clsx from "clsx";
 import SignUpIcon from "@/app/assets/icons/sign-up.svg";
 import SignInIcon from "@/app/assets/icons/sign-in.svg";
@@ -22,18 +23,24 @@ export default function AuthCard({
         )}>
             <Triangle className="w-[44px] h-auto absolute -top-6 left-1/2 -translate-x-1/2 z-30" />
             <div className="w-full flex flex-col items-center justify-center z-50 bg-secondary">
-                <div className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer">
+                <Link 
+                    className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer"
+                    href="/sign-in"
+                >
                     <SignInIcon className="h-5 w-auto" />
                     <div>
                         Sign in
                     </div>
-                </div>
-                <div className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer">
+                </Link>
+                <Link 
+                    className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer"
+                    href="/sign-up"
+                >
                     <SignUpIcon className="h-5 w-auto" />
                     <div>
                         Sign up
                     </div>
-                </div>
+                </Link>
             </div>
         </div>
     );
