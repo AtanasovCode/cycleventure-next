@@ -2,6 +2,7 @@
 import clsx from "clsx";
 import { Filters } from "@/app/types/Filters";
 import FilterWrapper from "@/app/ui/products/FilterWrapper";
+import FilterIcon from "@/app/assets/icons/filter.svg";
 import CloseIcon from "@/app/assets/icons/close.svg";
 
 type SideFiltersProps = {
@@ -64,7 +65,8 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
             >
                 <CloseIcon className="w-8 h-8" />
             </div>
-            <div className="text-left font-bold text-lg py-2">
+            <div className="text-left font-bold text-lg py-2 flex items-center justify-start gap-2">
+                <FilterIcon className="w-5 h-auto fill-white" />
                 Filters
             </div>
             <div className="flex flex-col items-start justify-center gap-5">
