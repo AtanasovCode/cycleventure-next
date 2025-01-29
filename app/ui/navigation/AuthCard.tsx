@@ -24,7 +24,7 @@ export default function AuthCard({
             <Triangle className="w-[44px] h-auto absolute -top-6 left-1/2 -translate-x-1/2 z-30" />
             <div className="w-full flex flex-col items-center justify-center z-50 bg-secondary">
                 <Link 
-                    className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer"
+                    className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer hover:bg-slate-600"
                     href="/sign-in"
                 >
                     <SignInIcon className="h-5 w-auto" />
@@ -33,7 +33,7 @@ export default function AuthCard({
                     </div>
                 </Link>
                 <Link 
-                    className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer"
+                    className="w-full flex items-center justify-center gap-3 p-3 cursor-pointer hover:bg-slate-600"
                     href="/sign-up"
                 >
                     <SignUpIcon className="h-5 w-auto" />
