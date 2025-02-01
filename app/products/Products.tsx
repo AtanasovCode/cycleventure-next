@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useMemo } from "react";
+import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Filters } from "@/app/types/Filters";
 import { SortOptions } from "@/app/types/sort";
@@ -9,6 +10,14 @@ import Navigation from "@/app/ui/Navigation";
 import SideFilters from "@/app/ui/products/SideFilters";
 
 export default function Products() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ProductsPageContent />
+        </Suspense>
+    );
+}
+
+function ProductsPageContent() {
 
     const router = useRouter();
     const searchParams = useSearchParams();
