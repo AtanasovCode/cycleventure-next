@@ -48,7 +48,7 @@ export default function Layout({
   const selectedImages = images[pathname] || images["/sign-in"];
 
   return (
-    <div className="h-dvh flex items-start justify-center bg-background">
+    <div className="min-h-dvh w-full flex flex-col items-center justify-start lg:flex-row lg:items-start lg:justify-center bg-background gap-10 lg:gap-0">
       <div className="flex items-center justify-center max-h-dvh overflow-hidden">
         <Image
           src={selectedImages.mobile}
@@ -72,8 +72,11 @@ export default function Layout({
           className="hidden xl:block"
         />
       </div>
-      <div className="min-h-dvh flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center gap-10 px-16 py-4">
+      <div className="w-full lg:w-auto lg:min-h-dvh flex flex-col items-center justify-center gap-16">
+        <div className="w-full text-center font-bold text-3xl">
+          cycleventure
+        </div>
+        <div className="flex flex-col items-center justify-center gap-10 pb-8 px-4 w-full sm:w-[80%] md:w-[65%] lg:w-auto lg:px-12">
           {children}
         </div>
       </div>
