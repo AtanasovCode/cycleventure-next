@@ -76,6 +76,10 @@ function ProductsPageContent() {
         setSelectedSortingOption(selectedSort);
     }, [searchParams]);
 
+    useEffect(() => {
+        // console.log(supabase.auth.getUser());
+    }, [])
+
     return (
         <div className="w-full flex flex-col items-start justify-start text-text gap-4 pb-6">
             <Navigation />
