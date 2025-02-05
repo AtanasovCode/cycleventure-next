@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { User } from "@supabase/supabase-js";
 import CycleventureLogo from "@/app/ui/cycleventure-logo";
 import CartIcon from "@/app/assets/icons/cart.svg";
 import ProfileIcon from "@/app/assets/icons/profile.svg";
 import AuthCard from "@/app/ui/navigation/AuthCard";
 
-export default function Navigation() {
+type NavProps = {
+    user: User | null;
+}
+
+export default function Navigation({
+    user,
+}: NavProps) {
 
     const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
 
@@ -16,15 +23,21 @@ export default function Navigation() {
             <CycleventureLogo />
             <div className="flex items-center justify-center gap-4"></div>
             <div className="flex items-center justify-center relative gap-4">
-                <div 
+                <div
                     className="flex items-center justify-center relative cursor-pointer"
                     onClick={() => setShowAuthCard(!showAuthCard)}
                 >
                     <ProfileIcon className="h-8 w-auto" />
-                    <AuthCard 
-                        show={showAuthCard}
-                        setShow={setShowAuthCard}
-                    />
+                    {
+                        user ? (
+                            <div>User: {user.email}</div>
+                        ) : (
+                            <AuthCard
+                                show={showAuthCard}
+                                setShow={setShowAuthCard}
+                            />
+                        )
+                    }
                 </div>
                 <CartIcon className="w-8 h-8 cursor-pointer" />
             </div>

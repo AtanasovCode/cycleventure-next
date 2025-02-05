@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useMemo } from "react";
+import { createClient } from "@/utils/supabase/client";
+import { User } from "@supabase/supabase-js";
 import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Filters } from "@/app/types/Filters";
@@ -19,6 +21,7 @@ export default function Products() {
 
 function ProductsPageContent() {
 
+    const supabase = createClient();
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -41,6 +44,7 @@ function ProductsPageContent() {
     });
     const [showFilters, setShowFilters] = useState<boolean>(false);
     const [selectedSortingOption, setSelectedSortingOption] = useState<SortOptions>({ name: "Position", value: "position" })
+    const [user, setUser] = useState<User | null>(null);
 
 
     // Sync URL params with state
@@ -76,13 +80,23 @@ function ProductsPageContent() {
         setSelectedSortingOption(selectedSort);
     }, [searchParams]);
 
+
+    // check if user is signed in and update user state with user data
     useEffect(() => {
         // console.log(supabase.auth.getUser());
+
+        const checkAuth = async () => {
+            const { data } = await supabase.auth.getUser();
+
+            setUser(data?.user || null)
+        }
+
+        checkAuth();
     }, [])
 
     return (
         <div className="w-full flex flex-col items-start justify-start text-text gap-4 pb-6">
-            <Navigation />
+            <Navigation user={user} />
             <div
                 className="w-full flex flex-col lg:flex-row px-6 xs:px-16 sm:px-6 items-center justify-center lg:items-start"
             >
