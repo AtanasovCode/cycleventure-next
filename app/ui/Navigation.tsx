@@ -4,6 +4,7 @@ import CycleventureLogo from "@/app/ui/cycleventure-logo";
 import CartIcon from "@/app/assets/icons/cart.svg";
 import ProfileIcon from "@/app/assets/icons/profile.svg";
 import AuthCard from "@/app/ui/navigation/AuthCard";
+import ProfileCard from "@/app/ui/navigation/ProfileCard";
 
 type NavProps = {
     user: User | null;
@@ -30,7 +31,11 @@ export default function Navigation({
                     <ProfileIcon className="h-8 w-auto" />
                     {
                         user ? (
-                            <div>User: {user.email}</div>
+                            <ProfileCard
+                                email={user.email}
+                                show={showAuthCard}
+                                setShow={setShowAuthCard}
+                            />
                         ) : (
                             <AuthCard
                                 show={showAuthCard}
