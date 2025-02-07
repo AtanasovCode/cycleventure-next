@@ -8,10 +8,12 @@ import ProfileCard from "@/app/ui/navigation/ProfileCard";
 
 type NavProps = {
     user: User | null;
+    setUser: (value: User | null) => void;
 }
 
 export default function Navigation({
     user,
+    setUser,
 }: NavProps) {
 
     const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
@@ -34,12 +36,13 @@ export default function Navigation({
                             <ProfileCard
                                 email={user.email}
                                 show={showAuthCard}
-                                setShow={setShowAuthCard}
+                                setUser={setUser}
                             />
                         ) : (
                             <AuthCard
                                 show={showAuthCard}
                                 setShow={setShowAuthCard}
+                                setUser={setUser}
                             />
                         )
                     }

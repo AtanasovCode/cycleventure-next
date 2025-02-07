@@ -83,20 +83,27 @@ function ProductsPageContent() {
 
     // check if user is signed in and update user state with user data
     useEffect(() => {
-        // console.log(supabase.auth.getUser());
-
-        const checkAuth = async () => {
+        const updateUser = async () => {
             const { data } = await supabase.auth.getUser();
+            setUser(data?.user || null);
+        };
 
-            setUser(data?.user || null)
-        }
+        const { data: authListener } = supabase.auth.onAuthStateChange(() => {
+            updateUser(); // Fetch the session after any auth change
+        });
 
-        checkAuth();
-    }, [])
+        updateUser(); // Fetch the session on component mount
+
+        return () => {
+            authListener.subscription.unsubscribe();
+        };
+    }, []);
+
+
 
     return (
         <div className="w-full flex flex-col items-start justify-start text-text gap-4 pb-6">
-            <Navigation user={user} />
+            <Navigation user={user} setUser={setUser} />
             <div
                 className="w-full flex flex-col lg:flex-row px-6 xs:px-16 sm:px-6 items-center justify-center lg:items-start"
             >

@@ -1,3 +1,5 @@
+import { signOutAction } from "@/app/actions";
+import { User } from "@supabase/supabase-js";
 import clsx from "clsx";
 import Triangle from "@/app/assets/icons/triangle.svg";
 
@@ -5,13 +7,13 @@ import Triangle from "@/app/assets/icons/triangle.svg";
 type ProfileProps = {
     email: string | undefined;
     show: boolean;
-    setShow: (value: boolean) => void;
+    setUser: (value: User | null) => void;
 }
 
 export default function ProfileCard({
     email,
     show,
-    setShow,
+    setUser,
 }: ProfileProps) {
 
     return (
@@ -34,6 +36,10 @@ export default function ProfileCard({
                     <input 
                         type="button"
                         value="Sign Out"
+                        onClick={() => {
+                            signOutAction();
+                            setUser(null);
+                        }}
                         className="w-full text-center bg-accent text-black text-xs p-2 rounded-xl cursor-pointer"
                     />
                 </div>
