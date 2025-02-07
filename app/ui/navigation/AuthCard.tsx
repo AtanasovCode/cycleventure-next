@@ -6,12 +6,10 @@ import Triangle from "@/app/assets/icons/triangle.svg";
 
 type AuthProps = {
     show: boolean;
-    setShow: (value: boolean) => void;
 }
 
 export default function AuthCard({
     show,
-    setShow,
 }: AuthProps) {
     return (
         <div className={clsx(

@@ -41,8 +41,6 @@ export default function Navigation({
                         ) : (
                             <AuthCard
                                 show={showAuthCard}
-                                setShow={setShowAuthCard}
-                                setUser={setUser}
                             />
                         )
                     }
