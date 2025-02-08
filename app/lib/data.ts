@@ -90,12 +90,13 @@ export async function fetchSelectedProduct(productID: string) {
             .from('products')
             .select('*')
             .eq("id", productID)
+            .single()
 
         const {data, error} = await query;
 
         if(error || !data) {
             console.error("Something went wrong", error);
-            return [];
+            return null;
         }
 
         return data;
