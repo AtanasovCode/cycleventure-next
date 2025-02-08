@@ -26,23 +26,23 @@ export default function ProductPreview() {
     const searchParams = useSearchParams();
 
     const [id, setID] = useState<string>("")
-    const [product, setProduct] = useState<Product[]>();
+    const [product, setProduct] = useState<Product>();
+    const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
         const name = searchParams.get("name")?.split(",") || [];
         const id = searchParams.get("id") || "";
 
         setID(id);
-        console.log(`ID: ${id}`);
     }, [searchParams])
 
     useEffect(() => {
         if (id) {
             const fetchProduct = async () => {
-                console.log("Fetching product...");
+                setLoading(true);
                 const data = await fetchSelectedProduct(id);
-                console.log(data);
                 setProduct(data);
+                setLoading(false);
             }
 
             fetchProduct();
@@ -51,7 +51,21 @@ export default function ProductPreview() {
 
     return (
         <div className="min-h-dvh flex items-center justify-center bg-background">
-            Product Preview
+            {
+                loading ? (
+                    <div>Loading...</div>
+                ) : (
+                    product ? (
+                        <div>
+                            {product["name"]}
+                        </div>
+                    ) : (
+                        <div>
+                            Product not found
+                        </div>
+                    )
+                )
+            }
         </div>
     );
 }
