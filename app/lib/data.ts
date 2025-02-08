@@ -82,3 +82,24 @@ export default async function fetchProducts(
         return { totalPages: 0, data: [] };
     }
 }
+
+
+export async function fetchSelectedProduct(productID: string) {
+     try {
+        let query = supabase
+            .from('products')
+            .select('*')
+            .eq("id", productID)
+
+        const {data, error} = await query;
+
+        if(error || !data) {
+            console.error("Something went wrong", error);
+            return [];
+        }
+
+        return data;
+     } catch (error: any) {
+        console.error(error.message);
+     }
+}
