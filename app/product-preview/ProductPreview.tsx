@@ -39,9 +39,9 @@ export default function ProductPreview() {
     }, [id])
 
     return (
-        <div className="min-h-dvh flex flex-col items-center justify-start bg-background gap-16">
+        <div className="min-h-screen flex-1 flex flex-col items-center justify-start bg-background text-text">
             <Navigation user={user} setUser={setUser} />
-            <div>
+            <div className="flex-1 w-full flex items-start justify-center lg:items-center">
                 {
                     loading ? (
                         <div>Loading...</div>
