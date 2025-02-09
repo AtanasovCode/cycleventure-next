@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ProductType } from "@/app/types/product-preview";
+import Star from "@/app/assets/icons/star.svg";
 
 type ProductProps = {
     product: ProductType;
@@ -8,6 +9,14 @@ type ProductProps = {
 export default function Product({
     product,
 }: ProductProps) {
+
+    const getStars = (starCount: number) => {
+        return Array.from({ length: starCount }).map((_, i) => (
+            <Star key={i} className="w-3 h-3" />
+        ));
+    };
+
+
     return (
         <div className="flex flex-1 flex-col lg:flex-row items-center justify-start lg:justify-between py-4 px-4 lg:max-w-[80vw]">
             <div className="flex lg:max-w-[40%]">
@@ -28,8 +37,14 @@ export default function Product({
                 </div>
                 <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
                     <div>Rating:</div>
-                    <div className="capitalize">{product.rating}</div>
-                    <div>{product.numberOfReviews}</div>
+                    <div className="flex items-cenetr justify-center gap-1">
+                        {
+                            getStars(product.rating)
+                        }
+                    </div>
+                    <div>
+                        ({product.numberOfReviews})
+                    </div>
                 </div>
                 <div className="font-bold text-2xl my-4">
                     ${product.price}
