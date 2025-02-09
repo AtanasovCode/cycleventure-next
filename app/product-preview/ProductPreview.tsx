@@ -3,30 +3,15 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { fetchSelectedProduct } from "@/app/lib/data";
-import { stringify } from "querystring";
-
-type Product = {
-    created_at: string;
-    id: string;
-    brand: string;
-    name: string;
-    description: string;
-    price: number;
-    isOnSale: boolean;
-    salePercent: number;
-    rating: number;
-    numberOfReviews: number;
-    frameType: string;
-    photos: string[];
-    sizes: string[];
-}
+import Product from "@/app/ui/product-preview/Product";
+import { ProductType } from "@/app/types/product-preview";
 
 export default function ProductPreview() {
 
     const searchParams = useSearchParams();
 
     const [id, setID] = useState<string>("")
-    const [product, setProduct] = useState<Product>();
+    const [product, setProduct] = useState<ProductType>();
     const [loading, setLoading] = useState<boolean>(false);
 
     useEffect(() => {
@@ -56,9 +41,7 @@ export default function ProductPreview() {
                     <div>Loading...</div>
                 ) : (
                     product ? (
-                        <div>
-                            {product["name"]}
-                        </div>
+                        <Product product={product} />
                     ) : (
                         <div>
                             Product not found
