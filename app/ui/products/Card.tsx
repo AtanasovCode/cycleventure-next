@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { Product } from "@/app/types/Product";
 import Image from "next/image";
+import { formatMoney } from "@/app/lib/utils";
 
 type CardType = {
     product: Product;

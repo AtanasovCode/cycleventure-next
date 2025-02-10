@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ProductType } from "@/app/types/product-preview";
 import Star from "@/app/assets/icons/star.svg";
+import { formatMoney } from "@/app/lib/utils";
 
 type ProductProps = {
     product: ProductType;
@@ -48,7 +49,7 @@ export default function Product({
                     </div>
                 </div>
                 <div className="font-bold text-2xl my-4">
-                    ${product.price}
+                    {formatMoney.format(product.price)}
                 </div>
                 <div>
                     {product.description}
