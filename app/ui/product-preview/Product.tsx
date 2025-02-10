@@ -18,13 +18,14 @@ export default function Product({
 
 
     return (
-        <div className="flex flex-1 flex-col lg:flex-row items-center justify-start lg:justify-between py-4 px-4 lg:max-w-[80vw]">
-            <div className="flex lg:max-w-[40%]">
+        <div className="flex flex-1 flex-col lg:flex-row items-center justify-start lg:justify-between py-4 px-4 sm:px-12 lg:px-0 lg:max-w-[90vw] lg:gap-16">
+            <div className="flex items-center justify-center">
                 <Image
                     src={product.photos[0]}
                     alt={`Photo of bike: ${product.name}, bike brand: ${product.brand}`}
                     width={1920}
                     height={1440}
+                    className="lg:w-[90%]"
                 />
             </div>
             <div className="flex flex-col items-start justify-center gap-2 lg:max-w-[30%]">
@@ -36,13 +37,13 @@ export default function Product({
                     <div className="capitalize">{product.brand}</div>
                 </div>
                 <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
-                    <div>Rating:</div>
-                    <div className="flex items-cenetr justify-center gap-1">
+                    <div className="flex items-center justify-center">Rating:</div>
+                    <div className="flex items-end justify-center gap-1">
                         {
                             getStars(product.rating)
                         }
                     </div>
-                    <div>
+                    <div className="flex items-center justify-center">
                         ({product.numberOfReviews})
                     </div>
                 </div>
