@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ProductType } from "@/app/types/product-preview";
+import PhotoPreview from "@/app/ui/product-preview/PhotoPreview";
 import Star from "@/app/assets/icons/star.svg";
 import { formatMoney } from "@/app/lib/utils";
 
@@ -20,15 +21,11 @@ export default function Product({
 
     return (
         <div className="flex flex-1 flex-col lg:flex-row items-center justify-start lg:justify-between py-4 px-4 sm:px-12 lg:px-0 lg:max-w-[90vw] lg:gap-16">
-            <div className="flex items-center justify-center">
-                <Image
-                    src={product.photos[0]}
-                    alt={`Photo of bike: ${product.name}, bike brand: ${product.brand}`}
-                    width={1920}
-                    height={1440}
-                    className="lg:w-[90%]"
-                />
-            </div>
+            <PhotoPreview 
+                photos={product.photos}
+                name={product.name}
+                brand={product.brand}
+            />
             <div className="flex flex-col items-start justify-center gap-2 lg:max-w-[30%]">
                 <div className="font-bold text-4xl">
                     {product.name}

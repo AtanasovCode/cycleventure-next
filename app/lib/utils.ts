@@ -1,4 +1,5 @@
 export const formatMoney = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: 'USD',
+    minimumFractionDigits: 0,
 });

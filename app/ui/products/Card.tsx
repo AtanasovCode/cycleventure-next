@@ -29,7 +29,9 @@ export default function Card({ product }: CardType) {
             />
             <h1 className="font-bold text-xl text-center">{product.name}</h1>
             <div className="text-sm">
-                ${product.price}
+                {
+                    formatMoney.format(product.price)
+                }
             </div>
         </div>
     );
