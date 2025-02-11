@@ -45,7 +45,7 @@ export default function Product({
                         ({product.numberOfReviews})
                     </div>
                 </div>
-                <div className="font-bold text-2xl my-4">
+                <div className="font-bold text-2xl my-4 text-accent">
                     {formatMoney.format(product.price)}
                 </div>
                 <div>

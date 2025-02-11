@@ -52,7 +52,7 @@ export default function PhotoPreview({
     return (
         <div className="flex items-center justify-center relative">
             <div
-                className="absolute top-1/2 left-0 md:left-6 -translate-y-1/2 bg-background flex items-center justify-center p-2 rounded-full cursor-pointer"
+                className="absolute top-1/2 -left-4 md:left-6 -translate-y-1/2 bg-primary flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"
                 onClick={() => prevPhoto()}
             >
                 <ArrowLeft className="w-5 md:w-8 h-auto" />
@@ -65,7 +65,7 @@ export default function PhotoPreview({
                 className="lg:w-[90%]"
             />
             <div
-                className="absolute top-1/2 right-0 md:right-6 -translate-y-1/2 bg-background flex items-center justify-center p-2 rounded-full cursor-pointer"
+                className="absolute top-1/2 -right-4 md:right-6 -translate-y-1/2 bg-primary flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"
                 onClick={() => nextPhoto()}
             >
                 <ArrowRight className="w-5 md:w-8 h-auto" />
