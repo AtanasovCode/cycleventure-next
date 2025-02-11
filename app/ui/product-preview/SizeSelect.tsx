@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 type SizeProps = {
     sizes: string[];
-    selectedSize: string;
+    selectedSize: string | null;
     setSelectedSize: (value: string) => void;
 }
 

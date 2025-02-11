@@ -5,7 +5,7 @@ import Star from "@/app/assets/icons/star.svg";
 
 type ProductProps = {
     product: ProductType;
-    selectedSize: string;
+    selectedSize: string | null;
     setSelectedSize: (value: string) => void;
 }
 

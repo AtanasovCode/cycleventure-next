@@ -5,7 +5,7 @@ import ProductDetails from "@/app/ui/product-preview/ProductDetails";
 
 type ProductProps = {
     product: ProductType;
-    selectedSize: string;
+    selectedSize: string | null;
     setSelectedSize: (value: string) => void;
 }
 
