@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 import { fetchSelectedProduct } from "@/app/lib/data";
@@ -9,6 +9,14 @@ import Product from "@/app/ui/product-preview/Product";
 import { ProductType } from "@/app/types/product-preview";
 
 export default function ProductPreview() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ProductPreviewPageContent />
+        </Suspense>
+    );
+}
+
+function ProductPreviewPageContent() {
 
     const searchParams = useSearchParams();
 
