@@ -1,5 +1,5 @@
-import { useState } from "react";
-import Image from "next/image";
+import { useState, useEffect } from "react";
+import NextImage from "next/image";
 import ArrowLeft from "@/app/assets/icons/arrow-left-fancy.svg";
 import ArrowRight from "@/app/assets/icons/arrow-right-fancy.svg";
 
@@ -16,6 +16,19 @@ export default function PhotoPreview({
 }: PhotoProps) {
 
     const [currentPhotoIdx, setCurrentPhotoIdx] = useState<number>(1);
+
+    const preloadImage = (src: string) => {
+        const img = new Image();
+        img.src = src;
+    };
+
+    useEffect(() => {
+        photos.forEach((photo) => {
+            preloadImage(photo);
+        })
+    }, []);
+
+    useEffect(() => {}, [])
 
     const prevPhoto = () => {
         if (currentPhotoIdx === 0) {
@@ -35,15 +48,16 @@ export default function PhotoPreview({
         setCurrentPhotoIdx(currentPhotoIdx + 1);
     }
 
+
     return (
         <div className="flex items-center justify-center relative">
-            <div 
+            <div
                 className="absolute top-1/2 left-0 md:left-6 -translate-y-1/2 bg-background flex items-center justify-center p-2 rounded-full cursor-pointer"
                 onClick={() => prevPhoto()}
             >
                 <ArrowLeft className="w-5 md:w-8 h-auto" />
             </div>
-            <Image
+            <NextImage
                 src={photos[currentPhotoIdx]}
                 alt={`Photo of bike: ${name}, bike brand: ${brand}`}
                 width={1920}
