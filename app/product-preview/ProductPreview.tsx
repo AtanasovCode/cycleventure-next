@@ -24,6 +24,7 @@ function ProductPreviewPageContent() {
     const [product, setProduct] = useState<ProductType>();
     const [loading, setLoading] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
+    const [selectedSize, setSelectedSize] = useState<string>("");
 
 
     useEffect(() => {
@@ -55,7 +56,11 @@ function ProductPreviewPageContent() {
                         <div>Loading...</div>
                     ) : (
                         product ? (
-                            <Product product={product} />
+                            <Product 
+                                product={product} 
+                                selectedSize={selectedSize}
+                                setSelectedSize={setSelectedSize}
+                            />
                         ) : (
                             <div>
                                 Product not found

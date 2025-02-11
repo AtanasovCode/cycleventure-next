@@ -5,10 +5,14 @@ import Star from "@/app/assets/icons/star.svg";
 
 type ProductProps = {
     product: ProductType;
+    selectedSize: string;
+    setSelectedSize: (value: string) => void;
 }
 
 export default function ProductDetails({
     product,
+    selectedSize,
+    setSelectedSize,
 }: ProductProps) {
 
     const getStars = (starCount: number) => {
@@ -45,6 +49,8 @@ export default function ProductDetails({
             </div>
             <SizeSelect
                 sizes={product.sizes}
+                selectedSize={selectedSize}
+                setSelectedSize={setSelectedSize}
             />
         </div>
     );
