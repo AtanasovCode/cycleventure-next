@@ -20,7 +20,8 @@ export default function SizeSelect({
                 {
                     sizes.map((size) => {
                         return (
-                            <div 
+                            <div
+                                key={size}
                                 className={clsx(
                                     "w-full flex items-center justify-center border p-2 rounded-md cursor-pointer",
                                     {

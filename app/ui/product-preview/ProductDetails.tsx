@@ -1,5 +1,6 @@
 import { ProductType } from "@/app/types/product-preview";
 import SizeSelect from "@/app/ui/product-preview/SizeSelect";;
+import CartButton from "@/app/ui/product-preview/CartButton";
 import { formatMoney } from "@/app/lib/utils";
 import Star from "@/app/assets/icons/star.svg";
 
@@ -26,19 +27,25 @@ export default function ProductDetails({
             <div className="font-bold text-4xl">
                 {product.name}
             </div>
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
-                <div>Brand:</div>
-                <div className="capitalize">{product.brand}</div>
-            </div>
-            <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
-                <div className="flex items-center justify-center">Rating:</div>
-                <div className="flex items-end justify-center gap-1">
-                    {
-                        getStars(product.rating)
-                    }
+            <div className="flex flex-col items-start justify-center gap-1">
+                <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
+                    <div>Brand:</div>
+                    <div className="capitalize">{product.brand}</div>
                 </div>
-                <div className="flex items-center justify-center">
-                    ({product.numberOfReviews})
+                <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
+                    <div>Frame:</div>
+                    <div className="capitalize">{product.frameType}</div>
+                </div>
+                <div className="flex items-center justify-center gap-2 text-sm text-slate-300">
+                    <div className="flex items-center justify-center">Rating:</div>
+                    <div className="flex items-end justify-center gap-1">
+                        {
+                            getStars(product.rating)
+                        }
+                    </div>
+                    <div className="flex items-center justify-center">
+                        ({product.numberOfReviews})
+                    </div>
                 </div>
             </div>
             <div className="font-bold text-2xl my-4 text-accent">
@@ -52,6 +59,7 @@ export default function ProductDetails({
                 selectedSize={selectedSize}
                 setSelectedSize={setSelectedSize}
             />
+            <CartButton />
         </div>
     );
 }
