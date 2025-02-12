@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ProductType } from "@/app/types/product-preview";
 import SizeSelect from "@/app/ui/product-preview/SizeSelect";;
 import CartButton from "@/app/ui/product-preview/CartButton";
@@ -15,6 +16,8 @@ export default function ProductDetails({
     selectedSize,
     setSelectedSize,
 }: ProductProps) {
+
+    const [sizeNotSelectedError, setSizeNotSelectedError] = useState<boolean>(false);
 
     const getStars = (starCount: number) => {
         return Array.from({ length: starCount }).map((_, i) => (
@@ -58,8 +61,13 @@ export default function ProductDetails({
                 sizes={product.sizes}
                 selectedSize={selectedSize}
                 setSelectedSize={setSelectedSize}
+                sizeError={sizeNotSelectedError}
+                setSizeError={setSizeNotSelectedError}
             />
-            <CartButton />
+            <CartButton
+                selectedSize={selectedSize}
+                setSizeError={setSizeNotSelectedError}
+            />
         </div>
     );
 }
