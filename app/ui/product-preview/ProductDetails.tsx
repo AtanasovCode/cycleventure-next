@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ProductType } from "@/app/types/product-preview";
 import SizeSelect from "@/app/ui/product-preview/SizeSelect";;
+import QuantitySelect from "@/app/ui/product-preview/QuantitySelect";
 import CartButton from "@/app/ui/product-preview/CartButton";
 import { formatMoney } from "@/app/lib/utils";
 import Star from "@/app/assets/icons/star.svg";
@@ -18,6 +19,7 @@ export default function ProductDetails({
 }: ProductProps) {
 
     const [sizeNotSelectedError, setSizeNotSelectedError] = useState<boolean>(false);
+    const [quantity, setQuantity] = useState<number>(1);
 
     const getStars = (starCount: number) => {
         return Array.from({ length: starCount }).map((_, i) => (
@@ -57,6 +59,10 @@ export default function ProductDetails({
             <div>
                 {product.description}
             </div>
+            <QuantitySelect 
+                quantity={quantity}
+                setQuantity={setQuantity}
+            />
             <SizeSelect
                 sizes={product.sizes}
                 selectedSize={selectedSize}
