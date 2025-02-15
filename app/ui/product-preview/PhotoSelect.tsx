@@ -4,14 +4,22 @@ import clsx from "clsx";
 type SelectProps = {
     photos: string[];
     currentPhotoIdx: number;
+    setCurrentPhotoIdx: (value: number) => void;
 }
 
-export default function PhotoSelect({ photos, currentPhotoIdx }: SelectProps) {
+export default function PhotoSelect({
+    photos, 
+    currentPhotoIdx,
+    setCurrentPhotoIdx, 
+}: SelectProps) {
     return (
-        <div className="w-full flex items-center justify-start gap-1">
+        <div className="flex items-center justify-start gap-1">
             {photos.map((photo, idx) => {
                 return (
-                    <div className="relative flex items-center justify-center">
+                    <div 
+                        className="relative flex items-center justify-center cursor-pointer"
+                        onClick={() => setCurrentPhotoIdx(idx)}
+                    >
                         <Image
                             src={photo}
                             width={600}

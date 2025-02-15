@@ -39,7 +39,7 @@ export default function MainPhoto({
     }, []);
 
     return (
-        <div className="w-full flex items-center justify-start relative">
+        <div className="flex items-center justify-center relative">
             <div
                 className="absolute top-1/2 -left-4 md:left-6 -translate-y-1/2 bg-primary flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"
                 onClick={() => prevPhoto()}
@@ -54,7 +54,7 @@ export default function MainPhoto({
                 alt={`Photo of bike: ${name}, bike brand: ${brand}`}
                 width={1920}
                 height={1440}
-                className="lg:w-[90%]"
+                className=""
             />
             <div
                 className="absolute top-1/2 -right-4 md:right-6 -translate-y-1/2 bg-primary flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"

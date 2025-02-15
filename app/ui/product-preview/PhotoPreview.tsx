@@ -30,7 +30,7 @@ export default function PhotoPreview({
     useEffect(() => { }, [])
 
     return (
-        <div className="flex flex-col gap-3 items-center justify-center">
+        <div className="flex flex-col gap-3 items-start justify-center">
             <MainPhoto 
                 photos={photos} 
                 currentPhotoIdx={currentPhotoIdx}
@@ -41,6 +41,7 @@ export default function PhotoPreview({
             <PhotoSelect 
                 photos={photos}
                 currentPhotoIdx={currentPhotoIdx}
+                setCurrentPhotoIdx={setCurrentPhotoIdx}
             />
         </div>
     );
