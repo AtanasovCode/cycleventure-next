@@ -27,7 +27,7 @@ export default async function fetchProducts(
     try {
         let query = supabase
             .from('products')
-            .select('id, name, brand, category, price, frameType, numberOfReviews, photos', { count: 'exact' })
+            .select('id, name, brand, category, price, isOnSale, salePercent, final_price, frameType, numberOfReviews, photos', { count: 'exact' })
             .range(start, end);
 
         // sort the products based on the sorting filter selected

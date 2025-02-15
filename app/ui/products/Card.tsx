@@ -1,7 +1,8 @@
 import { useRouter } from "next/navigation";
+import clsx from "clsx";
 import { Product } from "@/app/types/Product";
+import ProductPrice from "@/app/ui/ProductPrice";
 import Image from "next/image";
-import { formatMoney } from "@/app/lib/utils";
 
 type CardType = {
     product: Product;
@@ -27,11 +28,26 @@ export default function Card({ product }: CardType) {
                 width={1920}
                 height={1440}
             />
-            <h1 className="font-bold text-xl text-center">{product.name}</h1>
-            <div className="text-sm">
-                {
-                    formatMoney.format(product.price)
-                }
+            <div className="flex flex-col items-start justify-center gap-2">
+                <div className="flex items-center justify-start gap-2">
+                    <div className={clsx(
+                        "text-[.64rem] p-1 bg-accent uppercase rounded-md text-black",
+                        {
+                            "hidden": !product.isOnSale,
+                            "inline-block": product.isOnSale
+                        }
+                    )}>
+                        SALE
+                    </div>
+                    <h1 className="font-bold text-xl text-center">{product.name}</h1>
+                </div>
+                <div className="text-sm">
+                    <ProductPrice
+                        price={product.price}
+                        finalPrice={product.final_price}
+                        isOnSale={product.isOnSale}
+                    />
+                </div>
             </div>
         </div>
     );
