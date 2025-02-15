@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ProductType } from "@/app/types/product-preview";
 import ProductCategories from "@/app/ui/product-preview/ProductCategories";
-import SizeSelect from "@/app/ui/product-preview/SizeSelect";;
+import SizeSelect from "@/app/ui/product-preview/SizeSelect";
 import QuantitySelect from "@/app/ui/product-preview/QuantitySelect";
 import CartButton from "@/app/ui/product-preview/CartButton";
 import { formatMoney } from "@/app/lib/utils";
