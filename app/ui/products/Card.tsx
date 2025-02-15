@@ -1,11 +1,11 @@
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-import { Product } from "@/app/types/Product";
+import { ProductTypes } from "@/app/types/product-types";
 import ProductPrice from "@/app/ui/ProductPrice";
 import Image from "next/image";
 
 type CardType = {
-    product: Product;
+    product: ProductTypes;
 }
 
 export default function Card({ product }: CardType) {

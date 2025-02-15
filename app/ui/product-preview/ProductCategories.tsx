@@ -1,9 +1,9 @@
-import { ProductType } from "@/app/types/product-preview";
+import { ProductTypes } from "@/app/types/product-types";
 import Star from "@/app/assets/icons/star.svg";
 
 
 type CategoryProps = {
-    product: ProductType;
+    product: ProductTypes;
 }
 
 export default function ProductCategories({

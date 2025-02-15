@@ -6,7 +6,7 @@ import { User } from "@supabase/supabase-js";
 import { fetchSelectedProduct } from "@/app/lib/data";
 import Navigation from "@/app/ui/Navigation";
 import Product from "@/app/ui/product-preview/Product";
-import { ProductType } from "@/app/types/product-preview";
+import { ProductTypes } from "@/app/types/product-types";
 
 export default function ProductPreview() {
     return (
@@ -22,7 +22,7 @@ function ProductPreviewPageContent() {
     const searchParams = useSearchParams();
 
     const [id, setID] = useState<string>("")
-    const [product, setProduct] = useState<ProductType>();
+    const [product, setProduct] = useState<ProductTypes>();
     const [loading, setLoading] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -50,7 +50,7 @@ function ProductPreviewPageContent() {
         const frameSize = searchParams.get("frameSize");
 
         setID(id);
-        if(frameSize) setSelectedSize(decodeURIComponent(frameSize));
+        if (frameSize) setSelectedSize(decodeURIComponent(frameSize));
     }, [searchParams])
 
     useEffect(() => {

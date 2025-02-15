@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { ProductType } from "@/app/types/product-preview";
+import { ProductTypes } from "@/app/types/product-types";
 import ProductCategories from "@/app/ui/product-preview/ProductCategories";
 import SizeSelect from "@/app/ui/product-preview/SizeSelect";
 import QuantitySelect from "@/app/ui/product-preview/QuantitySelect";
+import ProductPrice from "@/app/ui/ProductPrice";
 import CartButton from "@/app/ui/product-preview/CartButton";
 import { formatMoney } from "@/app/lib/utils";
 
 type ProductProps = {
-    product: ProductType;
+    product: ProductTypes;
     selectedSize: string | null;
     setSelectedSize: (value: string) => void;
 }
@@ -43,7 +44,11 @@ export default function ProductDetails({
                 />
             </div>
             <div className="font-bold text-2xl text-accent">
-                {formatMoney.format(product.price)}
+                <ProductPrice
+                    price={product.price}
+                    finalPrice={product.final_price}
+                    isOnSale={product.isOnSale}
+                />
             </div>
             <div>
                 {product.description}

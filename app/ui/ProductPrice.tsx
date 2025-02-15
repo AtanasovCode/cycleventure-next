@@ -14,13 +14,13 @@ export default function ProductPrice({
 }: PriceProps) {
     return (
         <div className="flex items-center justify-start gap-2">
-            <div>
+            <div className="text-inherit">
                 {
                     formatMoney.format(finalPrice)
                 }
             </div>
             <div className={clsx(
-                "text-slate-400",
+                "text-slate-400 text-xs",
                 {
                     "hidden": !isOnSale,
                     "inline-block": isOnSale
@@ -29,7 +29,7 @@ export default function ProductPrice({
                 ●
             </div>
             <div className={clsx(
-                "line-through text-slate-400",
+                "line-through text-slate-400 text-base",
                 {
                     "hidden": !isOnSale,
                     "inline-block": isOnSale
