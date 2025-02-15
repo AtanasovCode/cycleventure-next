@@ -41,7 +41,7 @@ export default function MainPhoto({
     return (
         <div className="flex items-center justify-center relative">
             <div
-                className="absolute top-1/2 -left-4 md:left-6 -translate-y-1/2 bg-primary flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"
+                className="absolute top-1/2 -left-4 -translate-y-1/2 bg-accent flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"
                 onClick={() => prevPhoto()}
                 onKeyDown={(e) => e.key === "Enter" || e.key === "" ? prevPhoto() : null}
                 role="button"
@@ -57,7 +57,7 @@ export default function MainPhoto({
                 className=""
             />
             <div
-                className="absolute top-1/2 -right-4 md:right-6 -translate-y-1/2 bg-primary flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"
+                className="absolute top-1/2 -right-4 -translate-y-1/2 bg-accent flex items-center justify-center p-1 rounded-full cursor-pointer border-[.4rem] border-background"
                 onClick={() => nextPhoto()}
                 onKeyDown={(e) => e.key === "Enter" || e.key === "" ? nextPhoto() : null}
                 role="button"

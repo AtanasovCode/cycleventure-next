@@ -20,7 +20,7 @@ export default function CartButton({
         <input
             type="button"
             value="Add to Cart"
-            className="w-full text-center font-bold p-3 bg-accent text-black mt-6 rounded-md"
+            className="w-full text-center font-bold p-3 bg-accent text-black rounded-md"
             onClick={() => handleClick()}
         />
     );

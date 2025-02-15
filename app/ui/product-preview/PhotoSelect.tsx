@@ -17,7 +17,7 @@ export default function PhotoSelect({
             {photos.map((photo, idx) => {
                 return (
                     <div 
-                        className="relative flex items-center justify-center cursor-pointer"
+                        className="relative flex flex-wrap items-center justify-center cursor-pointer"
                         onClick={() => setCurrentPhotoIdx(idx)}
                     >
                         <Image
@@ -25,7 +25,7 @@ export default function PhotoSelect({
                             width={600}
                             height={800}
                             alt="photo"
-                            className="max-w-24"
+                            className="max-w-16 md:max-w-20 lg:max-w-24"
                         />
                         <div 
                             className={clsx(
