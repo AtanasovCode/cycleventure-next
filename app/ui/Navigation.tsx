@@ -5,6 +5,7 @@ import CartIcon from "@/app/assets/icons/cart.svg";
 import ProfileIcon from "@/app/assets/icons/profile.svg";
 import AuthCard from "@/app/ui/navigation/AuthCard";
 import ProfileCard from "@/app/ui/navigation/ProfileCard";
+import Cart from "@/app/ui/navigation/Cart";
 
 type NavProps = {
     user: User | null;
@@ -17,6 +18,7 @@ export default function Navigation({
 }: NavProps) {
 
     const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
+    const [showCart, setShowCart] = useState<boolean>(false);
 
     return (
         <div
@@ -45,7 +47,19 @@ export default function Navigation({
                         )
                     }
                 </div>
-                <CartIcon className="w-8 h-8 cursor-pointer" />
+                <div
+                    className="flex items-center justify-center relative cursor-pointer"
+                    onClick={() => setShowCart(!showCart)}
+                >
+                    <CartIcon className="w-8 h-8 cursor-pointer" />
+                    {
+                        showCart && (
+                            <Cart 
+                                show={showCart}
+                            />
+                        )
+                    }
+                </div>
             </div>
         </div>
     );
