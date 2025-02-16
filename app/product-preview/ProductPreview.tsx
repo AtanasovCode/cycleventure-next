@@ -1,9 +1,14 @@
 'use client';
 
 import { Suspense, useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
 import { useSearchParams, useRouter } from "next/navigation";
 import { User } from "@supabase/supabase-js";
-import { fetchSelectedProduct } from "@/app/lib/data";
+import { 
+    fetchSelectedProduct,
+    fetchUserCart,
+    fetchUserData,
+} from "@/app/lib/data";
 import Navigation from "@/app/ui/Navigation";
 import Product from "@/app/ui/product-preview/Product";
 import { ProductTypes } from "@/app/types/product-types";
@@ -18,15 +23,14 @@ export default function ProductPreview() {
 
 function ProductPreviewPageContent() {
 
+    const supabase = createClient();
     const router = useRouter();
     const searchParams = useSearchParams();
 
     const [id, setID] = useState<string>("")
     const [product, setProduct] = useState<ProductTypes>();
     const [loading, setLoading] = useState<boolean>(false);
-    const [user, setUser] = useState<User | null>(null);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
-
 
     // sync URL search params with selected bike frame size
     useEffect(() => {
@@ -68,7 +72,7 @@ function ProductPreviewPageContent() {
 
     return (
         <div className="min-h-screen flex-1 flex flex-col items-center justify-start bg-background text-text">
-            <Navigation user={user} setUser={setUser} />
+            <Navigation />
             <div className="flex-1 w-full flex items-start justify-center lg:items-center">
                 {
                     loading ? (
