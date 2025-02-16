@@ -2,14 +2,17 @@ import Image from "next/image";
 import { ProductTypes } from "@/app/types/product-types";
 import PhotoPreview from "@/app/ui/product-preview/PhotoPreview";
 import ProductDetails from "@/app/ui/product-preview/ProductDetails";
+import { User } from "@supabase/supabase-js";
 
 type ProductProps = {
+    user: User | null;
     product: ProductTypes;
     selectedSize: string | null;
     setSelectedSize: (value: string) => void;
 }
 
 export default function Product({
+    user,
     product,
     selectedSize,
     setSelectedSize,
@@ -21,7 +24,8 @@ export default function Product({
                 name={product.name}
                 brand={product.brand}
             />
-            <ProductDetails 
+            <ProductDetails
+                user={user}
                 product={product}
                 selectedSize={selectedSize}
                 setSelectedSize={setSelectedSize}

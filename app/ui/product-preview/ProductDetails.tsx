@@ -1,19 +1,21 @@
 import { useState } from "react";
+import { User } from "@supabase/supabase-js";
 import { ProductTypes } from "@/app/types/product-types";
 import ProductCategories from "@/app/ui/product-preview/ProductCategories";
 import SizeSelect from "@/app/ui/product-preview/SizeSelect";
 import QuantitySelect from "@/app/ui/product-preview/QuantitySelect";
 import ProductPrice from "@/app/ui/ProductPrice";
 import CartButton from "@/app/ui/product-preview/CartButton";
-import { formatMoney } from "@/app/lib/utils";
 
 type ProductProps = {
+    user: User | null;
     product: ProductTypes;
     selectedSize: string | null;
     setSelectedSize: (value: string) => void;
 }
 
 export default function ProductDetails({
+    user,
     product,
     selectedSize,
     setSelectedSize,
@@ -21,17 +23,6 @@ export default function ProductDetails({
 
     const [sizeNotSelectedError, setSizeNotSelectedError] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
-
-    const addToCartWithoutAuth = () => {
-        const data = {
-            brand: product.brand,
-            name: product.name,
-            price: product.price,
-            photo: product.photos[0],
-            size: selectedSize,
-            quantity: quantity,
-        }
-    }
 
     return (
         <div className="flex flex-col items-start justify-start gap-8 lg:max-w-[35%]">
@@ -65,6 +56,8 @@ export default function ProductDetails({
                 setQuantity={setQuantity}
             />
             <CartButton
+                user={user}
+                product={product}
                 selectedSize={selectedSize}
                 setSizeError={setSizeNotSelectedError}
             />

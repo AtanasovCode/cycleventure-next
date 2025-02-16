@@ -2,7 +2,7 @@ import { CartType } from "@/app/types/cart-types";
 import Image from "next/image";
 
 type ItemProps = {
-    cart: CartType[] | null;
+    cart: CartType | null;
 }
 
 export default function CartItems({
@@ -12,21 +12,25 @@ export default function CartItems({
         <div>
             {
                 cart ? (
-                    cart.map((item) => {
-                        return (
-                            <div className="flex items-center justify-center gap-2">
-                                <div>
-                                    <Image
-                                        src={item.photo}
-                                        width={800}
-                                        height={600}
-                                        alt="cart item photo"
-                                        className="max-w-16"
-                                    />
-                                </div>
-                            </div>
-                        );
-                    })
+                    <div
+                        className="flex items-center justify-center gap-2"
+                    >
+                        <div>
+                            <Image
+                                src={cart.photo}
+                                width={800}
+                                height={600}
+                                alt="cart item photo"
+                                className="max-w-16"
+                            />
+                        </div>
+                        <div>
+                            {cart.name}
+                        </div>
+                        <div>
+                            {cart.price}
+                        </div>
+                    </div>
                 ) : (
                     <div>
                         Cart is empty

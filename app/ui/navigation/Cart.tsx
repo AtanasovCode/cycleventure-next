@@ -18,18 +18,23 @@ export default function Cart({
     setUser,
 }: CartProps) {
 
-    const [localCart, setLocalCart] = useState<CartType[] | null>(null); // viewing cart as guest
-    const [userCart, setUserCart] = useState<CartType[] | null>(null) // viewing cart as authenticated user
+    const [localCart, setLocalCart] = useState<CartType | null>(null); // viewing cart as guest
+    const [userCart, setUserCart] = useState<CartType | null>(null) // viewing cart as authenticated user
 
     // fetch data for both types of carts
     useEffect(() => {
         if(user) {
-            fetchUserCart().then(setUserCart);
+            return;
         } else {
-            const localCart = sessionStorage.getItem("localCart");
-            setLocalCart(localCart ? JSON.parse(localCart) : null);
+            const cart = sessionStorage.getItem("localCart")
+            cart && setLocalCart(JSON.parse(cart));
         }
-    }, [user])
+    }, []);
+
+    useEffect(() => {
+        console.log(localCart);
+    }, [localCart])
+
 
     return (
         <div className={clsx(
