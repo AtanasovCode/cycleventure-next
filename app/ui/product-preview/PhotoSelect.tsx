@@ -16,7 +16,8 @@ export default function PhotoSelect({
         <div className="flex items-center justify-start gap-1">
             {photos.map((photo, idx) => {
                 return (
-                    <div 
+                    <div
+                        key={idx}
                         className="relative flex flex-wrap items-center justify-center cursor-pointer"
                         onClick={() => setCurrentPhotoIdx(idx)}
                     >

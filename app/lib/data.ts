@@ -128,6 +128,7 @@ export async function fetchUserCart() {
         }
 
         return data;
+        
     } catch (error: any) {
         console.error("Something went wrong", error.message);
         return null;
