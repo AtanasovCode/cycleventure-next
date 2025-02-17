@@ -19,6 +19,10 @@ export default function CartButton({
 }: ButtonProps) {
 
     const addToCartWithoutAuth = () => {
+        
+        const currentLocalCart = sessionStorage.getItem("localCart");
+        const parsedCurrentLocalCart = currentLocalCart ? JSON.parse(currentLocalCart) : [];
+
         const data = {
             product_id: product.id,
             brand: product.brand,
@@ -29,7 +33,9 @@ export default function CartButton({
             quantity: quantity,
         }
 
-        sessionStorage.setItem("localCart", JSON.stringify(data));
+        parsedCurrentLocalCart.unshift(data);
+
+        sessionStorage.setItem("localCart", JSON.stringify(parsedCurrentLocalCart));
     }
 
     const handleClick = () => {

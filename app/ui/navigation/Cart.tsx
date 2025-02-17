@@ -18,8 +18,8 @@ export default function Cart({
     setUser,
 }: CartProps) {
 
-    const [localCart, setLocalCart] = useState<CartType | null>(null); // viewing cart as guest
-    const [userCart, setUserCart] = useState<CartType | null>(null) // viewing cart as authenticated user
+    const [localCart, setLocalCart] = useState<CartType[] | null>(null); // viewing cart as guest
+    const [userCart, setUserCart] = useState<CartType[] | null>(null) // viewing cart as authenticated user
 
     // fetch data for both types of carts
     useEffect(() => {
@@ -45,7 +45,10 @@ export default function Cart({
             }
         )}>
             <Triangle className="w-[34px] h-auto absolute -top-6 right-0 z-30" />
-            <div className="flex flex-col items-center justify-start z-50 bg-secondary min-w-[85vw] lg:min-w-[30vw] min-h-[70dvh] rounded-md">
+            <div className="flex flex-col items-center justify-start z-50 p-6 gap-6 bg-secondary min-w-[85vw] lg:min-w-[30vw] h-[85dvh] rounded-md">
+                <div className="font-bold text-xl text-center">
+                    Your Cart
+                </div>
                 {
                     user ? (
                         <CartItems cart={userCart} />
