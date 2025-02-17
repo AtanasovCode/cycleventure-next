@@ -38,14 +38,14 @@ export default function Cart({
 
     return (
         <div className={clsx(
-            "flex flex-col items-center justify-start absolute top-[160%] right-0 rounded-md transition-all ease-in-out text-text bg-secondary border-2 border-slate-600 z-50",
+            "flex flex-col items-center justify-start absolute top-[160%] right-0 transition-all ease-in-out text-text bg-secondary border-2 border-slate-600 rounded-lg",
             {
                 "max-h-0 pointer-events-none border-none overflow-hidden": !show,
-                "max-h-64 min-w-0 pointer-events-auto": show
+                "max-h-[80dvh] min-w-0 pointer-events-auto": show
             }
         )}>
-            <Triangle className="w-[34px] h-auto absolute -top-6 right-0 z-30" />
-            <div className="flex flex-col items-center justify-start z-50 p-6 gap-6 bg-secondary min-w-[85vw] lg:min-w-[30vw] h-[85dvh] rounded-md">
+            <Triangle className="w-[34px] h-auto absolute -top-5 right-0 z-30" />
+            <div className="flex flex-col items-center justify-start z-50 p-6 gap-6 bg-secondary w-[85vw] lg:w-[30vw] h-[80dvh] rounded-lg">
                 <div className="font-bold text-xl text-center">
                     Your Cart
                 </div>
