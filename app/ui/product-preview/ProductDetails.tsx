@@ -59,6 +59,7 @@ export default function ProductDetails({
                 user={user}
                 product={product}
                 selectedSize={selectedSize}
+                quantity={quantity}
                 setSizeError={setSizeNotSelectedError}
             />
         </div>

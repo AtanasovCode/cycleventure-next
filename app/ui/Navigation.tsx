@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
+import clsx from "clsx";
 import { User } from "@supabase/supabase-js";
 import CycleventureLogo from "@/app/ui/cycleventure-logo";
 import CartIcon from "@/app/assets/icons/cart.svg";
@@ -43,16 +44,22 @@ export default function Navigation() {
     return (
         <div
             id="navigation"
-            className="w-full p-6 sticky top-0 left-0 z-40 bg-background flex items-center justify-between gap-4 border-b-2 border-slate-600"
+            className="w-full px-12 py-4 sticky top-0 left-0 z-40 bg-background border-b border-slate-600 flex items-center justify-between gap-4"
         >
             <CycleventureLogo />
             <div className="flex items-center justify-center gap-4"></div>
-            <div className="flex items-center justify-center relative gap-4">
+            <div className="flex items-center justify-center relative gap-2">
                 <div
                     className="flex items-center justify-center relative cursor-pointer"
                     onClick={() => setShowAuthCard(!showAuthCard)}
                 >
-                    <ProfileIcon className="h-8 w-auto" />
+                    <ProfileIcon className={clsx(
+                        "h-8 w-auto",
+                        {
+                            "fill-white": showAuthCard, // shown
+                            "fill-primary": !showAuthCard // hidden
+                        }
+                    )} />
                     {
                         user ? (
                             <ProfileCard
@@ -71,7 +78,13 @@ export default function Navigation() {
                     className="flex items-center justify-center relative cursor-pointer"
                     onClick={() => setShowCart(!showCart)}
                 >
-                    <CartIcon className="w-8 h-8 cursor-pointer" />
+                    <CartIcon className={clsx(
+                        "w-8 h-8",
+                        {
+                            "fill-white": showCart, // shown
+                            "fill-primary": !showCart // hidden
+                        }
+                    )} />
                     {
                         showCart && (
                             <Cart

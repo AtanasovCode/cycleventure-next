@@ -29,8 +29,13 @@ export default function CartItems({
                                             className="max-w-28 p-1 bg-slate-300 rounded-xl flex items-center justify-center"
                                         />
                                     </div>
-                                    <div className="font-bold">
-                                        {item.name}
+                                    <div className="flex flex-col items-start justify-center gap-1">
+                                        <div className="font-bold">
+                                            {item.name}
+                                        </div>
+                                        <div className="text-sm">
+                                            Quantity: {item.quantity}
+                                        </div>
                                     </div>
                                 </div>
                                 <div>
