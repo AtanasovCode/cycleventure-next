@@ -44,7 +44,9 @@ function ProductPreviewPageContent() {
             params.delete("frameSize");
         }
 
-        router.replace(`/product-preview?${params.toString()}`);
+        // router.replace(`/product-preview?${params.toString()}`);
+        router.replace(`/product-preview?${params.toString()}`, { scroll: false });
+
 
     }, [selectedSize])
 
