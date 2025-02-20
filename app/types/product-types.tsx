@@ -1,4 +1,4 @@
-export type Product = {
+export type ProductTypes = {
     id: string;
     brand: string;
     category: string;
@@ -6,6 +6,9 @@ export type Product = {
     description: string;
     photos: string[];
     price: number;
+    isOnSale: boolean;
+    salePercent: number;
+    final_price: number;
     sizes: string[];
     rating: number;
     numberOfReviews: number;

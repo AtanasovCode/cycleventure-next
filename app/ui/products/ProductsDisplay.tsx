@@ -9,8 +9,7 @@ import Card from "@/app/ui/products/Card";
 import ProductsHeader from "@/app/ui/products/ProductsHeader";
 import Pages from "@/app/ui/products/Pages";
 import { ProductsDisplaySkeleton } from "@/app/ui/Skeletons";
-
-import { Product } from "@/app/types/Product";
+import { ProductTypes } from "@/app/types/product-types";
 
 type ProductsDisplayProps = {
     filters: Filters;
@@ -31,7 +30,7 @@ export default function ProductsDisplay({
     setSelectedSortingOption,
 }: ProductsDisplayProps) {
 
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<ProductTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
     const [itemsPerPage, setItemsPerPage] = useState<number>(12);

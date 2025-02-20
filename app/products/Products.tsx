@@ -44,8 +44,6 @@ function ProductsPageContent() {
     });
     const [showFilters, setShowFilters] = useState<boolean>(false);
     const [selectedSortingOption, setSelectedSortingOption] = useState<SortOptions>({ name: "Position", value: "position" })
-    const [user, setUser] = useState<User | null>(null);
-
 
     // Sync URL params with state
     useEffect(() => {
@@ -80,30 +78,9 @@ function ProductsPageContent() {
         setSelectedSortingOption(selectedSort);
     }, [searchParams]);
 
-
-    // check if user is signed in and update user state with user data
-    useEffect(() => {
-        const updateUser = async () => {
-            const { data } = await supabase.auth.getUser();
-            setUser(data?.user || null);
-        };
-
-        const { data: authListener } = supabase.auth.onAuthStateChange(() => {
-            updateUser(); // Fetch the session after any auth change
-        });
-
-        updateUser(); // Fetch the session on component mount
-
-        return () => {
-            authListener.subscription.unsubscribe();
-        };
-    }, []);
-
-
-
     return (
         <div className="w-full flex flex-col items-start justify-start text-text gap-4 pb-6">
-            <Navigation user={user} setUser={setUser} />
+            <Navigation />
             <div
                 className="w-full flex flex-col lg:flex-row px-6 xs:px-16 sm:px-6 items-center justify-center lg:items-start"
             >

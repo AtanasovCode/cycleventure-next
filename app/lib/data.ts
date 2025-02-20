@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
-import { Product } from "@/app/types/Product";
-import { SortOptions } from "@/app/types/sort";
-
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+import { ProductTypes } from "@/app/types/product-types";
+import { CartType } from "@/app/types/cart-types";
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -19,7 +19,7 @@ export default async function fetchProducts(
     itemsPerPage: number,
     filters: Filters,
     sort: string,
-): Promise<{ totalPages: number; data: Product[] }> {
+): Promise<{ totalPages: number; data: ProductTypes[] }> {
 
     const start = Math.max(0, (page - 1) * itemsPerPage);
     const end = Math.max(start + itemsPerPage - 1, 0);
@@ -27,7 +27,7 @@ export default async function fetchProducts(
     try {
         let query = supabase
             .from('products')
-            .select('id, name, brand, category, price, frameType, numberOfReviews, photos', { count: 'exact' })
+            .select('id, name, brand, category, price, isOnSale, salePercent, final_price, frameType, numberOfReviews, photos', { count: 'exact' })
             .range(start, end);
 
         // sort the products based on the sorting filter selected
@@ -77,7 +77,7 @@ export default async function fetchProducts(
 
         const totalPages = count ? Math.ceil(count / itemsPerPage) : 0;
 
-        return { totalPages, data: data as Product[] };
+        return { totalPages, data: data as ProductTypes[] };
     } catch {
         return { totalPages: 0, data: [] };
     }
@@ -85,22 +85,77 @@ export default async function fetchProducts(
 
 
 export async function fetchSelectedProduct(productID: string) {
-     try {
+    try {
         let query = supabase
             .from('products')
             .select('*')
             .eq("id", productID)
             .single()
 
-        const {data, error} = await query;
+        const { data, error } = await query;
 
-        if(error || !data) {
+        if (error || !data) {
             console.error("Something went wrong", error);
             return null;
         }
 
         return data;
-     } catch (error: any) {
+    } catch (error: any) {
         console.error(error.message);
-     }
+    }
+}
+
+export async function fetchUserData() {
+    const { data } = await supabase.auth.getUser();
+    return (data?.user || null);
+};
+
+async function addToCart(product_id: string, user_id: string, quantity: number) {
+    try {
+        const { data, error } = await supabase
+            .from("cart")
+            .insert([
+                {
+                    user_id: user_id,
+                    product_id: product_id,
+                    quantity: quantity
+                }
+            ]);
+
+        if (error) {
+            console.error("Failed to add item to cart:", error);
+            return null;
+        }
+
+    } catch (error: any) {
+        console.error("Something went wrong", error.message);
+        return;
+    }
+}
+
+export async function fetchUserCart() {
+
+    const user = await fetchUserData();
+
+    if (!user) {
+        throw new Error("User is not authenticated");
+    }
+
+    try {
+        const { data, error } = await supabase
+            .from("cart")
+            .select("*")
+            .eq("user_id", user.id)
+
+        if (error) {
+            console.error("Something went wrong", error.message);
+            return null;
+        }
+
+        return data;
+
+    } catch (error: any) {
+        console.error("Something went wrong", error.message);
+        return null;
+    }
 }

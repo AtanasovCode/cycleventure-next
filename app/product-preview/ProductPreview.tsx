@@ -1,12 +1,17 @@
 'use client';
 
 import { Suspense, useEffect, useState } from "react";
+import { createClient } from "@/utils/supabase/client";
 import { useSearchParams, useRouter } from "next/navigation";
 import { User } from "@supabase/supabase-js";
-import { fetchSelectedProduct } from "@/app/lib/data";
+import { 
+    fetchSelectedProduct,
+    fetchUserCart,
+    fetchUserData,
+} from "@/app/lib/data";
 import Navigation from "@/app/ui/Navigation";
 import Product from "@/app/ui/product-preview/Product";
-import { ProductType } from "@/app/types/product-preview";
+import { ProductTypes } from "@/app/types/product-types";
 
 export default function ProductPreview() {
     return (
@@ -18,15 +23,15 @@ export default function ProductPreview() {
 
 function ProductPreviewPageContent() {
 
+    const supabase = createClient();
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const [id, setID] = useState<string>("")
-    const [product, setProduct] = useState<ProductType>();
-    const [loading, setLoading] = useState<boolean>(false);
+    const [id, setID] = useState<string>("");
     const [user, setUser] = useState<User | null>(null);
+    const [product, setProduct] = useState<ProductTypes>();
+    const [loading, setLoading] = useState<boolean>(false);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
-
 
     // sync URL search params with selected bike frame size
     useEffect(() => {
@@ -39,7 +44,9 @@ function ProductPreviewPageContent() {
             params.delete("frameSize");
         }
 
-        router.replace(`/product-preview?${params.toString()}`);
+        // router.replace(`/product-preview?${params.toString()}`);
+        router.replace(`/product-preview?${params.toString()}`, { scroll: false });
+
 
     }, [selectedSize])
 
@@ -50,7 +57,7 @@ function ProductPreviewPageContent() {
         const frameSize = searchParams.get("frameSize");
 
         setID(id);
-        if(frameSize) setSelectedSize(decodeURIComponent(frameSize));
+        if (frameSize) setSelectedSize(decodeURIComponent(frameSize));
     }, [searchParams])
 
     useEffect(() => {
@@ -68,7 +75,7 @@ function ProductPreviewPageContent() {
 
     return (
         <div className="min-h-screen flex-1 flex flex-col items-center justify-start bg-background text-text">
-            <Navigation user={user} setUser={setUser} />
+            <Navigation />
             <div className="flex-1 w-full flex items-start justify-center lg:items-center">
                 {
                     loading ? (
@@ -76,6 +83,7 @@ function ProductPreviewPageContent() {
                     ) : (
                         product ? (
                             <Product
+                                user={user}
                                 product={product}
                                 selectedSize={selectedSize}
                                 setSelectedSize={setSelectedSize}
