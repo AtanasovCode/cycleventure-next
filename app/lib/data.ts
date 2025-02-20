@@ -1,7 +1,9 @@
-import { ProductTypes } from "@/app/types/product-types";
 import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+import { ProductTypes } from "@/app/types/product-types";
+import { CartType } from "@/app/types/cart-types";
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
@@ -108,6 +110,29 @@ export async function fetchUserData() {
     return (data?.user || null);
 };
 
+async function addToCart(product_id: string, user_id: string, quantity: number) {
+    try {
+        const { data, error } = await supabase
+            .from("cart")
+            .insert([
+                {
+                    user_id: user_id,
+                    product_id: product_id,
+                    quantity: quantity
+                }
+            ]);
+
+        if (error) {
+            console.error("Failed to add item to cart:", error);
+            return null;
+        }
+
+    } catch (error: any) {
+        console.error("Something went wrong", error.message);
+        return;
+    }
+}
+
 export async function fetchUserCart() {
 
     const user = await fetchUserData();
@@ -128,7 +153,7 @@ export async function fetchUserCart() {
         }
 
         return data;
-        
+
     } catch (error: any) {
         console.error("Something went wrong", error.message);
         return null;
