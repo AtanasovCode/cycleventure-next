@@ -110,7 +110,12 @@ export async function fetchUserData() {
     return (data?.user || null);
 };
 
-async function addToCart(product_id: string, user_id: string, quantity: number) {
+async function addToCart(
+        product_id: string, 
+        user_id: string, 
+        quantity: number,
+        size: string,
+    ) {
     try {
         const { data, error } = await supabase
             .from("cart")
@@ -118,7 +123,8 @@ async function addToCart(product_id: string, user_id: string, quantity: number) 
                 {
                     user_id: user_id,
                     product_id: product_id,
-                    quantity: quantity
+                    quantity: quantity,
+                    size: size
                 }
             ]);
 
