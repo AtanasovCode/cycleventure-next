@@ -28,7 +28,6 @@ function ProductPreviewPageContent() {
     const searchParams = useSearchParams();
 
     const [id, setID] = useState<string>("");
-    const [user, setUser] = useState<User | null>(null);
     const [product, setProduct] = useState<ProductTypes>();
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -83,7 +82,6 @@ function ProductPreviewPageContent() {
                     ) : (
                         product ? (
                             <Product
-                                user={user}
                                 product={product}
                                 selectedSize={selectedSize}
                                 setSelectedSize={setSelectedSize}

@@ -20,6 +20,7 @@ export default function Navigation() {
     const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
     const [showCart, setShowCart] = useState<boolean>(false);
 
+    // fetch user details
     useEffect(() => {
         const getUser = async () => {
             const user = await fetchUserData();

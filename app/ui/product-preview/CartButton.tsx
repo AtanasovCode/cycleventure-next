@@ -1,25 +1,53 @@
+import { useState, useEffect } from "react";
+import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { ProductTypes } from "@/app/types/product-types";
 
 type ButtonProps = {
-    user: User | null;
     product: ProductTypes;
     selectedSize: string | null;
     quantity: number;
     setSizeError: (value: boolean) => void;
-    // user: User | null;
 }
 
 export default function CartButton({
-    user,
     product,
     selectedSize,
     quantity,
     setSizeError,
 }: ButtonProps) {
 
+    const supabase = createClient();
+
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const getUser = async () => {
+            const { data, error } = await supabase.auth.getUser();
+            if (error) {
+                console.error("Unable to get user details", error);
+                return;
+            }
+
+            setUser(data?.user || null);
+        };
+
+        getUser();
+
+        // Listen for authentication state changes
+        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user || null);
+        });
+
+        // Cleanup to remove listener when component unmounts
+        return () => {
+            authListener?.subscription?.unsubscribe();
+        };
+    }, []);
+
+
     const addToCartWithoutAuth = () => {
-        
+
         const currentLocalCart = sessionStorage.getItem("localCart");
         const parsedCurrentLocalCart = currentLocalCart ? JSON.parse(currentLocalCart) : [];
 
@@ -39,7 +67,7 @@ export default function CartButton({
     }
 
     const handleClick = () => {
-        if(!selectedSize) {
+        if (!selectedSize) {
             setSizeError(true);
             return;
         }
