@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { ProductTypes } from "@/app/types/product-types";
+import { addToCart } from "@/app/lib/data";
 
 type ButtonProps = {
     product: ProductTypes;
@@ -22,29 +23,16 @@ export default function CartButton({
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        const getUser = async () => {
-            const { data, error } = await supabase.auth.getUser();
-            if (error) {
-                console.error("Unable to get user details", error);
-                return;
-            }
-
-            setUser(data?.user || null);
-        };
-
-        getUser();
-
-        // Listen for authentication state changes
-        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user || null);
+        supabase.auth.getUser().then((session) => {
+            // do something here with the session like  ex: setState(session)
+            setUser(session.data.user)
         });
+    }, [])
 
-        // Cleanup to remove listener when component unmounts
-        return () => {
-            authListener?.subscription?.unsubscribe();
-        };
-    }, []);
-
+    useEffect(() => {
+        console.log(user?.role);
+        console.log("PRODUCT DETAILS: ", product);
+    }, [user])
 
     const addToCartWithoutAuth = () => {
 
@@ -72,8 +60,16 @@ export default function CartButton({
             return;
         }
 
-        user ? "" : addToCartWithoutAuth();
-    }
+        if (!user) {
+            console.error("User is not authenticated.");
+            addToCartWithoutAuth();
+            return;
+        }
+
+        console.log("Adding to cart for user:", user.id); // Debugging
+        addToCart(user.id, product.id, quantity, selectedSize);
+    };
+
 
     return (
         <input

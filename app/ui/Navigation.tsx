@@ -8,7 +8,6 @@ import ProfileIcon from "@/app/assets/icons/profile.svg";
 import AuthCard from "@/app/ui/navigation/AuthCard";
 import ProfileCard from "@/app/ui/navigation/ProfileCard";
 import Cart from "@/app/ui/navigation/Cart";
-import { fetchUserData } from "@/app/lib/data";
 
 type NavProps = {}
 
@@ -17,30 +16,16 @@ export default function Navigation() {
     const supabase = createClient();
 
     const [user, setUser] = useState<User | null>(null);
+    const [mySession, setMySession] = useState<any>();
     const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
     const [showCart, setShowCart] = useState<boolean>(false);
 
-    // fetch user details
     useEffect(() => {
-        const getUser = async () => {
-            const user = await fetchUserData();
-            setUser(user);
-        };
-
-        getUser();
-
-        // Listen for authentication state changes
-        const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user || null);
+        supabase.auth.getUser().then((session) => {
+            // do something here with the session like  ex: setState(session)
+            setUser(session.data.user)
         });
-
-        // Cleanup function to remove listener when component unmounts
-        return () => {
-            authListener.subscription.unsubscribe();
-        };
-
-    }, []);
-
+    }, [])
 
     return (
         <div

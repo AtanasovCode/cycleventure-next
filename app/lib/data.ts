@@ -1,11 +1,12 @@
-import { createClient } from '@supabase/supabase-js';
+// import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@/utils/supabase/client";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 import { ProductTypes } from "@/app/types/product-types";
 import { CartType } from "@/app/types/cart-types";
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient();
 
 type Filters = {
     category?: string[];
@@ -106,16 +107,21 @@ export async function fetchSelectedProduct(productID: string) {
 }
 
 export async function fetchUserData() {
-    const { data } = await supabase.auth.getUser();
-    return (data?.user || null);
-};
+    const { data: { user } } = await supabase.auth.getUser();
 
-async function addToCart(
-        product_id: string, 
-        user_id: string, 
-        quantity: number,
-        size: string,
-    ) {
+    return user;
+}
+
+
+export async function addToCart(
+    user_id: string,
+    product_id: string,
+    quantity: number,
+    size: string,
+) {
+
+    console.log("USER ID: ", user_id);
+
     try {
         const { data, error } = await supabase
             .from("cart")
