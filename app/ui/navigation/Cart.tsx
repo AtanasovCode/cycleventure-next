@@ -29,17 +29,28 @@ export default function Cart({
 
     // fetch data for both types of carts
     useEffect(() => {
-        if (user) {
-            return;
+        if (user?.id) {
+            console.log("Fetching cart for user:", user.id);
+            const fetchCart = async () => {
+                const data = await fetchUserCart(user.id);
+                console.log("Fetched cart data:", data);
+                setUserCart(data);
+            }
+
+            fetchCart();
         } else {
             const cart = sessionStorage.getItem("localCart")
             cart && setLocalCart(JSON.parse(cart));
         }
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         console.log(localCart);
     }, [localCart])
+
+    useEffect(() => {
+        console.log("USER CART: ", userCart);
+    }, [userCart])
 
 
     return (

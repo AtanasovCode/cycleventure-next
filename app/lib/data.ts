@@ -145,25 +145,19 @@ export async function addToCart(
     }
 }
 
-export async function fetchUserCart() {
-
-    const user = await fetchUserData();
-
-    if (!user) {
-        throw new Error("User is not authenticated");
-    }
-
+export async function fetchUserCart(user_id: string) {
     try {
         const { data, error } = await supabase
             .from("cart")
-            .select("*")
-            .eq("user_id", user.id)
+            .select("id, user_id, product_id, size, quantity, products (name, final_price, photos)")
+            .eq("user_id", user_id)
 
         if (error) {
-            console.error("Something went wrong", error.message);
+            console.error("Something went wrong", error);
             return null;
         }
 
+        console.log(`Raw cart data ${data}`);
         return data;
 
     } catch (error: any) {

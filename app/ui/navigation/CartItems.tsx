@@ -22,7 +22,7 @@ export default function CartItems({
                                 <div className="w-full flex items-center justify-start gap-4">
                                     <div>
                                         <Image
-                                            src={item.photo}
+                                            src={item.products.photos[0]}
                                             width={800}
                                             height={600}
                                             alt="cart item photo"
@@ -31,7 +31,7 @@ export default function CartItems({
                                     </div>
                                     <div className="flex flex-col items-start justify-center gap-1">
                                         <div className="font-bold">
-                                            {item.name}
+                                            {item.products.name}
                                         </div>
                                         <div className="text-sm">
                                             Quantity: {item.quantity}
@@ -39,7 +39,7 @@ export default function CartItems({
                                     </div>
                                 </div>
                                 <div>
-                                    {formatMoney.format(item.price)}
+                                    {formatMoney.format(item.products.final_price)}
                                 </div>
                             </div>
                         );

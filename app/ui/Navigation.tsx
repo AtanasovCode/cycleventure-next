@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
 import clsx from "clsx";
 import { User } from "@supabase/supabase-js";
+import { fetchUserCart } from "@/app/lib/data";
 import CycleventureLogo from "@/app/ui/cycleventure-logo";
 import CartIcon from "@/app/assets/icons/cart.svg";
 import ProfileIcon from "@/app/assets/icons/profile.svg";
@@ -16,7 +17,6 @@ export default function Navigation() {
     const supabase = createClient();
 
     const [user, setUser] = useState<User | null>(null);
-    const [mySession, setMySession] = useState<any>();
     const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
     const [showCart, setShowCart] = useState<boolean>(false);
 
