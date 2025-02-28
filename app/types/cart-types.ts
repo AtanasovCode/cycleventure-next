@@ -4,11 +4,12 @@ type ProductTypes = {
     photos: string[];
 }
 
-export type CartType = {
-    //id: string;
+export type CartItemProps = {
+    id: string;
     user_id: string;
     product_id: string;
     size: string;
     quantity: number;
-    products: ProductTypes[];
+    totalItemPrice: number;
+    products: ProductTypes;
 };

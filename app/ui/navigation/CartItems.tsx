@@ -1,14 +1,17 @@
-import { CartType } from "@/app/types/cart-types";
+import { CartItemProps } from "@/app/types/cart-types";
 import Image from "next/image";
 import { formatMoney } from "@/app/lib/utils";
 
 type ItemProps = {
-    cart: CartType[] | null;
+    cart: CartItemProps[] | null;
 }
 
 export default function CartItems({
     cart,
 }: ItemProps) {
+
+    console.log(cart);
+
     return (
         <div className="w-full flex flex-col items-start justify-start gap-6">
             {
@@ -39,7 +42,7 @@ export default function CartItems({
                                     </div>
                                 </div>
                                 <div>
-                                    {formatMoney.format(item.products.final_price)}
+                                    {formatMoney.format(item.totalItemPrice)}
                                 </div>
                             </div>
                         );

@@ -4,7 +4,7 @@ const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 import { ProductTypes } from "@/app/types/product-types";
-import { CartType } from "@/app/types/cart-types";
+import { CartItemProps } from "@/app/types/cart-types";
 
 const supabase = createClient();
 
@@ -157,8 +157,17 @@ export async function fetchUserCart(user_id: string) {
             return null;
         }
 
-        console.log(`Raw cart data ${data}`);
-        return data;
+        const cartItems = data.map((item) => ({
+            ...item,
+            products: Array.isArray(item.products) ? item.products[0] : item.products, // Ensure it's an object
+            totalItemPrice: item.products?.final_price ? item.quantity * item.products.final_price : 0
+        }));
+
+
+
+        const totalCartPrice = cartItems.reduce((acc, item) => acc + item.totalItemPrice, 0);
+
+        return { cartItems, totalCartPrice }
 
     } catch (error: any) {
         console.error("Something went wrong", error.message);

@@ -3,7 +3,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { fetchUserCart } from "@/app/lib/data";
 import CartItems from "@/app/ui/navigation/CartItems";
-import { CartType } from "@/app/types/cart-types";
+import { CartItemProps } from "@/app/types/cart-types";
 import { User } from "@supabase/supabase-js";
 import Triangle from "@/app/assets/icons/triangle.svg";
 
@@ -19,8 +19,9 @@ export default function Cart({
     setUser,
 }: CartProps) {
 
-    const [localCart, setLocalCart] = useState<CartType[] | null>(null); // viewing cart as guest
-    const [userCart, setUserCart] = useState<CartType[] | null>(null) // viewing cart as authenticated user
+    const [localCart, setLocalCart] = useState<CartItemProps[] | null>(null); // viewing cart as guest
+    const [userCart, setUserCart] = useState<CartItemProps[] | null>(null) // viewing cart as authenticated user
+    const [userTotalCartPrice, setUserTotalCartPrice] = useState<number | null>(null);
 
     const clearLocalCart = () => {
         setLocalCart(null);
@@ -30,11 +31,17 @@ export default function Cart({
     // fetch data for both types of carts
     useEffect(() => {
         if (user?.id) {
-            console.log("Fetching cart for user:", user.id);
             const fetchCart = async () => {
-                const data = await fetchUserCart(user.id);
-                console.log("Fetched cart data:", data);
-                setUserCart(data);
+                const cartData = await fetchUserCart(user.id);
+                
+                if(cartData) {
+                    const { cartItems, totalCartPrice } = cartData;
+                    setUserCart(cartItems);
+                    setUserTotalCartPrice(totalCartPrice);
+                } else {
+                    setUserCart([]);
+                    setUserTotalCartPrice(null);
+                }
             }
 
             fetchCart();
@@ -66,6 +73,9 @@ export default function Cart({
                 <div className="w-full flex flex-col items-start justify-start gap-6">
                     <div className="w-full font-bold text-xl text-center">
                         Your Cart
+                    </div>
+                    <div>
+                        Total: ${userTotalCartPrice}
                     </div>
                     {
                         user ? (
