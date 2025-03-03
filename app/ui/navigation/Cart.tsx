@@ -79,9 +79,9 @@ export default function Cart({
                     </div>
                     {
                         user ? (
-                            <CartItems cart={userCart} />
+                            <CartItems cart={userCart} local={false} />
                         ) : (
-                            <CartItems cart={localCart} />
+                            <CartItems cart={localCart} local={true} />
                         )
                     }
                     <div className={clsx(

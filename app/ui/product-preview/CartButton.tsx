@@ -40,11 +40,11 @@ export default function CartButton({
         const parsedCurrentLocalCart = currentLocalCart ? JSON.parse(currentLocalCart) : [];
 
         const data = {
+            id: product.id,
             product_id: product.id,
-            brand: product.brand,
             name: product.name,
-            price: product.price,
-            photo: product.photos[0],
+            final_price: product.final_price * quantity,
+            photo: product?.photos[0],
             size: selectedSize,
             quantity: quantity,
         }
@@ -61,7 +61,7 @@ export default function CartButton({
         }
 
         if (!user) {
-            console.error("User is not authenticated.");
+            console.log("User is not authenticated, storing item to local cart");
             addToCartWithoutAuth();
             return;
         }

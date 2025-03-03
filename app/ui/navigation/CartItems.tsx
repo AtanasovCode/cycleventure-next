@@ -4,13 +4,15 @@ import { formatMoney } from "@/app/lib/utils";
 
 type ItemProps = {
     cart: CartItemProps[] | null;
+    local: boolean;
 }
 
 export default function CartItems({
     cart,
+    local,
 }: ItemProps) {
 
-    console.log(cart);
+    console.log("CART ITEMS: ", cart);
 
     return (
         <div className="w-full flex flex-col items-start justify-start gap-6">
@@ -25,7 +27,7 @@ export default function CartItems({
                                 <div className="w-full flex items-center justify-start gap-4">
                                     <div>
                                         <Image
-                                            src={item.products.photos[0]}
+                                            src={local ? item.photo : item.products.photos[0]}
                                             width={800}
                                             height={600}
                                             alt="cart item photo"
@@ -34,15 +36,18 @@ export default function CartItems({
                                     </div>
                                     <div className="flex flex-col items-start justify-center gap-1">
                                         <div className="font-bold">
-                                            {item.products.name}
+                                            {local ? item.name : item.products.name}
                                         </div>
                                         <div className="text-sm">
                                             Quantity: {item.quantity}
                                         </div>
+                                        <div className="text-sm">
+                                            Size: {item.size}
+                                        </div>
                                     </div>
                                 </div>
                                 <div>
-                                    {formatMoney.format(item.totalItemPrice)}
+                                    {formatMoney.format(local ? item.final_price : item.totalItemPrice)}
                                 </div>
                             </div>
                         );
