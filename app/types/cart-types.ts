@@ -10,6 +10,7 @@ export type CartItemProps = {
     product_id: string;
     size: string;
     quantity: number;
+    final_price: number;
     totalItemPrice: number;
     products: ProductTypes;
 };

@@ -6,6 +6,7 @@ import CartItems from "@/app/ui/navigation/CartItems";
 import { CartItemProps } from "@/app/types/cart-types";
 import { User } from "@supabase/supabase-js";
 import Triangle from "@/app/assets/icons/triangle.svg";
+import { formatMoney } from "@/app/lib/utils";
 
 type CartProps = {
     show: boolean;
@@ -21,7 +22,7 @@ export default function Cart({
 
     const [localCart, setLocalCart] = useState<CartItemProps[] | null>(null); // viewing cart as guest
     const [userCart, setUserCart] = useState<CartItemProps[] | null>(null) // viewing cart as authenticated user
-    const [userTotalCartPrice, setUserTotalCartPrice] = useState<number | null>(null);
+    const [totalCartPrice, setTotalCartPrice] = useState<number | null>(null);
 
     const clearLocalCart = () => {
         setLocalCart(null);
@@ -37,10 +38,10 @@ export default function Cart({
                 if(cartData) {
                     const { cartItems, totalCartPrice } = cartData;
                     setUserCart(cartItems);
-                    setUserTotalCartPrice(totalCartPrice);
+                    setTotalCartPrice(totalCartPrice);
                 } else {
                     setUserCart([]);
-                    setUserTotalCartPrice(null);
+                    setTotalCartPrice(null);
                 }
             }
 
@@ -52,12 +53,13 @@ export default function Cart({
     }, [user]);
 
     useEffect(() => {
-        console.log(localCart);
-    }, [localCart])
+        let total = 0;
+        localCart?.map((item) => {
+            total += item.final_price;
+        })
 
-    useEffect(() => {
-        console.log("USER CART: ", userCart);
-    }, [userCart])
+        setTotalCartPrice(total);
+    }, [localCart])
 
 
     return (
@@ -75,7 +77,7 @@ export default function Cart({
                         Your Cart
                     </div>
                     <div>
-                        Total: ${userTotalCartPrice}
+                        Total: ${formatMoney.format(totalCartPrice)}
                     </div>
                     {
                         user ? (
