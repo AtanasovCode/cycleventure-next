@@ -39,10 +39,10 @@ export default async function fetchProducts(
                 query = query.order("numberOfReviews", { ascending: false });
                 break;
             case "price-low-to-high":
-                query = query.order("price", { ascending: true });
+                query = query.order("final_price", { ascending: true });
                 break;
             case "price-high-to-low":
-                query = query.order("price", { ascending: false });
+                query = query.order("final_price", { ascending: false });
                 break;
             case "a-z":
                 query = query.order("name", { ascending: true });
