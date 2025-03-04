@@ -66,14 +66,14 @@ export default function Cart({
 
     return (
         <div className={clsx(
-            "flex flex-col items-center justify-start absolute top-[100%] -right-6 transition-all ease-in-out text-text bg-secondary border border-slate-500",
+            "flex flex-col items-center justify-start absolute top-[110%] -right-4 lg:-right-6 transition-all ease-in-out text-text bg-secondary border border-slate-500",
             {
                 "max-h-0 pointer-events-none border-none overflow-hidden": !show,
                 "max-h-[80dvh] min-w-0 pointer-events-auto": show
             }
         )}>
-            <Triangle className="w-[28px] h-auto absolute -top-3 right-5 z-30" />
-            <div className="flex flex-col items-center justify-between gap-4 z-50 p-6 bg-secondary min-w-[33vw] min-h-[30dvh] max-h-[90dvh] overflow-y-auto">
+            <Triangle className="w-[28px] h-auto absolute -top-3 right-3 lg:right-5 z-30" />
+            <div className="flex flex-col items-center justify-between gap-4 z-50 p-4 bg-secondary min-h-[35dvh] min-w-[85vw] lg:min-w-[33vw] lg:min-h-[30dvh] max-h-[90dvh] overflow-y-auto">
                 <div className="w-full flex flex-col items-start justify-start gap-6">
                     {
                         user ? (
@@ -97,8 +97,8 @@ export default function Cart({
                         />
                     </div>
                 </div>
-                <div className="w-full flex flex-col items-start justify-start gap-4">
-                    <div className="w-full text-base flex items-center justify-between">
+                <div className="w-full flex flex-col items-start justify-start gap-2">
+                    <div className="w-full text-sm lg:text-base flex items-center justify-between">
                         <div>
                             Subtotal
                         </div>
@@ -106,7 +106,7 @@ export default function Cart({
                             {formatMoney.format(totalCartPrice)}
                         </div>
                     </div>
-                    <div className="w-full text-xl flex items-center justify-between">
+                    <div className="w-full text-lg lg:text-xl flex items-center justify-between">
                         <div>
                             Total
                         </div>

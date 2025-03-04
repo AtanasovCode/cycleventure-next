@@ -56,7 +56,7 @@ export default function CartItems({
                         );
                     })
                 ) : (
-                    <div>
+                    <div className="w-full flex items-center justify-center">
                         Cart is empty
                     </div>
                 )
