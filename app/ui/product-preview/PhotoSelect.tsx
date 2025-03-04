@@ -13,12 +13,12 @@ export default function PhotoSelect({
     setCurrentPhotoIdx, 
 }: SelectProps) {
     return (
-        <div className="flex items-center justify-start gap-1">
+        <div className="flex flex-wrap items-center justify-start gap-2">
             {photos.map((photo, idx) => {
                 return (
                     <div
                         key={idx}
-                        className="relative flex flex-wrap items-center justify-center cursor-pointer"
+                        className="relative flex items-center justify-center cursor-pointer"
                         onClick={() => setCurrentPhotoIdx(idx)}
                     >
                         <Image

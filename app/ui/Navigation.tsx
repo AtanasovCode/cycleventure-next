@@ -30,7 +30,7 @@ export default function Navigation() {
     return (
         <div
             id="navigation"
-            className="w-full px-6 py-2 sticky z-40 bg-background border-b-2 border-slate-600 flex items-center justify-between gap-4"
+            className="w-full px-6 py-2 sticky top-0 left-0 z-40 bg-background border-b-2 border-slate-600 flex items-center justify-between gap-4"
         >
             <CycleventureLogo />
             <div className="flex items-center justify-center relative gap-2">
