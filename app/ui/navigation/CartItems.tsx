@@ -25,23 +25,20 @@ export default function CartItems({
                                 key={item.id}
                                 className="w-full flex items-start justify-start"
                             >
-                                <div className="w-full flex flex-col items-start justify-start gap-2">
-                                    <div className="font-bold">
-                                        {local ? item.name : item.products.name}
-                                    </div>
-                                    <div className="flex items-center ju0stify-start gap-3">
+                                <div className="w-full flex items-center justify-between gap-2">
+                                    <div className="flex items-center justify-start gap-2">
                                         <div>
                                             <Image
                                                 src={local ? item.photo : item.products.photos[0]}
                                                 width={800}
                                                 height={600}
                                                 alt="cart item photo"
-                                                className="max-w-40 p-1 bg-gray-200 rounded-xl flex items-center justify-center"
+                                                className="max-w-32 p-1 bg-gray-200 rounded-xl flex items-center justify-center"
                                             />
                                         </div>
                                         <div className="flex flex-col items-start justify-center gap-1">
-                                            <div className="text-sm capitalize">
-                                                <span className="font-bold">Brand:</span> {local ? item.brand : item.products.brand}
+                                            <div className="font-bold text-base">
+                                                {local ? item.name : item.products.name}
                                             </div>
                                             <div className="text-sm">
                                                 <span className="font-bold">Quantity:</span> {item.quantity}
@@ -49,10 +46,10 @@ export default function CartItems({
                                             <div className="text-sm">
                                                 <span className="font-bold">Size:</span> {item.size}
                                             </div>
-                                            <div>
-                                                {formatMoney.format(local ? item.final_price : item.totalItemPrice)}
-                                            </div>
                                         </div>
+                                    </div>
+                                    <div>
+                                        {formatMoney.format(local ? item.final_price : item.totalItemPrice)}
                                     </div>
                                 </div>
                             </div>

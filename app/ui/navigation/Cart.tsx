@@ -36,8 +36,8 @@ export default function Cart({
         if (user?.id) {
             const fetchCart = async () => {
                 const cartData = await fetchUserCart(user.id);
-                
-                if(cartData) {
+
+                if (cartData) {
                     const { cartItems, totalCartPrice } = cartData;
                     setUserCart(cartItems);
                     setTotalCartPrice(totalCartPrice);
@@ -66,14 +66,14 @@ export default function Cart({
 
     return (
         <div className={clsx(
-            "flex flex-col items-center justify-start absolute top-[150%] -right-6 transition-all ease-in-out text-text bg-background",
+            "flex flex-col items-center justify-start absolute top-[100%] -right-6 transition-all ease-in-out text-text bg-secondary border border-slate-500",
             {
                 "max-h-0 pointer-events-none border-none overflow-hidden": !show,
                 "max-h-[80dvh] min-w-0 pointer-events-auto": show
             }
         )}>
-            <Triangle className="w-[34px] h-auto absolute -top-5 right-6 z-30" />
-            <div className="flex flex-col items-center justify-between gap-4 z-50 p-6 bg-background min-w-[30vw] min-h-[30dvh] max-h-[90dvh] overflow-y-auto">
+            <Triangle className="w-[28px] h-auto absolute -top-3 right-5 z-30" />
+            <div className="flex flex-col items-center justify-between gap-4 z-50 p-6 bg-secondary min-w-[33vw] min-h-[30dvh] max-h-[90dvh] overflow-y-auto">
                 <div className="w-full flex flex-col items-start justify-start gap-6">
                     {
                         user ? (
@@ -95,6 +95,24 @@ export default function Cart({
                             onClick={() => clearLocalCart()}
                             className="text-sm underline text-accent bg-none border-none text-left cursor-pointer p-0 m-0"
                         />
+                    </div>
+                </div>
+                <div className="w-full flex flex-col items-start justify-start gap-4">
+                    <div className="w-full text-base flex items-center justify-between">
+                        <div>
+                            Subtotal
+                        </div>
+                        <div>
+                            {formatMoney.format(totalCartPrice)}
+                        </div>
+                    </div>
+                    <div className="w-full text-xl flex items-center justify-between">
+                        <div>
+                            Total
+                        </div>
+                        <div>
+                            {formatMoney.format(totalCartPrice)}
+                        </div>
                     </div>
                 </div>
                 <div className="w-full">
