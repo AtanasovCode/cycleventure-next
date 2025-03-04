@@ -30,17 +30,16 @@ export default function Navigation() {
     return (
         <div
             id="navigation"
-            className="w-full px-12 py-4 sticky top-0 left-0 z-40 bg-background border-b border-slate-600 flex items-center justify-between gap-4"
+            className="w-full px-6 py-2 sticky z-40 bg-background border-b-2 border-slate-600 flex items-center justify-between gap-4"
         >
             <CycleventureLogo />
-            <div className="flex items-center justify-center gap-4"></div>
             <div className="flex items-center justify-center relative gap-2">
                 <div
                     className="flex items-center justify-center relative cursor-pointer"
                     onClick={() => setShowAuthCard(!showAuthCard)}
                 >
                     <ProfileIcon className={clsx(
-                        "h-8 w-auto",
+                        "h-6 w-auto",
                         {
                             "fill-white": showAuthCard, // shown
                             "fill-primary": !showAuthCard // hidden
@@ -65,7 +64,7 @@ export default function Navigation() {
                     onClick={() => setShowCart(!showCart)}
                 >
                     <CartIcon className={clsx(
-                        "w-8 h-8",
+                        "w-6 h-8",
                         {
                             "fill-white": showCart, // shown
                             "fill-primary": !showCart // hidden
