@@ -47,6 +47,7 @@ export default function CartButton({
             photo: product?.photos[0],
             size: selectedSize,
             quantity: quantity,
+            brand: product?.brand,
         }
 
         parsedCurrentLocalCart.unshift(data);

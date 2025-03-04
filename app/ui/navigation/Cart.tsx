@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import clsx from "clsx";
-import { fetchUserCart } from "@/app/lib/data";
 import CartItems from "@/app/ui/navigation/CartItems";
+import { fetchUserCart } from "@/app/lib/data";
 import { CartItemProps } from "@/app/types/cart-types";
 import { User } from "@supabase/supabase-js";
-import Triangle from "@/app/assets/icons/triangle.svg";
 import { formatMoney } from "@/app/lib/utils";
+
+// icons
+import Triangle from "@/app/assets/icons/triangle.svg";
 
 type CartProps = {
     show: boolean;
@@ -64,21 +66,15 @@ export default function Cart({
 
     return (
         <div className={clsx(
-            "flex flex-col items-center justify-start absolute top-[150%] -right-6 transition-all ease-in-out text-text bg-secondary border-2 border-slate-500 rounded-lg",
+            "flex flex-col items-center justify-start absolute top-[150%] -right-6 transition-all ease-in-out text-text bg-background",
             {
                 "max-h-0 pointer-events-none border-none overflow-hidden": !show,
                 "max-h-[80dvh] min-w-0 pointer-events-auto": show
             }
         )}>
             <Triangle className="w-[34px] h-auto absolute -top-5 right-6 z-30" />
-            <div className="flex flex-col items-center justify-between gap-4 z-50 p-6 bg-secondary w-[85vw] lg:w-[30vw] h-[80dvh] rounded-lg overflow-y-auto">
+            <div className="flex flex-col items-center justify-between gap-4 z-50 p-6 bg-background min-w-[30vw] min-h-[30dvh] max-h-[90dvh] overflow-y-auto">
                 <div className="w-full flex flex-col items-start justify-start gap-6">
-                    <div className="w-full font-bold text-xl text-center">
-                        Your Cart
-                    </div>
-                    <div>
-                        Total: ${formatMoney.format(totalCartPrice)}
-                    </div>
                     {
                         user ? (
                             <CartItems cart={userCart} local={false} />
