@@ -6,6 +6,7 @@ import { fetchUserCart } from "@/app/lib/data";
 import CycleventureLogo from "@/app/ui/cycleventure-logo";
 import CartIcon from "@/app/assets/icons/cart.svg";
 import ProfileIcon from "@/app/assets/icons/profile.svg";
+import CardWrapper from "@/app/ui/navigation/CardWrapper";
 import AuthCard from "@/app/ui/navigation/AuthCard";
 import ProfileCard from "@/app/ui/navigation/ProfileCard";
 import Cart from "@/app/ui/navigation/Cart";
@@ -47,16 +48,22 @@ export default function Navigation() {
                         }
                     )} />
                     {
-                        user ? (
-                            <ProfileCard
-                                email={user.email}
-                                show={showAuthCard}
-                                setUser={setUser}
-                            />
-                        ) : (
-                            <AuthCard
-                                show={showAuthCard}
-                            />
+                        showAuthCard && (
+                            <>
+                                <Triangle className="w-[48px] h-auto absolute z-30 left-1/2 -translate-x-1/2 -bottom-[160%] stroke-none fill-secondary pointer-events-none" />
+                                <CardWrapper>
+                                    {
+                                        user ? (
+                                            <ProfileCard
+                                                email={user.email}
+                                                setUser={setUser}
+                                            />
+                                        ) : (
+                                            <AuthCard />
+                                        )
+                                    }
+                                </CardWrapper>
+                            </>
                         )
                     }
                 </div>
@@ -74,7 +81,7 @@ export default function Navigation() {
                     {
                         showCart && (
                             <>
-                                <Triangle className="w-[48px] h-auto absolute z-30 left-1/2 -translate-x-1/2 -bottom-[110%] stroke-none fill-secondary" />
+                                <Triangle className="w-[48px] h-auto absolute z-30 left-1/2 -translate-x-1/2 -bottom-[110%] stroke-none fill-secondary pointer-events-none" />
                                 <Cart
                                     show={showCart}
                                     user={user}
