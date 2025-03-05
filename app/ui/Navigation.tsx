@@ -9,6 +9,7 @@ import ProfileIcon from "@/app/assets/icons/profile.svg";
 import AuthCard from "@/app/ui/navigation/AuthCard";
 import ProfileCard from "@/app/ui/navigation/ProfileCard";
 import Cart from "@/app/ui/navigation/Cart";
+import Triangle from "@/app/assets/icons/triangle.svg";
 
 type NavProps = {}
 
@@ -72,11 +73,14 @@ export default function Navigation() {
                     )} />
                     {
                         showCart && (
-                            <Cart
-                                show={showCart}
-                                user={user}
-                                setUser={setUser}
-                            />
+                            <>
+                                <Triangle className="w-[48px] h-auto absolute z-30 left-1/2 -translate-x-1/2 -bottom-[110%] stroke-none fill-secondary" />
+                                <Cart
+                                    show={showCart}
+                                    user={user}
+                                    setUser={setUser}
+                                />
+                            </>
                         )
                     }
                 </div>

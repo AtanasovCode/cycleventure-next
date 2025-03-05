@@ -39,7 +39,7 @@ export default function Cart({
                     setTotalCartPrice(totalCartPrice ?? 0);
                 } else {
                     setUserCart([]);
-                    setTotalCartPrice(null);
+                    setTotalCartPrice(0);
                 }
             }
 
@@ -62,36 +62,34 @@ export default function Cart({
 
 
     return (
-        <div className={clsx(
-            "flex flex-col items-center justify-start absolute top-[110%] -right-4 lg:-right-2 transition-all ease-in-out text-text bg-secondary border border-slate-500",
-            {
-                "max-h-0 pointer-events-none border-none overflow-hidden": !show,
-                "max-h-[80dvh] min-w-0 pointer-events-auto": show
-            }
-        )}>
-            <Triangle className="w-[28px] h-auto absolute -top-3 right-3 lg:right-5 z-30" />
-            <div className="flex flex-col items-center justify-between gap-4 z-50 p-4 bg-secondary min-h-[35dvh] min-w-[85vw] lg:min-w-[33vw] lg:min-h-[30dvh] max-h-[90dvh] overflow-y-auto">
-                <div className="w-full flex flex-col items-start justify-start gap-6">
-                    {
-                        user ? (
-                            <CartItems cart={userCart} local={false} />
-                        ) : (
-                            <CartItems cart={localCart} local={true} />
-                        )
-                    }
-                    <ClearCartButton
-                        localCart={localCart}
-                        setLocalCart={setLocalCart}
-                        userCart={userCart}
-                        setUserCart={setUserCart}
-                    />
-                </div>
-                <CartTotal
-                    cart={user ? userCart : localCart}
-                    totalCartPrice={totalCartPrice}
+        <div
+            className="
+                flex flex-col items-center justify-between text-text bg-secondary rounded-md
+                gap-4 p-4 z-50
+                min-h-[35dvh] min-w-[85vw] lg:min-w-[33vw] lg:min-h-[30dvh] max-h-[90dvh] overflow-y-auto
+                absolute top-[105%] -right-4 lg:-right-2 transition-all ease-in-out
+            "
+        >
+            <div className="w-full flex flex-col items-start justify-start gap-6">
+                {
+                    user ? (
+                        <CartItems cart={userCart} local={false} />
+                    ) : (
+                        <CartItems cart={localCart} local={true} />
+                    )
+                }
+                <ClearCartButton
+                    localCart={localCart}
+                    setLocalCart={setLocalCart}
+                    userCart={userCart}
+                    setUserCart={setUserCart}
                 />
-                <CartAuthMessage user={user} />
             </div>
+            <CartTotal
+                cart={user ? userCart : localCart}
+                totalCartPrice={totalCartPrice}
+            />
+            <CartAuthMessage user={user} />
         </div>
     );
 }
