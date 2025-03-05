@@ -16,10 +16,15 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           Sign up
         </Link>
       </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8 w-full">
+      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
         <Label htmlFor="email">Email</Label>
-        <Input name="email" placeholder="you@example.com" required className="w-full border border-slate-500" />
-        <div className="flex justify-between items-center w-full">
+        <Input
+          name="email"
+          placeholder="you@example.com"
+          required
+          className="bg-white text-black rounded-md"
+        />
+        <div className="flex justify-between items-center">
           <Label htmlFor="password">Password</Label>
           <Link
             className="text-xs text-foreground underline"
@@ -32,8 +37,8 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           type="password"
           name="password"
           placeholder="Your password"
+          className="bg-white text-black rounded-md"
           required
-          className="w-full border border-slate-500"
         />
         <SubmitButton pendingText="Signing In..." formAction={signInAction}>
           Sign in

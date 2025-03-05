@@ -1,11 +1,25 @@
-export type CartType = {
-    id: string | null;
-    user_id: string | null;
-    email: string | null;
-    product_id: string;
+type ProductTypes = {
     name: string;
-    photo: string;
-    price: number;
+    final_price: number;
+    photos: string[];
+}
+
+export type UserCartItemProps = {
+    id: string;
+    user_id: string;
+    product_id: string;
+    size: string;
+    quantity: string;
+    products: ProductTypes;
+    totalItemPrice: number;
+}
+
+export type CartItemProps = {
+    id: string;
+    user_id: string;
+    product_id: string;
     size: string;
     quantity: number;
-}
+    final_price: number;
+    totalItemPrice: number;
+};

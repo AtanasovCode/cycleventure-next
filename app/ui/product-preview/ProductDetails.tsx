@@ -8,14 +8,12 @@ import ProductPrice from "@/app/ui/ProductPrice";
 import CartButton from "@/app/ui/product-preview/CartButton";
 
 type ProductProps = {
-    user: User | null;
     product: ProductTypes;
     selectedSize: string | null;
     setSelectedSize: (value: string) => void;
 }
 
 export default function ProductDetails({
-    user,
     product,
     selectedSize,
     setSelectedSize,
@@ -56,7 +54,6 @@ export default function ProductDetails({
                 setQuantity={setQuantity}
             />
             <CartButton
-                user={user}
                 product={product}
                 selectedSize={selectedSize}
                 quantity={quantity}

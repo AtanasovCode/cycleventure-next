@@ -1,11 +1,12 @@
-import { createClient } from '@supabase/supabase-js';
+// import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@/utils/supabase/client";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 import { ProductTypes } from "@/app/types/product-types";
-import { CartType } from "@/app/types/cart-types";
+import { CartItemProps } from "@/app/types/cart-types";
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient();
 
 type Filters = {
     category?: string[];
@@ -38,10 +39,10 @@ export default async function fetchProducts(
                 query = query.order("numberOfReviews", { ascending: false });
                 break;
             case "price-low-to-high":
-                query = query.order("price", { ascending: true });
+                query = query.order("final_price", { ascending: true });
                 break;
             case "price-high-to-low":
-                query = query.order("price", { ascending: false });
+                query = query.order("final_price", { ascending: false });
                 break;
             case "a-z":
                 query = query.order("name", { ascending: true });
@@ -106,11 +107,21 @@ export async function fetchSelectedProduct(productID: string) {
 }
 
 export async function fetchUserData() {
-    const { data } = await supabase.auth.getUser();
-    return (data?.user || null);
-};
+    const { data: { user } } = await supabase.auth.getUser();
 
-async function addToCart(product_id: string, user_id: string, quantity: number) {
+    return user;
+}
+
+
+export async function addToCart(
+    user_id: string,
+    product_id: string,
+    quantity: number,
+    size: string,
+) {
+
+    console.log("USER ID: ", user_id);
+
     try {
         const { data, error } = await supabase
             .from("cart")
@@ -118,7 +129,8 @@ async function addToCart(product_id: string, user_id: string, quantity: number) 
                 {
                     user_id: user_id,
                     product_id: product_id,
-                    quantity: quantity
+                    quantity: quantity,
+                    size: size
                 }
             ]);
 
@@ -133,26 +145,29 @@ async function addToCart(product_id: string, user_id: string, quantity: number) 
     }
 }
 
-export async function fetchUserCart() {
-
-    const user = await fetchUserData();
-
-    if (!user) {
-        throw new Error("User is not authenticated");
-    }
-
+export async function fetchUserCart(user_id: string) {
     try {
         const { data, error } = await supabase
             .from("cart")
-            .select("*")
-            .eq("user_id", user.id)
+            .select("id, user_id, product_id, size, quantity, products (name, final_price, photos)")
+            .eq("user_id", user_id)
 
         if (error) {
-            console.error("Something went wrong", error.message);
+            console.error("Something went wrong", error);
             return null;
         }
 
-        return data;
+        const cartItems = data.map((item) => ({
+            ...item,
+            products: Array.isArray(item.products) ? item.products[0] : item.products, // Ensure it's an object
+            totalItemPrice: item.products?.final_price ? item.quantity * item.products.final_price : 0
+        }));
+
+
+
+        const totalCartPrice = cartItems.reduce((acc, item) => acc + item.totalItemPrice, 0);
+
+        return { cartItems, totalCartPrice }
 
     } catch (error: any) {
         console.error("Something went wrong", error.message);

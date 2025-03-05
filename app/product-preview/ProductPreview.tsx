@@ -3,8 +3,9 @@
 import { Suspense, useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useSearchParams, useRouter } from "next/navigation";
+import { ProductPreviewSkeleton } from "@/app/ui/Skeletons";
 import { User } from "@supabase/supabase-js";
-import { 
+import {
     fetchSelectedProduct,
     fetchUserCart,
     fetchUserData,
@@ -28,7 +29,6 @@ function ProductPreviewPageContent() {
     const searchParams = useSearchParams();
 
     const [id, setID] = useState<string>("");
-    const [user, setUser] = useState<User | null>(null);
     const [product, setProduct] = useState<ProductTypes>();
     const [loading, setLoading] = useState<boolean>(false);
     const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -60,6 +60,7 @@ function ProductPreviewPageContent() {
         if (frameSize) setSelectedSize(decodeURIComponent(frameSize));
     }, [searchParams])
 
+    // get product details
     useEffect(() => {
         if (id) {
             const fetchProduct = async () => {
@@ -79,11 +80,10 @@ function ProductPreviewPageContent() {
             <div className="flex-1 w-full flex items-start justify-center lg:items-center">
                 {
                     loading ? (
-                        <div>Loading...</div>
+                        <ProductPreviewSkeleton />
                     ) : (
                         product ? (
                             <Product
-                                user={user}
                                 product={product}
                                 selectedSize={selectedSize}
                                 setSelectedSize={setSelectedSize}

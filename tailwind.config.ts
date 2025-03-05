@@ -12,7 +12,7 @@ export default {
         'text': 'hsl(268, 42%, 94%)',
         'background': 'hsl(170, 28%, 10%)', // 'hsl(250, 53%, 8%)',
         'primary': 'hsl(272, 92%, 85%)',
-        'secondary': 'hsl(170, 28%, 13%)',
+        'secondary': 'hsl(170, 28%, 18%)',
         'accent': 'hsl(68, 64%, 55%)',
       },
       backgroundImage: {
