@@ -15,52 +15,23 @@ type CartProps = {
     show: boolean;
     user: User | null;
     setUser: (value: User | null) => void;
+    userCart: UserCartItemProps[] | null;
+    setUserCart: (value: any) => void;
+    localCart: CartItemProps[] | null;
+    setLocalCart: (value: any) => void;
+    totalCartPrice: number;
 }
 
 export default function Cart({
     show,
     user,
     setUser,
+    localCart,
+    setLocalCart,
+    userCart,
+    setUserCart,
+    totalCartPrice,
 }: CartProps) {
-
-    const [localCart, setLocalCart] = useState<CartItemProps[] | null>(null); // viewing cart as guest
-    const [userCart, setUserCart] = useState<UserCartItemProps[] | null>(null) // viewing cart as authenticated user
-    const [totalCartPrice, setTotalCartPrice] = useState<number>(0);
-
-    // fetch data for both types of carts
-    useEffect(() => {
-        if (user?.id) {
-            const fetchCart = async () => {
-                const cartData = await fetchUserCart(user.id);
-
-                if (cartData) {
-                    const { cartItems, totalCartPrice } = cartData;
-                    setUserCart(cartItems);
-                    setTotalCartPrice(totalCartPrice ?? 0);
-                } else {
-                    setUserCart([]);
-                    setTotalCartPrice(0);
-                }
-            }
-
-            fetchCart();
-        } else {
-            try {
-                const cart = sessionStorage.getItem("localCart");
-                cart && setLocalCart(JSON.parse(cart));
-            } catch (error) {
-                console.error("Error parsing localCart from sessionStorage:", error);
-                setLocalCart(null);
-            }
-
-        }
-    }, [user]);
-
-    useEffect(() => {
-        setTotalCartPrice(localCart?.reduce((total, item) => total + item.final_price, 0) ?? 0);
-    }, [localCart])
-
-
     return (
         <div
             className="

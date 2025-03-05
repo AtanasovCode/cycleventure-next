@@ -11,6 +11,7 @@ import AuthCard from "@/app/ui/navigation/AuthCard";
 import ProfileCard from "@/app/ui/navigation/ProfileCard";
 import Cart from "@/app/ui/navigation/Cart";
 import Triangle from "@/app/assets/icons/triangle.svg";
+import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 
 type NavProps = {}
 
@@ -21,13 +22,49 @@ export default function Navigation() {
     const [user, setUser] = useState<User | null>(null);
     const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
     const [showCart, setShowCart] = useState<boolean>(false);
+    const [localCart, setLocalCart] = useState<CartItemProps[] | null>(null); // viewing cart as guest
+    const [userCart, setUserCart] = useState<UserCartItemProps[] | null>(null) // viewing cart as authenticated user
+    const [totalCartPrice, setTotalCartPrice] = useState<number>(0);
 
     useEffect(() => {
         supabase.auth.getUser().then((session) => {
             // do something here with the session like  ex: setState(session)
             setUser(session.data.user)
         });
-    }, [])
+    }, []);
+
+    // fetch data for both types of carts
+    useEffect(() => {
+        if (user?.id) {
+            const fetchCart = async () => {
+                const cartData = await fetchUserCart(user.id);
+
+                if (cartData) {
+                    const { cartItems, totalCartPrice } = cartData;
+                    setUserCart(cartItems);
+                    setTotalCartPrice(totalCartPrice ?? 0);
+                } else {
+                    setUserCart([]);
+                    setTotalCartPrice(0);
+                }
+            }
+
+            fetchCart();
+        } else {
+            try {
+                const cart = sessionStorage.getItem("localCart");
+                cart && setLocalCart(JSON.parse(cart));
+            } catch (error) {
+                console.error("Error parsing localCart from sessionStorage:", error);
+                setLocalCart(null);
+            }
+
+        }
+    }, [user]);
+
+    useEffect(() => {
+        setTotalCartPrice(localCart?.reduce((total, item) => total + item.final_price, 0) ?? 0);
+    }, [localCart])
 
     return (
         <div
@@ -86,6 +123,11 @@ export default function Navigation() {
                                     show={showCart}
                                     user={user}
                                     setUser={setUser}
+                                    localCart={localCart}
+                                    setLocalCart={setLocalCart}
+                                    userCart={userCart}
+                                    setUserCart={setUserCart}
+                                    totalCartPrice={totalCartPrice}
                                 />
                             </>
                         )
