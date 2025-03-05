@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import { CartItemProps } from "@/app/types/cart-types";
+import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 
 type ClearCartProps = {
     localCart: CartItemProps[] | null;
     setLocalCart: (value: null) => void;
-    userCart: CartItemProps[] | null;
+    userCart: UserCartItemProps[] | null;
     setUserCart: (value: null) => void;
 }
 

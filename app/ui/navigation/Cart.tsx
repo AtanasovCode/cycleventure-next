@@ -5,7 +5,7 @@ import CartTotal from "@/app/ui/navigation/CartTotal";
 import CartAuthMessage from "@/app/ui/navigation/CartAuthMessage";
 import ClearCartButton from "@/app/ui/navigation/ClearCartButton";
 import { fetchUserCart } from "@/app/lib/data";
-import { CartItemProps } from "@/app/types/cart-types";
+import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 import { User } from "@supabase/supabase-js";
 
 // icons
@@ -24,7 +24,7 @@ export default function Cart({
 }: CartProps) {
 
     const [localCart, setLocalCart] = useState<CartItemProps[] | null>(null); // viewing cart as guest
-    const [userCart, setUserCart] = useState<CartItemProps[] | null>(null) // viewing cart as authenticated user
+    const [userCart, setUserCart] = useState<UserCartItemProps[] | null>(null) // viewing cart as authenticated user
     const [totalCartPrice, setTotalCartPrice] = useState<number>(0);
 
     // fetch data for both types of carts

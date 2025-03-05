@@ -1,9 +1,9 @@
 import clsx from "clsx";
-import { CartItemProps } from "@/app/types/cart-types";
+import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 import { formatMoney } from "@/app/lib/utils";
 
 type TotalProps = {
-    cart: CartItemProps[] | null;
+    cart: CartItemProps[] | UserCartItemProps[] | null;
     totalCartPrice: number;
 }
 

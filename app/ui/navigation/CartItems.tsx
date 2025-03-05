@@ -1,10 +1,10 @@
-import { CartItemProps } from "@/app/types/cart-types";
+import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 import Image from "next/image";
 import { formatMoney } from "@/app/lib/utils";
 import TrashIcon from "@/app/assets/icons/trash.svg";
 
 type ItemProps = {
-    cart: CartItemProps[] | null;
+    cart: CartItemProps[] | UserCartItemProps[] | null;
     local: boolean;
 }
 
