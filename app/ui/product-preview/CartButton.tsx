@@ -3,6 +3,8 @@ import { createClient } from "@/utils/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { ProductTypes } from "@/app/types/product-types";
 import { addToCart } from "@/app/lib/data";
+import { fetchUserCart } from "@/app/lib/data";
+import { useCartStore } from "@/useCartStore";
 
 type ButtonProps = {
     product: ProductTypes;
@@ -19,6 +21,11 @@ export default function CartButton({
 }: ButtonProps) {
 
     const supabase = createClient();
+
+    const {
+        setUserCart,
+        setTotalCartPrice,
+    } = useCartStore();
 
     const [user, setUser] = useState<User | null>(null);
 
@@ -68,8 +75,24 @@ export default function CartButton({
         }
 
         console.log("Adding to cart for user:", user.id); // Debugging
-        addToCart(user.id, product.id, quantity, selectedSize);
+        addToCart(user.id, product.id, quantity, selectedSize).then(() => {
+            refreshCart();
+        })
     };
+
+    const refreshCart = async () => {
+        if (user?.id) {
+            const cartData = await fetchUserCart(user.id);
+            if (cartData) {
+                setUserCart(cartData.cartItems);
+                setTotalCartPrice(cartData.totalCartPrice ?? 0);
+            } else {
+                setUserCart([]);
+                setTotalCartPrice(0);
+            }
+        }
+    };
+
 
 
     return (

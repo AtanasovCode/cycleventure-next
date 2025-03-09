@@ -11,7 +11,6 @@ import AuthCard from "@/app/ui/navigation/AuthCard";
 import ProfileCard from "@/app/ui/navigation/ProfileCard";
 import Cart from "@/app/ui/navigation/Cart";
 import Triangle from "@/app/assets/icons/triangle.svg";
-import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 import { useCartStore } from "@/useCartStore";
 
 
