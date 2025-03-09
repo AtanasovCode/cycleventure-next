@@ -13,6 +13,8 @@ interface CartState {
   setTotalCartPrice: (value: number) => void;
   showAuthCard: boolean;
   setShowAuthCard: (value: boolean) => void;
+  showCart: boolean;
+  setShowCart: (value: boolean) => void;
 }
 
 export const useCartStore = create<CartState>()((set) => ({
@@ -27,4 +29,6 @@ export const useCartStore = create<CartState>()((set) => ({
   setTotalCartPrice: (total) => set({ totalCartPrice: total }),
   showAuthCard: false,
   setShowAuthCard: (toShow) => set({ showAuthCard: toShow }),
+  showCart: false,
+  setShowCart: (toShow) => set({ showCart: toShow }),
 }))
