@@ -41,10 +41,10 @@ export default function CartItems({
                                                 {local ? item.name : item.products.name}
                                             </div>
                                             <div className="text-sm">
-                                                <span className="font-bold">Quantity:</span> {item.quantity}
+                                                <span className="">Quantity:</span> {item.quantity}
                                             </div>
                                             <div className="text-sm">
-                                                <span className="font-bold">Size:</span> {item.size}
+                                                <span className="">Size:</span> {item.size}
                                             </div>
                                         </div>
                                     </div>

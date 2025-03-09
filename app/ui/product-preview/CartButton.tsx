@@ -4,6 +4,8 @@ import { User } from "@supabase/supabase-js";
 import { ProductTypes } from "@/app/types/product-types";
 import { addToCart } from "@/app/lib/data";
 import { fetchUserCart } from "@/app/lib/data";
+import CartAddIcon from "@/app/assets/icons/cart-add.svg";
+import CartCheckIcon from "@/app/assets/icons/cart-check.svg";
 import { useCartStore } from "@/useCartStore";
 
 type ButtonProps = {
@@ -96,11 +98,14 @@ export default function CartButton({
 
 
     return (
-        <input
-            type="button"
-            value="Add to Cart"
-            className="w-full text-center font-bold p-3 bg-accent text-black rounded-md"
+        <button
+            className="w-full text-center font-bold p-3 bg-accent text-black rounded-md cursor-pointer flex items-center justify-center gap-2"
             onClick={() => handleClick()}
-        />
+        >
+            <CartAddIcon className="w-6 h-auto" />
+            <p>
+                Add to Cart
+            </p>
+        </button>
     );
 }
