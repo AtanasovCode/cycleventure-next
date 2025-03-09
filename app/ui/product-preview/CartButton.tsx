@@ -13,6 +13,7 @@ type ButtonProps = {
     selectedSize: string | null;
     quantity: number;
     setSizeError: (value: boolean) => void;
+    productID: string;
 }
 
 export default function CartButton({
@@ -20,16 +21,19 @@ export default function CartButton({
     selectedSize,
     quantity,
     setSizeError,
+    productID,
 }: ButtonProps) {
 
     const supabase = createClient();
 
     const {
-        setUserCart,
+        userCart, setUserCart,
+        localCart, setLocalCart,
         setTotalCartPrice,
     } = useCartStore();
 
     const [user, setUser] = useState<User | null>(null);
+    const [itemInCart, setItemInCart] = useState<boolean | undefined>(false);
 
     useEffect(() => {
         supabase.auth.getUser().then((session) => {
@@ -38,15 +42,10 @@ export default function CartButton({
         });
     }, [])
 
-    useEffect(() => {
-        console.log(user?.role);
-        console.log("PRODUCT DETAILS: ", product);
-    }, [user])
-
     const addToCartWithoutAuth = () => {
 
         const currentLocalCart = sessionStorage.getItem("localCart");
-        const parsedCurrentLocalCart = currentLocalCart ? JSON.parse(currentLocalCart) : [];
+        const updatedLocalCart = currentLocalCart ? JSON.parse(currentLocalCart) : [];
 
         const data = {
             id: product.id,
@@ -59,9 +58,10 @@ export default function CartButton({
             brand: product?.brand,
         }
 
-        parsedCurrentLocalCart.unshift(data);
+        updatedLocalCart.unshift(data);
 
-        sessionStorage.setItem("localCart", JSON.stringify(parsedCurrentLocalCart));
+        sessionStorage.setItem("localCart", JSON.stringify(updatedLocalCart));
+        setLocalCart(updatedLocalCart);
     }
 
     const handleClick = () => {
@@ -95,17 +95,35 @@ export default function CartButton({
         }
     };
 
+    useEffect(() => {
+        const userCartHasItem = userCart?.some((item) => item.product_id === productID);
+        const localCartHasItem = localCart?.some((item) => item.product_id === productID);
 
+        setItemInCart(userCartHasItem || localCartHasItem);
+    }, [localCart, userCart, productID])
 
     return (
         <button
             className="w-full text-center font-bold p-3 bg-accent text-black rounded-md cursor-pointer flex items-center justify-center gap-2"
             onClick={() => handleClick()}
         >
-            <CartAddIcon className="w-6 h-auto" />
-            <p>
-                Add to Cart
-            </p>
+            {
+                itemInCart ? (
+                    <>
+                        <CartCheckIcon className="w-6 h-auto" />
+                        <p>
+                            Item in Cart
+                        </p>
+                    </>
+                ) : (
+                    <>
+                        <CartAddIcon className="w-6 h-auto" />
+                        <p>
+                            Add to Cart
+                        </p>
+                    </>
+                )
+            }
         </button>
     );
 }

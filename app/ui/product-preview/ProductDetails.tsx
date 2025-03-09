@@ -58,6 +58,7 @@ export default function ProductDetails({
                 selectedSize={selectedSize}
                 quantity={quantity}
                 setSizeError={setSizeNotSelectedError}
+                productID={product.id}
             />
         </div>
     );
