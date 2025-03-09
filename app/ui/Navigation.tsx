@@ -12,6 +12,8 @@ import ProfileCard from "@/app/ui/navigation/ProfileCard";
 import Cart from "@/app/ui/navigation/Cart";
 import Triangle from "@/app/assets/icons/triangle.svg";
 import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
+import { useCartStore } from "@/useCartStore";
+
 
 type NavProps = {}
 
@@ -20,11 +22,14 @@ export default function Navigation() {
     const supabase = createClient();
 
     const [user, setUser] = useState<User | null>(null);
-    const [showAuthCard, setShowAuthCard] = useState<boolean>(false);
-    const [showCart, setShowCart] = useState<boolean>(false);
-    const [localCart, setLocalCart] = useState<CartItemProps[] | null>(null); // viewing cart as guest
-    const [userCart, setUserCart] = useState<UserCartItemProps[] | null>(null) // viewing cart as authenticated user
-    const [totalCartPrice, setTotalCartPrice] = useState<number>(0);
+    
+    const {
+        localCart, setLocalCart,
+        userCart, setUserCart,
+        showCart, setShowCart,
+        showAuthCard, setShowAuthCard,
+        totalCartPrice, setTotalCartPrice,
+    } = useCartStore();
 
     useEffect(() => {
         supabase.auth.getUser().then((session) => {
