@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
+import clsx from "clsx";
 import { User } from "@supabase/supabase-js";
 import { ProductTypes } from "@/app/types/product-types";
 import { addToCart } from "@/app/lib/data";
@@ -64,24 +65,6 @@ export default function CartButton({
         setLocalCart(updatedLocalCart);
     }
 
-    const handleClick = () => {
-        if (!selectedSize) {
-            setSizeError(true);
-            return;
-        }
-
-        if (!user) {
-            console.log("User is not authenticated, storing item to local cart");
-            addToCartWithoutAuth();
-            return;
-        }
-
-        console.log("Adding to cart for user:", user.id); // Debugging
-        addToCart(user.id, product.id, quantity, selectedSize).then(() => {
-            refreshCart();
-        })
-    };
-
     const refreshCart = async () => {
         if (user?.id) {
             const cartData = await fetchUserCart(user.id);
@@ -95,6 +78,25 @@ export default function CartButton({
         }
     };
 
+    const handleClick = () => {
+        if (!selectedSize) {
+            setSizeError(true);
+            return;
+        }
+
+        if(itemInCart) return;
+
+        if (!user) {
+            console.log("User is not authenticated, storing item to local cart");
+            addToCartWithoutAuth();
+            return;
+        }
+
+        addToCart(user.id, product.id, quantity, selectedSize).then(() => {
+            refreshCart();
+        })
+    };
+
     useEffect(() => {
         const userCartHasItem = userCart?.some((item) => item.product_id === productID);
         const localCartHasItem = localCart?.some((item) => item.product_id === productID);
@@ -104,7 +106,14 @@ export default function CartButton({
 
     return (
         <button
-            className="w-full text-center font-bold p-3 bg-accent text-black rounded-md cursor-pointer flex items-center justify-center gap-2"
+            className={clsx(
+                "w-full text-center font-bold p-3 bg-accent text-black rounded-md cursor-pointer",
+                "flex items-center justify-center gap-2",
+                {
+                    "cursor-pointer": !itemInCart,
+                    "cursor-not-allowed": itemInCart,
+                }
+            )}
             onClick={() => handleClick()}
         >
             {
