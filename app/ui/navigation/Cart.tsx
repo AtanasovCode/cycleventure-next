@@ -38,7 +38,7 @@ export default function Cart({
             className="
                 flex flex-col items-center justify-between text-text bg-secondary rounded-md
                 gap-4 p-4 z-50
-                min-h-[20dvh] min-w-[85vw] lg:min-w-[33vw] lg:min-h-[20dvh] max-h-[90dvh] overflow-y-auto
+                min-h-[20dvh] min-w-[92vw] lg:min-w-[28vw] lg:min-h-[20dvh] max-h-[90dvh] overflow-y-auto
                 absolute top-[105%] -right-4 lg:-right-2 transition-all ease-in-out
             "
         >

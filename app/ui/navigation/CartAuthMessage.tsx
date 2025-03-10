@@ -12,7 +12,7 @@ export default function CartAuthMessage({
         <div className="w-full">
             {
                 user ? (
-                    <div>User signed in</div>
+                    <div className="hidden"></div>
                 ) : (
                     <div className="w-full flex flex-col items-start justify-center gap-4">
                         <div className="w-full text-left text-slate-300">
