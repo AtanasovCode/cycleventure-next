@@ -15,8 +15,8 @@ export default function CartTotal({
         <div className={clsx(
             "w-full flex flex-col items-start justify-start gap-2",
             {
-                "hidden": !cart,
-                "inline-block": cart
+                "hidden": !cart?.length,
+                "inline-block": cart?.length
             },
         )}>
             <div className="w-full text-sm flex items-center justify-between">

@@ -21,7 +21,7 @@ export default function Navigation() {
     const supabase = createClient();
 
     const [user, setUser] = useState<User | null>(null);
-    
+
     const {
         localCart, setLocalCart,
         userCart, setUserCart,
@@ -109,16 +109,18 @@ export default function Navigation() {
                     }
                 </div>
                 <div
-                    className="flex items-center justify-center relative cursor-pointer"
-                    onClick={() => setShowCart(!showCart)}
+                    className="flex items-center justify-center relative"
                 >
-                    <CartIcon className={clsx(
-                        "w-6 h-8",
-                        {
-                            "fill-white": showCart, // shown
-                            "fill-primary": !showCart // hidden
-                        }
-                    )} />
+                    <CartIcon
+                        className={clsx(
+                            "w-6 h-8 cursor-pointer",
+                            {
+                                "fill-white": showCart, // shown
+                                "fill-primary": !showCart // hidden
+                            }
+                        )}
+                        onClick={() => setShowCart(!showCart)}
+                    />
                     {
                         showCart && (
                             <>

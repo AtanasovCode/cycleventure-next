@@ -43,7 +43,7 @@ export default function Cart({
             "
         >
             <div className="w-full flex flex-col items-start justify-start gap-6">
-                {(userCart || localCart) ? (
+                {(userCart?.length || localCart?.length) ? (
                     <CartItems cart={userCart || localCart} local={!user} userID={user?.id} />
                 ) : (
                     <div className="w-full flex items-center justify-center">Cart is empty</div>
@@ -59,7 +59,7 @@ export default function Cart({
                 cart={user ? userCart : localCart}
                 totalCartPrice={totalCartPrice}
             />
-            {user && userCart && <ViewCartButton />}
+            {userCart?.length && <ViewCartButton />}
             <CartAuthMessage user={user} />
         </div>
     );
