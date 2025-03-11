@@ -78,16 +78,19 @@ export default function Navigation() {
             <CycleventureLogo />
             <div className="flex items-center justify-center relative gap-2">
                 <div
-                    className="flex items-center justify-center relative cursor-pointer"
-                    onClick={() => setShowAuthCard(!showAuthCard)}
+                    className="flex items-center justify-center relative"
+
                 >
-                    <ProfileIcon className={clsx(
-                        "h-6 w-auto",
-                        {
-                            "fill-white": showAuthCard, // shown
-                            "fill-primary": !showAuthCard // hidden
-                        }
-                    )} />
+                    <ProfileIcon
+                        className={clsx(
+                            "h-6 w-auto cursor-pointer",
+                            {
+                                "fill-white": showAuthCard, // shown
+                                "fill-primary": !showAuthCard // hidden
+                            }
+                        )}
+                        onClick={() => setShowAuthCard(!showAuthCard)}
+                    />
                     {
                         showAuthCard && (
                             <>
