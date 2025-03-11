@@ -1,19 +1,44 @@
 import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 import Image from "next/image";
 import { formatMoney } from "@/app/lib/utils";
+import { fetchUserCart } from "@/app/lib/data";
 import TrashIcon from "@/app/assets/icons/trash.svg";
+import { deleteItemFromCart } from "@/app/lib/data";
+import { useCartStore } from "@/useCartStore";
 
 type ItemProps = {
+    userID: string | undefined;
     cart: CartItemProps[] | UserCartItemProps[] | null;
     local: boolean;
 }
 
 export default function CartItems({
+    userID,
     cart,
     local,
 }: ItemProps) {
 
-    console.log("CART ITEMS: ", cart);
+    const { setUserCart, setTotalCartPrice } = useCartStore();
+
+    const refreshCart = async () => {
+        if (userID) {
+            const cartData = await fetchUserCart(userID);
+            if (cartData) {
+                setUserCart(cartData.cartItems);
+                setTotalCartPrice(cartData.totalCartPrice ?? 0);
+            } else {
+                setUserCart([]);
+                setTotalCartPrice(0);
+            }
+        }
+    };
+
+    const handleItemDelete = async (product_id: string) => {
+        await deleteItemFromCart(product_id, userID).then(() => {
+            refreshCart();
+        })
+    };
+
 
     return (
         <div className="w-full flex flex-col items-start justify-start gap-4">
@@ -49,7 +74,9 @@ export default function CartItems({
                                             {formatMoney.format(local ? item.final_price : item.totalItemPrice)}
                                         </div>
                                     </div>
-                                    <div>
+                                    <div
+                                        onClick={() => handleItemDelete(item.product_id)}
+                                    >
                                         <TrashIcon className="w-4 h-auto" />
                                     </div>
                                 </div>

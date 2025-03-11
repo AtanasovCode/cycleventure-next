@@ -84,7 +84,7 @@ export default function CartButton({
             return;
         }
 
-        if(itemInCart) return;
+        if (itemInCart) return;
 
         if (!user) {
             console.log("User is not authenticated, storing item to local cart");

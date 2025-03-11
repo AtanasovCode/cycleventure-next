@@ -174,3 +174,30 @@ export async function fetchUserCart(user_id: string) {
         return null;
     }
 }
+
+export async function deleteItemFromCart(product_id: string, user_id: string | undefined) {
+
+    if (user_id === undefined) {
+        console.log("Couldn't find any authenticated users");
+        return;
+    } else {
+        console.log("Deleting product:", product_id);
+        console.log("For user:", user_id);
+
+    }
+
+    try {
+        const { error } = await supabase
+            .from("cart")
+            .delete()
+            .eq("product_id", product_id)
+
+        if (error) {
+            console.error("Something went wrong deleting cart item ", error.message);
+            return;
+        }
+    } catch (error: any) {
+        console.error("Something went wrong deleting cart item ", error.message);
+        return;
+    }
+}

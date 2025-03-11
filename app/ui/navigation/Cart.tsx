@@ -44,7 +44,7 @@ export default function Cart({
         >
             <div className="w-full flex flex-col items-start justify-start gap-6">
                 {(userCart || localCart) ? (
-                    <CartItems cart={userCart || localCart} local={!user} />
+                    <CartItems cart={userCart || localCart} local={!user} userID={user?.id} />
                 ) : (
                     <div className="w-full flex items-center justify-center">Cart is empty</div>
                 )}
