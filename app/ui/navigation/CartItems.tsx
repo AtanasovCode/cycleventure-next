@@ -42,6 +42,12 @@ export default function CartItems({
     const deleteItemFromLocalCart = (product_id: string) => {
         const updatedLocalCart = localCart ? localCart.filter((item) => item.product_id !== product_id) : null;
 
+        if(updatedLocalCart && updatedLocalCart.length === 0) {
+            setLocalCart(null);
+            sessionStorage.setItem("localCart", "");
+            return;
+        }
+
         setLocalCart(updatedLocalCart);
         sessionStorage.setItem("localCart", JSON.stringify(updatedLocalCart));
     }
@@ -52,14 +58,9 @@ export default function CartItems({
                 refreshCart();
             })
         } else {
-            console.log("Deleting item from local cart with id:", product_id);
             deleteItemFromLocalCart(product_id);
         }
     };
-
-    useEffect(() => {
-        console.log("Cart Data:", cart);
-    }, [])
 
 
     return (
