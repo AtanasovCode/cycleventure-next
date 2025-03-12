@@ -59,7 +59,7 @@ export default function Cart({
                 cart={user ? userCart : localCart}
                 totalCartPrice={totalCartPrice}
             />
-            {userCart?.length && <ViewCartButton />}
+            {userCart && <ViewCartButton />}
             <CartAuthMessage user={user} />
         </div>
     );

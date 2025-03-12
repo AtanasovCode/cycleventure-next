@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 import Image from "next/image";
 import { formatMoney } from "@/app/lib/utils";
@@ -39,6 +40,10 @@ export default function CartItems({
         })
     };
 
+    useEffect(() => {
+        console.log("Cart Data:", cart);
+    }, [])
+
 
     return (
         <div className="w-full flex flex-col items-start justify-start gap-4">
@@ -77,7 +82,7 @@ export default function CartItems({
                                     <div
                                         onClick={() => handleItemDelete(item.product_id)}
                                     >
-                                        <TrashIcon className="w-4 h-auto" />
+                                        <TrashIcon className="w-4 h-auto cursor-pointer" />
                                     </div>
                                 </div>
                             </div>

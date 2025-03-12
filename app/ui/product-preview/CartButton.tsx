@@ -72,7 +72,7 @@ export default function CartButton({
                 setUserCart(cartData.cartItems);
                 setTotalCartPrice(cartData.totalCartPrice ?? 0);
             } else {
-                setUserCart([]);
+                setUserCart(null);
                 setTotalCartPrice(0);
             }
         }

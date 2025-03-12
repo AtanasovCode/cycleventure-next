@@ -48,7 +48,7 @@ export default function Navigation() {
                     setUserCart(cartItems);
                     setTotalCartPrice(totalCartPrice ?? 0);
                 } else {
-                    setUserCart([]);
+                    setUserCart(null);
                     setTotalCartPrice(0);
                 }
             }
