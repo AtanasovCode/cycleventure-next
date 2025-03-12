@@ -24,7 +24,7 @@ export default function CartItems({
     const refreshCart = async () => {
         if (userID) {
             const cartData = await fetchUserCart(userID);
-            if (cartData) {
+            if (cartData && (cartData.cartItems?.length > 0 || cartData.totalCartPrice > 0)) {
                 setUserCart(cartData.cartItems);
                 setTotalCartPrice(cartData.totalCartPrice ?? 0);
             } else {

@@ -43,7 +43,7 @@ export default function Navigation() {
             const fetchCart = async () => {
                 const cartData = await fetchUserCart(user.id);
 
-                if (cartData) {
+                if (cartData && (cartData.cartItems?.length > 0 || cartData.totalCartPrice > 0)) {
                     const { cartItems, totalCartPrice } = cartData;
                     setUserCart(cartItems);
                     setTotalCartPrice(totalCartPrice ?? 0);
@@ -129,14 +129,7 @@ export default function Navigation() {
                             <>
                                 <Triangle className="w-[48px] h-auto absolute z-30 left-1/2 -translate-x-1/2 -bottom-[110%] stroke-none fill-secondary pointer-events-none" />
                                 <Cart
-                                    show={showCart}
                                     user={user}
-                                    setUser={setUser}
-                                    localCart={localCart}
-                                    setLocalCart={setLocalCart}
-                                    userCart={userCart}
-                                    setUserCart={setUserCart}
-                                    totalCartPrice={totalCartPrice}
                                 />
                             </>
                         )

@@ -68,7 +68,7 @@ export default function CartButton({
     const refreshCart = async () => {
         if (user?.id) {
             const cartData = await fetchUserCart(user.id);
-            if (cartData) {
+            if (cartData && (cartData.cartItems?.length > 0 || cartData.totalCartPrice > 0)) {
                 setUserCart(cartData.cartItems);
                 setTotalCartPrice(cartData.totalCartPrice ?? 0);
             } else {

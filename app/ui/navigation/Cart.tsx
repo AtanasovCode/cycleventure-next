@@ -5,34 +5,31 @@ import CartTotal from "@/app/ui/navigation/CartTotal";
 import CartAuthMessage from "@/app/ui/navigation/CartAuthMessage";
 import ClearCartButton from "@/app/ui/navigation/ClearCartButton";
 import ViewCartButton from "@/app/ui/navigation/ViewCartButton";
-import { fetchUserCart } from "@/app/lib/data";
 import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
 import { User } from "@supabase/supabase-js";
+import { useCartStore } from "@/useCartStore";
 
 // icons
 import Triangle from "@/app/assets/icons/triangle.svg";
 
 type CartProps = {
-    show: boolean;
     user: User | null;
-    setUser: (value: User | null) => void;
-    userCart: UserCartItemProps[] | null;
-    setUserCart: (value: any) => void;
-    localCart: CartItemProps[] | null;
-    setLocalCart: (value: any) => void;
-    totalCartPrice: number;
 }
 
 export default function Cart({
-    show,
     user,
-    setUser,
-    localCart,
-    setLocalCart,
-    userCart,
-    setUserCart,
-    totalCartPrice,
 }: CartProps) {
+
+    const {
+        localCart, setLocalCart,
+        userCart, setUserCart,
+        totalCartPrice
+    } = useCartStore();
+
+    useEffect(() => {
+        console.log("USER CART: ", userCart);
+    }, [])
+
     return (
         <div
             className="
