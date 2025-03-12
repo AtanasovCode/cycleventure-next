@@ -19,7 +19,12 @@ export default function CartItems({
     local,
 }: ItemProps) {
 
-    const { setUserCart, setTotalCartPrice } = useCartStore();
+    const {
+        setUserCart,
+        localCart,
+        setLocalCart,
+        setTotalCartPrice
+    } = useCartStore();
 
     const refreshCart = async () => {
         if (userID) {
@@ -34,10 +39,22 @@ export default function CartItems({
         }
     };
 
+    const deleteItemFromLocalCart = (product_id: string) => {
+        const updatedLocalCart = localCart ? localCart.filter((item) => item.product_id !== product_id) : null;
+
+        setLocalCart(updatedLocalCart);
+        sessionStorage.setItem("localCart", JSON.stringify(updatedLocalCart));
+    }
+
     const handleItemDelete = async (product_id: string) => {
-        await deleteItemFromCart(product_id, userID).then(() => {
-            refreshCart();
-        })
+        if (userID) {
+            await deleteItemFromCart(product_id, userID).then(() => {
+                refreshCart();
+            })
+        } else {
+            console.log("Deleting item from local cart with id:", product_id);
+            deleteItemFromLocalCart(product_id);
+        }
     };
 
     useEffect(() => {
