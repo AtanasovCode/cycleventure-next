@@ -18,7 +18,13 @@ export default function DropdownSort({
         >
             <div className="w-full flex items-center justify-between gap-2">
                 <p>{selectedSortingOption["name"]}</p>
-                <ArrowDown className="w-4 h-4" />
+                <ArrowDown className={clsx(
+                    "w-4 h-4 transition-transform duration-300",
+                    {
+                        "rotate-180": showSort,
+                        "rotate-0": !showSort
+                    }
+                )} />
             </div>
             <div
                 className={clsx(
