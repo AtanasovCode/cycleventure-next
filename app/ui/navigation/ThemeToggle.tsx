@@ -6,37 +6,40 @@ import Sun from "@/app/assets/icons/sun.svg";
 
 export default function ThemeToggle() {
 
-    const { setTheme } = useTheme();
-    const {
-        currentTheme,
-        setCurrentTheme,
-    } = useCartStore();
+    const { theme, setTheme } = useTheme();
+    const { currentTheme, setCurrentTheme } = useCartStore();
 
     useEffect(() => {
-        const mq = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        );
+        const mq = window.matchMedia("(prefers-color-scheme: dark)");
 
-        if (mq.matches) {
-            setCurrentTheme("dark");
+        if (mq.matches && currentTheme === "system") {
+            setCurrentTheme("dark")
+        } else if (!mq.matches && currentTheme === "system") {
+            setCurrentTheme("light")
         }
 
         // This callback will fire if the perferred color scheme changes without a reload
         mq.addEventListener("change", (evt) => setCurrentTheme(evt.matches ? "dark" : "light"));
-    }, []);
+    }, [])
 
-    const changeTheme = (theme: string) => {
-        setTheme(theme);
-        setCurrentTheme(theme);
+    useEffect(() => {
+        setTheme(currentTheme);
+    }, [currentTheme])
+
+    const changeTheme = (newTheme: string) => {
+        setCurrentTheme(newTheme);
     }
 
     return (
         <button
-            className="flex items-center justify-center cursor-pointer"
-            onClick={() => changeTheme(currentTheme === "dark" ? "light" : "dark")}
+            className="flex items-center justify-center cursor-pointer text-white gap-2"
+            onClick={() => changeTheme(theme === "dark" ? "light" : "dark")}
         >
+            <p>
+                Theme: {theme}
+            </p>
             {
-                currentTheme === "dark" ?
+                theme === "dark" ?
                     <Sun className="w-6 h-auto" style={{ stroke: "var(--primary-dark)", fill: "var(--primary-dark)" }} />
                     :
                     <Moon className="w-6 h-auto" style={{ fill: "var(--primary-dark)" }} />
