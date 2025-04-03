@@ -10,6 +10,7 @@ import CardWrapper from "@/app/ui/navigation/CardWrapper";
 import AuthCard from "@/app/ui/navigation/AuthCard";
 import ProfileCard from "@/app/ui/navigation/ProfileCard";
 import Cart from "@/app/ui/navigation/Cart";
+import ThemeToggle from "@/app/ui/navigation/ThemeToggle";
 import Triangle from "@/app/assets/icons/triangle.svg";
 import { useCartStore } from "@/useCartStore";
 
@@ -73,10 +74,14 @@ export default function Navigation() {
     return (
         <div
             id="navigation"
-            className="w-full px-6 py-2 sticky top-0 left-0 z-40 bg-background border-b-2 border-slate-600 flex items-center justify-between gap-4"
+            className="w-full px-6 py-2 sticky top-0 left-0 z-40 border-b-2 border-slate-600 flex items-center justify-between gap-4"
+            style={{ backgroundColor: "var(--background-dark)" }}
         >
-            <CycleventureLogo />
+            <div className="font-bold text-base md:text-lg lg:text-xl" style={{ color:"var(--text-dark)" }}>
+                cycleventure
+            </div>
             <div className="flex items-center justify-center relative gap-2">
+                <ThemeToggle />
                 <div
                     className="flex items-center justify-center relative"
 
@@ -85,7 +90,7 @@ export default function Navigation() {
                         className={clsx(
                             "h-6 w-auto cursor-pointer",
                             {
-                                "fill-white": showAuthCard, // shown
+                                "fill-text": showAuthCard, // shown
                                 "fill-primary": !showAuthCard // hidden
                             }
                         )}

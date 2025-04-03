@@ -15,6 +15,8 @@ interface CartState {
   setShowAuthCard: (value: boolean) => void;
   showCart: boolean;
   setShowCart: (value: boolean) => void;
+  currentTheme: string;
+  setCurrentTheme: (newTheme: string) => void;
 }
 
 export const useCartStore = create<CartState>()((set) => ({
@@ -31,4 +33,6 @@ export const useCartStore = create<CartState>()((set) => ({
   setShowAuthCard: (toShow) => set({ showAuthCard: toShow }),
   showCart: false,
   setShowCart: (toShow) => set({ showCart: toShow }),
+  currentTheme: "system",
+  setCurrentTheme: (newTheme) => set({ currentTheme: newTheme }),
 }))
