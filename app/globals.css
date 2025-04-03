@@ -3,12 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --text: hsl(268, 42%, 94%);
-  --background: hsl(250, 53%, 8%);
+  --primary-light: #aacbe5;
+  --secondary-light: #c7f0f2;
+  --accent-light: #e2e8f0;
+  --text-light: #1a202c;
+  --background-light: #ffffff;
+
+  --primary-dark: hsl(272, 92%, 85%);
+  --secondary-dark: hsl(170, 28%, 18%);
+  --accent-dark: hsl(68, 64%, 55%);
+  --text-dark: hsl(268, 42%, 94%);
+  --background-dark: hsl(170, 28%, 10%);
+
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --accent: var(--accent-light);
+  --text: var(--text-light);
+  --background: var(--background-light);
 }
 
-body {
-  color: var(--text);
-  background: var(--background);
-  overflow-x: hidden;
+/* Apply dark theme variables when dark mode is active */
+.dark {
+  --primary: var(--primary-dark);
+  --secondary: var(--secondary-dark);
+  --accent: var(--accent-dark);
+  --text: var(--text-dark);
+  --background: var(--background-dark);
 }

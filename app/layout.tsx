@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { quicksand } from '@/app/ui/fonts';
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
 
 
 export const metadata: Metadata = {
@@ -18,7 +19,16 @@ export default function RootLayout({
       <body
         className={`${quicksand.className} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className="min-h-screen bg-background">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

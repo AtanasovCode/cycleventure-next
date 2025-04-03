@@ -9,11 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        'text': 'hsl(268, 42%, 94%)',
-        'background': 'hsl(170, 28%, 10%)', // 'hsl(250, 53%, 8%)',
-        'primary': 'hsl(272, 92%, 85%)',
-        'secondary': 'hsl(170, 28%, 18%)',
-        'accent': 'hsl(68, 64%, 55%)',
+        primary: 'var(--primary)',
+        secondary: 'var(--secondary)',
+        accent: 'var(--accent)',
+        text: 'var(--text)',
+        background: 'var(--background)',
       },
       backgroundImage: {
         'image-gradient': 'linear-gradient(to right, #D19B91, #D7895E)',
