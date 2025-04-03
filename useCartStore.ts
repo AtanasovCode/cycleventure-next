@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist, createJSONStorage } from 'zustand/middleware'
 import { UserCartItemProps, CartItemProps } from '@/app/types/cart-types';
 
 interface CartState {
@@ -19,20 +20,30 @@ interface CartState {
   setCurrentTheme: (newTheme: string) => void;
 }
 
-export const useCartStore = create<CartState>()((set) => ({
-  //carts
-  userCart: null,
-  setUserCart: (value) => set({ userCart: value }),
-  localCart: null,
-  setLocalCart: (value) => set({ localCart: value }),
+export const useCartStore = create<CartState>()(
+  persist(
+    (set, get) => ({
+      //carts
+      userCart: null,
+      setUserCart: (value) => set({ userCart: value }),
+      localCart: null,
+      setLocalCart: (value) => set({ localCart: value }),
 
-  //values
-  totalCartPrice: 0,
-  setTotalCartPrice: (total) => set({ totalCartPrice: total }),
-  showAuthCard: false,
-  setShowAuthCard: (toShow) => set({ showAuthCard: toShow }),
-  showCart: false,
-  setShowCart: (toShow) => set({ showCart: toShow }),
-  currentTheme: "system",
-  setCurrentTheme: (newTheme) => set({ currentTheme: newTheme }),
-}))
+      //values
+      totalCartPrice: 0,
+      setTotalCartPrice: (total) => set({ totalCartPrice: total }),
+      showAuthCard: false,
+      setShowAuthCard: (toShow) => set({ showAuthCard: toShow }),
+      showCart: false,
+      setShowCart: (toShow) => set({ showCart: toShow }),
+      currentTheme: "system",
+      setCurrentTheme: (newTheme) => set({ currentTheme: newTheme }),
+    }),
+    {
+      name: 'cart-storage', // name of the item in the storage (must be unique)
+      partialize: (state) => ({
+        currentTheme: state.currentTheme,
+      })
+    },
+  ),
+)

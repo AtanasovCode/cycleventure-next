@@ -5,7 +5,7 @@
 :root {
   --primary-light: #aacbe5;
   --secondary-light: #c7f0f2;
-  --accent-light: #e2e8f0;
+  --accent-light: hsl(68, 64%, 55%);
   --text-light: #1a202c;
   --background-light: #ffffff;
 
