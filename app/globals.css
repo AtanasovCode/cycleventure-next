@@ -3,17 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --primary-light: #aacbe5;
-  --secondary-light: #c7f0f2;
+  
+  --text-light: hsl(69, 83%, 5%);
+  --background-light: hsl(65, 75%, 97%);
+  --primary-light: hsl(70, 62%, 53%);
+  --secondary-light: hsl(159, 63%, 74%);
   --accent-light: hsl(68, 64%, 55%);
-  --text-light: #1a202c;
-  --background-light: #ffffff;
 
+  --text-dark: hsl(268, 42%, 94%);
+  --background-dark: hsl(170, 28%, 10%);
   --primary-dark: hsl(272, 92%, 85%);
   --secondary-dark: hsl(170, 28%, 18%);
   --accent-dark: hsl(68, 64%, 55%);
-  --text-dark: hsl(268, 42%, 94%);
-  --background-dark: hsl(170, 28%, 10%);
 
   --primary: var(--primary-light);
   --secondary: var(--secondary-light);

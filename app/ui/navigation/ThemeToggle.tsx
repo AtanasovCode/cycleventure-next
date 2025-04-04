@@ -5,45 +5,52 @@ import Moon from "@/app/assets/icons/moon.svg";
 import Sun from "@/app/assets/icons/sun.svg";
 
 export default function ThemeToggle() {
-
-    const { theme, setTheme } = useTheme();
+    const { theme, resolvedTheme, setTheme } = useTheme();
     const { currentTheme, setCurrentTheme } = useCartStore();
 
+    // Sync Zustand store with actual applied theme on first load
+    useEffect(() => {
+        if (currentTheme === "system" && resolvedTheme) {
+            setCurrentTheme(resolvedTheme);
+        }
+    }, [resolvedTheme]);
+
+    // Watch for user preference changes (system dark/light)
     useEffect(() => {
         const mq = window.matchMedia("(prefers-color-scheme: dark)");
+        const updateTheme = (e: MediaQueryListEvent) => {
+            if (currentTheme === "system") {
+                setCurrentTheme(e.matches ? "dark" : "light");
+            }
+        };
 
-        if (mq.matches && currentTheme === "system") {
-            setCurrentTheme("dark")
-        } else if (!mq.matches && currentTheme === "system") {
-            setCurrentTheme("light")
-        }
+        mq.addEventListener("change", updateTheme);
+        return () => mq.removeEventListener("change", updateTheme);
+    }, [currentTheme]);
 
-        // This callback will fire if the perferred color scheme changes without a reload
-        mq.addEventListener("change", (evt) => setCurrentTheme(evt.matches ? "dark" : "light"));
-    }, [])
-
+    // Apply the selected theme to `next-themes`
     useEffect(() => {
         setTheme(currentTheme);
-    }, [currentTheme])
+    }, [currentTheme]);
 
     const changeTheme = (newTheme: string) => {
         setCurrentTheme(newTheme);
-    }
+    };
+
+    // ❗ prevent rendering until theme is ready
+    // avoid wrong theme flashing before correct theme is applied
+    if (!resolvedTheme) return null;
 
     return (
         <button
             className="flex items-center justify-center cursor-pointer text-white gap-2"
             onClick={() => changeTheme(theme === "dark" ? "light" : "dark")}
         >
-            <p>
-                Theme: {theme}
-            </p>
-            {
-                theme === "dark" ?
-                    <Sun className="w-6 h-auto" style={{ stroke: "var(--primary-dark)", fill: "var(--primary-dark)" }} />
-                    :
-                    <Moon className="w-6 h-auto" style={{ fill: "var(--primary-dark)" }} />
-            }
+            {theme === "dark" ? (
+                <Sun className="w-6 h-auto" style={{ stroke: "var(--primary-dark)", fill: "var(--primary-dark)" }} />
+            ) : (
+                <Moon className="w-6 h-auto" style={{ fill: "var(--primary-dark)" }} />
+            )}
         </button>
     );
 }
