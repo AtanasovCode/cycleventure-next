@@ -100,7 +100,7 @@ export default function CartItems({
                                     <div
                                         onClick={() => handleItemDelete(item.product_id)}
                                     >
-                                        <TrashIcon className="w-4 h-auto cursor-pointer" />
+                                        <TrashIcon className="w-4 h-auto cursor-pointer fill-text" />
                                     </div>
                                 </div>
                             </div>

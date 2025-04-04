@@ -7,7 +7,7 @@ const ToggleIcon = (props: any) => (
         height="55"
         fill="none"
         viewBox="0 0 54 55"
-        className="w-8 h-auto"
+        className="w-6 h-auto"
     >
         <g id="toggle">
             <g id="globe-moon">
