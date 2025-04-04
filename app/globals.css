@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  
+
   --text-light: hsl(69, 83%, 5%);
   --background-light: hsl(65, 75%, 97%);
   --primary-light: hsl(70, 62%, 53%);
@@ -30,4 +30,113 @@
   --accent: var(--accent-dark);
   --text: var(--text-dark);
   --background: var(--background-dark);
+}
+
+@keyframes grow {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.3);
+  }
+}
+
+@keyframes shrink {
+  from {
+    transform: scale(1.3);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-125%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(125%);
+    opacity: 0;
+  }
+}
+
+@keyframes scale-down {
+  from {
+    height: 18%;
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@keyframes scale-up {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 18%;
+  }
+}
+
+#globe {
+  fill: white;
+  transform-origin: center;
+  animation: grow .5s ease-in-out forwards;
+}
+
+.dark #globe {
+  animation: shrink .5s ease-in-out forwards;
+}
+
+#sun-rays {
+  fill: white;
+}
+
+#ray,
+#ray_2,
+#ray_3,
+#ray_4,
+#ray_5,
+#ray_6,
+#ray_7,
+#ray_8 {
+  animation: scale-down .5s ease-in-out forwards;
+}
+
+.dark #ray,
+.dark #ray_2,
+.dark #ray_3,
+.dark #ray_4,
+.dark #ray_5,
+.dark #ray_6,
+.dark #ray_7,
+.dark #ray_8 {
+  animation: scale-up .5s ease-in-out forwards;
+}
+
+#moon {
+  transform-origin: center;
+  animation: slide-in .5s ease-in-out forwards, grow .5s ease-in-out forwards;
+}
+
+.dark #moon {
+  animation: slide-out .5s ease forwards;
 }

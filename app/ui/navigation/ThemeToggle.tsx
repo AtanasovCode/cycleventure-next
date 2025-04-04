@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useCartStore } from "@/useCartStore";
-import Moon from "@/app/assets/icons/moon.svg";
-import Sun from "@/app/assets/icons/sun.svg";
+import ToggleIcon from "@/app/ui/navigation/ToggleIcon";
 
 export default function ThemeToggle() {
     const { theme, resolvedTheme, setTheme } = useTheme();
@@ -43,14 +42,10 @@ export default function ThemeToggle() {
 
     return (
         <button
-            className="flex items-center justify-center cursor-pointer text-white gap-2"
+            className="flex items-center justify-center cursor-pointer"
             onClick={() => changeTheme(theme === "dark" ? "light" : "dark")}
         >
-            {theme === "dark" ? (
-                <Sun className="w-6 h-auto" style={{ stroke: "var(--primary-dark)", fill: "var(--primary-dark)" }} />
-            ) : (
-                <Moon className="w-6 h-auto" style={{ fill: "var(--primary-dark)" }} />
-            )}
+            <ToggleIcon />
         </button>
     );
 }
