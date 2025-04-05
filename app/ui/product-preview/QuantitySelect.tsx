@@ -26,13 +26,13 @@ export default function QuantitySelect({
             </div>
             <div className="border-2 border-slate-500 rounded-lg flex items-center justify-between gap-6 p-2">
                 <button onClick={() => decreaseQuantity()}>
-                    <Minus className="w-4 h-auto" />
+                    <Minus className="w-4 h-auto stroke-text" />
                 </button>
                 <div>
                     {quantity}
                 </div>
                 <button onClick={() => increaseQuantity()}>
-                    <Plus className="w-4 h-auto" />
+                    <Plus className="w-4 h-auto stroke-text" />
                 </button>
             </div>
         </div>

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import AlertIcon from "@/app/assets/icons/alert-icon.svg";
+import Checkmark from "@/app/assets/icons/checkmark.svg";
 
 type SizeProps = {
     sizes: string[];
@@ -44,10 +45,10 @@ export default function SizeSelect({
                             <div
                                 key={size}
                                 className={clsx(
-                                    "w-full flex items-center justify-center border p-2 rounded-md cursor-pointer",
+                                    "w-full flex items-center justify-center border p-2 rounded-md cursor-pointer relative",
                                     {
                                         "border-slate-500": selectedSize !== size,
-                                        "border-accent border-2": selectedSize === size
+                                        "border-text": selectedSize === size
                                     }
                                 )}
                                 onClick={() => {
@@ -56,6 +57,15 @@ export default function SizeSelect({
                                 }}
                             >
                                 {size}
+                                <div className={clsx(
+                                    "absolute bottom-1 right-1",
+                                    {
+                                        "visible": selectedSize === size,
+                                        "hidden": selectedSize !== size,
+                                    }
+                                )}>
+                                    <Checkmark className="stroke-text w-5 h-auto" />
+                                </div>
                             </div>
                         );
                     })
