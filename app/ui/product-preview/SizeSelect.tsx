@@ -25,7 +25,7 @@ export default function SizeSelect({
                 </p>
                 <div
                     className={clsx(
-                        "w-full text-sm text-accent text-left flex items-center justify-start gap-1",
+                        "w-full text-sm text-text text-left flex items-center justify-start gap-1",
                         {
                             "hidden": !sizeError,
                             "shown": sizeError

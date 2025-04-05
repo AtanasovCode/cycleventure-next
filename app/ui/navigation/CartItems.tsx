@@ -74,8 +74,7 @@ export default function CartItems({
                         >
                             <div className="font-bold text-base">
                                 {local ? item.name : item.products.name}
-                            </div>
-                            <div className="w-full flex items-center justify-start gap-2">
+                            </div>                            <div className="w-full flex items-center justify-start gap-2">
                                 <div>
                                     <Image
                                         src={local ? item.photo : item.products.photos[0]}

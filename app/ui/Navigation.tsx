@@ -74,12 +74,9 @@ export default function Navigation() {
     return (
         <div
             id="navigation"
-            className="w-full px-6 py-2 sticky top-0 left-0 z-40 border-b-2 border-slate-600 flex items-center justify-between gap-4"
-            style={{ backgroundColor: "var(--background-dark)" }}
+            className="w-full px-6 py-2 sticky top-0 left-0 z-40 border-b-2 border-accent bg-background flex items-center justify-between gap-4"
         >
-            <div className="font-bold text-base md:text-lg lg:text-xl" style={{ color:"var(--text-dark)" }}>
-                cycleventure
-            </div>
+            <CycleventureLogo />
             <div className="flex items-center justify-center relative gap-2">
                 <ThemeToggle />
                 <div
@@ -90,8 +87,8 @@ export default function Navigation() {
                         className={clsx(
                             "h-6 w-auto cursor-pointer",
                             {
-                                "fill-text": showAuthCard, // shown
-                                "fill-primary": !showAuthCard // hidden
+                                "fill-accent": showAuthCard, // shown
+                                "fill-text": !showAuthCard // hidden
                             }
                         )}
                         onClick={() => setShowAuthCard(!showAuthCard)}
@@ -123,8 +120,8 @@ export default function Navigation() {
                         className={clsx(
                             "w-6 h-8 cursor-pointer",
                             {
-                                "fill-white": showCart, // shown
-                                "fill-primary": !showCart // hidden
+                                "fill-accent": showCart, // shown
+                                "fill-text": !showCart // hidden
                             }
                         )}
                         onClick={() => setShowCart(!showCart)}

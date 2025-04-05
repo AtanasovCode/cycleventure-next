@@ -32,7 +32,7 @@ export default function ProductDetails({
                     product={product}
                 />
             </div>
-            <div className="font-bold text-2xl text-accent">
+            <div className="font-bold text-2xl text-text">
                 <ProductPrice
                     price={product.price}
                     finalPrice={product.final_price}
