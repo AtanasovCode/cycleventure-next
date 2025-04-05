@@ -63,10 +63,10 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
                 className="absolute top-[3%] right-[3%] cursor-pointer xl:hidden"
                 onClick={() => setShowFilters(false)}
             >
-                <CloseIcon className="w-8 h-8" />
+                <CloseIcon className="w-8 h-8 stroke-text" />
             </div>
             <div className="text-left font-bold text-lg py-2 flex items-center justify-start gap-2">
-                <FilterIcon className="w-5 h-auto fill-white" />
+                <FilterIcon className="w-5 h-auto fill-text" />
                 Filters
             </div>
             <div className="flex flex-col items-start justify-center gap-5">

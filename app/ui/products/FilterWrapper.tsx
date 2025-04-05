@@ -30,14 +30,14 @@ export default function FilterWrapper({ title, differentFilters, handleFilterCha
                                 className={clsx(
                                     "w-5 lg:w-4 aspect-square overflow-hidden border border-text rounded-sm flex items-center justify-center",
                                     {
-                                        "bg-white": checkFilter(filter.value),
+                                        "bg-text": checkFilter(filter.value),
                                         "bg-transparent": checkFilter(filter.value)
                                     }
                                 )}
                             >
                                 <Checkmark 
                                     className={clsx(
-                                        "w-[90%] h-[90%]",
+                                        "w-[100%] h-[100%] fill-background",
                                         {
                                             "hidden": !checkFilter(filter.value),
                                             "inline-block": checkFilter(filter.value)
