@@ -12,21 +12,21 @@ type PageTypes = {
 
 export default function Pages({ page, setPage, totalPages, pageForward, pageBack }: PageTypes) {
     return (
-        <div className="w-full flex items-center justify-center lg:justify-start gap-3">
+        <div className="w-full flex items-center justify-start gap-3">
             <div
-                className="flex items-center justify-center w-12 h-12 lg:w-8 lg:h-8 rounded-full border border-slate-600 cursor-pointer"
+                className="flex items-center justify-center rounded-md border border-accent cursor-pointer p-2"
                 onClick={() => pageBack()}
             >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="w-5 h-auto stroke-text" />
             </div>
             {Array.from({ length: totalPages }, (_, i) => (
                 <div
                     key={i} // Always use a key when rendering lists in React
                     className={clsx(
-                        "text-base lg:text-xs cursor-pointer w-12 lg:w-8 aspect-square flex items-center justify-center border rounded-full",
+                        "text-base lg:text-xs cursor-pointer aspect-square flex items-center justify-center text-text rounded-md border py-2 px-4",
                         {
-                            "bg-primary text-background border-none": page === i + 1,
-                            "border-slate-600": page !== i + 1,
+                            "border-accent": page === i + 1,
+                            "border-none": page !== i + 1,
                         }
                     )}
                     onClick={() => setPage(i + 1)} // Adjust index for page number
@@ -35,10 +35,10 @@ export default function Pages({ page, setPage, totalPages, pageForward, pageBack
                 </div>
             ))}
             <div
-                className="flex items-center justify-center w-12 h-12 lg:w-8 lg:h-8 rounded-full border border-slate-600 cursor-pointer"
+                className="flex items-center justify-center rounded-md border border-accent cursor-pointer p-2"
                 onClick={() => pageForward()}
             >
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-5 h-auto stroke-text" />
             </div>
         </div>
     );
