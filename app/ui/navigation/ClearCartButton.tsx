@@ -1,11 +1,13 @@
 import clsx from "clsx";
 import { CartItemProps, UserCartItemProps } from "@/app/types/cart-types";
+import { User } from "@supabase/supabase-js";
 
 type ClearCartProps = {
     localCart: CartItemProps[] | null;
     setLocalCart: (value: null) => void;
     userCart: UserCartItemProps[] | null;
     setUserCart: (value: null) => void;
+    user: User | null;
 }
 
 
@@ -14,6 +16,7 @@ export default function ClearCartButton({
     setLocalCart,
     userCart,
     setUserCart,
+    user,
 }: ClearCartProps) {
 
     const clearLocalCart = () => {
@@ -25,8 +28,8 @@ export default function ClearCartButton({
         <div className={clsx(
             "w-full flex items-center justify-start",
             {
-                "hidden": !localCart,
-                "inline-block": localCart
+                "hidden": user,
+                "inline-block": !user
             }
         )}>
             <input

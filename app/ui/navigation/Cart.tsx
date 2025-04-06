@@ -40,12 +40,13 @@ export default function Cart({
             "
         >
             <div className="w-full flex flex-col items-start justify-start gap-6">
-                {(userCart?.length || localCart?.length) ? (
-                    <CartItems cart={userCart || localCart} local={!user} userID={user?.id} />
+                {(user ? (userCart?.length) : (localCart?.length)) ? (
+                    <CartItems cart={user ? userCart : localCart} local={!user} userID={user?.id} />
                 ) : (
                     <div className="w-full flex items-center justify-center">Cart is empty</div>
                 )}
                 <ClearCartButton
+                    user={user}
                     localCart={localCart}
                     setLocalCart={setLocalCart}
                     userCart={userCart}
@@ -56,7 +57,7 @@ export default function Cart({
                 cart={user ? userCart : localCart}
                 totalCartPrice={totalCartPrice}
             />
-            {userCart && <ViewCartButton />}
+            {(user && userCart) && <ViewCartButton />}
             <CartAuthMessage user={user} />
         </div>
     );
