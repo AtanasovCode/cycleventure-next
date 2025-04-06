@@ -8,13 +8,13 @@ export default function AuthCard() {
         {
             id: "SignInKey",
             href: "/sign-in",
-            icon: <SignInIcon className="h-5 w-auto" />,
+            icon: <SignInIcon className="h-5 w-auto fill-text" />,
             name: "Sign In"
         },
         {
             id: "SignUpKey",
             href: "/sign-up",
-            icon: <SignUpIcon className="h-5 w-auto" />,
+            icon: <SignUpIcon className="h-5 w-auto fill-text" />,
             name: "Sign Up"
         }
     ]
@@ -26,7 +26,7 @@ export default function AuthCard() {
                     return (
                         <Link
                             key={item.id}
-                            className="w-full flex items-center justify-start gap-3 p-3 cursor-pointer hover:bg-slate-600"
+                            className="w-full flex items-center justify-start gap-3 p-3 cursor-pointer"
                             href={item.href}
                         >
                             {item.icon}

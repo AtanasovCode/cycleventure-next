@@ -85,11 +85,7 @@ export default function Navigation() {
                 >
                     <ProfileIcon
                         className={clsx(
-                            "h-6 w-auto cursor-pointer",
-                            {
-                                "fill-accent": showAuthCard, // shown
-                                "fill-text": !showAuthCard // hidden
-                            }
+                            "h-6 w-auto cursor-pointer fill-text",
                         )}
                         onClick={() => setShowAuthCard(!showAuthCard)}
                     />
@@ -118,11 +114,7 @@ export default function Navigation() {
                 >
                     <CartIcon
                         className={clsx(
-                            "w-6 h-8 cursor-pointer",
-                            {
-                                "fill-accent": showCart, // shown
-                                "fill-text": !showCart // hidden
-                            }
+                            "w-6 h-8 cursor-pointer fill-text",
                         )}
                         onClick={() => setShowCart(!showCart)}
                     />
