@@ -10,6 +10,7 @@ import ProductsHeader from "@/app/ui/products/ProductsHeader";
 import Pages from "@/app/ui/products/Pages";
 import { ProductsDisplaySkeleton } from "@/app/ui/Skeletons";
 import { ProductTypes } from "@/app/types/product-types";
+import SadIcon from "@/app/assets/icons/sad.svg";
 
 type ProductsDisplayProps = {
     filters: Filters;
@@ -21,8 +22,8 @@ type ProductsDisplayProps = {
 };
 
 
-export default function ProductsDisplay({ 
-    filters, 
+export default function ProductsDisplay({
+    filters,
     showFilters,
     setShowFilters,
     sortOptions,
@@ -77,7 +78,7 @@ export default function ProductsDisplay({
     return (
         <div
             className={clsx(
-                "min-h-dvh w-full flex flex-col items-center justify-center gap-16",
+                "min-h-dvh w-full flex flex-col items-center justify-center gap-16 relative",
                 {
                     "h-full overflow-hidden": showFilters
                 }
@@ -95,19 +96,34 @@ export default function ProductsDisplay({
                     <ProductsDisplaySkeleton />
                 ) : (
                     <div className="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-4 lg:gap-16">
-                        {products?.map((product: any) => (
-                            <Card key={product.id} product={product} />
-                        ))}
+                        {
+                            products && products.length ? (
+                                products.map((product: any) => (
+                                    <Card key={product.id} product={product} />
+                                ))
+                            ) : (
+                                <div className="flex items-center justify-center gap-3 absolute top-1/2 left-1/2 -translate-1/2">
+                                    <SadIcon className="w-8 h-auto stroke-text" />
+                                    <div className="text-center text-xl">
+                                        No products found
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 )}
             </div>
-            <Pages
-                page={page}
-                setPage={setPage}
-                totalPages={totalPages}
-                pageForward={pageForward}
-                pageBack={pageBack}
-            />
+            {
+                products.length && (
+                    <Pages
+                        page={page}
+                        setPage={setPage}
+                        totalPages={totalPages}
+                        pageForward={pageForward}
+                        pageBack={pageBack}
+                    />
+                )
+            }
         </div>
     );
 
