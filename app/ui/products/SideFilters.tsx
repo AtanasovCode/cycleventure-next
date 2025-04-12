@@ -52,14 +52,21 @@ export default function SideFilters({ filters, setFilters, showFilters, setShowF
     return (
         <div
             className={clsx(
-                "fixed top-0 left-0 xl:relative h-dvh overflow-y-auto border-none xs:border-r-2 border-slate-700 xl:overflow-y-clip xl:min-h-screen w-screen xs:w-2/3 md:w-1/3 xl:w-auto xl:min-w-64 bg-secondary xl:bg-background flex flex-col items-start justify-start gap-6 transition-transform duration-300 ease-in-out p-12 xl:pt-0",
+                `
+                    fixed top-0 left-0 h-dvh overflow-y-auto bg-secondary xl:bg-transparent
+                    flex flex-col items-start justify-start gap-6
+                    w-screen xs:w-2/3 md:w-1/3 xl:w-auto xl:min-w-64
+                    transition-transform duration-300 ease-in-out p-12 xl:pt-0
+                    border-none xs:border-r-2 border-slate-700
+                    xl:relative xl:top-auto xl:left-auto xl:h-auto xl:overflow-y-clip
+                `,
                 {
                     "-translate-x-full xl:translate-x-0": !showFilters, // Hidden state
                     "translate-x-0 z-50 xl:relative xl:z-auto": showFilters,   // Visible state
                 }
             )}
         >
-            <div 
+            <div
                 className="absolute top-[3%] right-[3%] cursor-pointer xl:hidden"
                 onClick={() => setShowFilters(false)}
             >

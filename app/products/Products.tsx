@@ -79,10 +79,10 @@ function ProductsPageContent() {
     }, [searchParams]);
 
     return (
-        <div className="w-full flex flex-col items-start justify-start text-text gap-4 pb-6">
+        <div className="w-full min-h-screen flex flex-col items-start justify-start text-text gap-4">
             <Navigation />
             <div
-                className="w-full flex flex-col lg:flex-row px-6 xs:px-16 sm:px-6 items-center justify-center lg:items-start"
+                className="w-full flex flex-col lg:flex-row px-6 sm:px-4 items-center justify-center lg:items-start"
             >
                 <SideFilters
                     filters={filters}

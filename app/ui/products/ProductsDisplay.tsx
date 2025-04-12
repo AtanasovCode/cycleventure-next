@@ -78,7 +78,7 @@ export default function ProductsDisplay({
     return (
         <div
             className={clsx(
-                "min-h-dvh w-full flex flex-col items-center justify-center gap-16 relative",
+                "h-auto min-h-[92vh] w-full flex flex-col items-center justify-start gap-16 relative",
                 {
                     "h-full overflow-hidden": showFilters
                 }
@@ -91,7 +91,7 @@ export default function ProductsDisplay({
                 showFilters={showFilters}
                 setShowFilters={setShowFilters}
             />
-            <div className="w-full min-h-[80dvh]">
+            <div className="w-full">
                 {loading ? (
                     <ProductsDisplaySkeleton />
                 ) : (
@@ -102,9 +102,9 @@ export default function ProductsDisplay({
                                     <Card key={product.id} product={product} />
                                 ))
                             ) : (
-                                <div className="flex items-center justify-center gap-3 absolute top-1/2 left-1/2 -translate-1/2">
-                                    <SadIcon className="w-8 h-auto stroke-text" />
-                                    <div className="text-center text-xl">
+                                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center gap-3">
+                                    <SadIcon className="w-6 h-auto stroke-text" />
+                                    <div className="text-center text-md">
                                         No products found
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@ export default function ProductsDisplay({
                 )}
             </div>
             {
-                products.length && (
+                products.length > 0 && (
                     <Pages
                         page={page}
                         setPage={setPage}
