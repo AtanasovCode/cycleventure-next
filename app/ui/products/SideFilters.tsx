@@ -1,4 +1,3 @@
-
 import clsx from "clsx";
 import { Filters } from "@/app/types/Filters";
 import FilterWrapper from "@/app/ui/products/FilterWrapper";
@@ -18,6 +17,7 @@ export default function SideFilters() {
     const {
         filters, setFilters,
         showFilters, setShowFilters,
+        setPage,
     } = useProductStore();
 
     const addOrRemoveFilter = (filterName: string, filterType: keyof Filters) => {
@@ -31,21 +31,12 @@ export default function SideFilters() {
                     : [...prevFilters[filterType], filterName], // Add filter
             };
         });
+
+        setPage(1);
     };
 
     const checkIfFilterIsSelected = (filterName: string, filterType: keyof Filters): boolean => {
         return filters[filterType]?.some((filter) => filter === filterName) ?? false;
-    };
-
-    const returnAllFilters = () => {
-        const category = filters.category || [];
-        const brand = filters.brand || [];
-        const frame = filters.frameType || [];
-
-        // Combine all selected filters into a single array
-        const allFilters = [...category, ...brand, ...frame];
-
-        return allFilters;
     };
 
     return (
