@@ -11,6 +11,7 @@ export default function ProductsHeader() {
         sortOptions,
         showFilters,
         setShowFilters,
+        setPage,
     } = useProductStore();
 
     return (
@@ -25,11 +26,7 @@ export default function ProductsHeader() {
                 <div className="text-xs md:text-sm">
                     Sort by
                 </div>
-                <DropdownSort
-                    selectedSortingOption={selectedSortingOption}
-                    setSelectedSortingOption={setSelectedSortingOption}
-                    sortOptions={sortOptions}
-                />
+                <DropdownSort />
             </div>
         </div>
     );

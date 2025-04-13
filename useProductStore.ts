@@ -32,6 +32,8 @@ interface ProductState {
     totalPages: number;
     setTotalPages: (count: number) => void;
 
+    showSort: boolean,
+    setShowSort: (showSort: boolean) => void;
 }
 
 export const useProductStore = create<ProductState>()(
@@ -75,6 +77,9 @@ export const useProductStore = create<ProductState>()(
 
             totalPages: 0,
             setTotalPages: (count) => set({ totalPages: count }),
+
+            showSort: false,
+            setShowSort: (showSort: boolean) => set({ showSort }),
 
         }),
         {

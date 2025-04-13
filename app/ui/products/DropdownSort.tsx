@@ -2,14 +2,17 @@ import { useState } from "react";
 import clsx from "clsx";
 import ArrowDown from "@/app/assets/icons/arrow-down.svg";
 import { DropdownTypes, SortOptions } from "@/app/types/sort";
+import { useProductStore } from "@/useProductStore";
 
-export default function DropdownSort({
-    selectedSortingOption,
-    setSelectedSortingOption,
-    sortOptions,
-}: DropdownTypes) {
+export default function DropdownSort() {
 
-    const [showSort, setShowSort] = useState<boolean>(false);
+    const {
+        selectedSortingOption,
+        setSelectedSortingOption,
+        sortOptions,
+        showSort, setShowSort,
+        setPage,
+    } = useProductStore();
 
     return (
         <div
@@ -41,6 +44,7 @@ export default function DropdownSort({
                             <div
                                 key={option["value"]}
                                 onClick={() => {
+                                    setPage(1);
                                     setSelectedSortingOption(option);
                                     setShowSort(false);
                                 }}
