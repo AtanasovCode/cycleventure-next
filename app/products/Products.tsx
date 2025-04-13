@@ -23,7 +23,6 @@ function ProductsPageContent() {
 
     const {
         sortOptions,
-        showFilters, setShowFilters,
         filters, setFilters,
         selectedSortingOption, setSelectedSortingOption, 
     } = useProductStore();
@@ -64,23 +63,9 @@ function ProductsPageContent() {
     return (
         <div className="w-full min-h-screen flex flex-col items-start justify-start text-text gap-4">
             <Navigation />
-            <div
-                className="w-full flex flex-col lg:flex-row px-6 sm:px-4 items-center justify-center lg:items-start"
-            >
-                <SideFilters
-                    filters={filters}
-                    setFilters={setFilters}
-                    showFilters={showFilters}
-                    setShowFilters={setShowFilters}
-                />
-                <ProductsDisplay
-                    filters={filters}
-                    showFilters={showFilters}
-                    setShowFilters={setShowFilters}
-                    sortOptions={sortOptions}
-                    selectedSortingOption={selectedSortingOption}
-                    setSelectedSortingOption={setSelectedSortingOption}
-                />
+            <div className="w-full flex flex-col lg:flex-row px-6 sm:px-4 items-center justify-center lg:items-start">
+                <SideFilters />
+                <ProductsDisplay />
             </div>
         </div>
     );

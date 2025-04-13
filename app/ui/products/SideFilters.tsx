@@ -4,13 +4,7 @@ import { Filters } from "@/app/types/Filters";
 import FilterWrapper from "@/app/ui/products/FilterWrapper";
 import FilterIcon from "@/app/assets/icons/filter.svg";
 import CloseIcon from "@/app/assets/icons/close.svg";
-
-type SideFiltersProps = {
-    filters: Filters;
-    setFilters: React.Dispatch<React.SetStateAction<Filters>>;
-    showFilters: boolean;
-    setShowFilters: (value: boolean) => void;
-};
+import { useProductStore } from "@/useProductStore";
 
 import {
     mtbFilters,
@@ -19,7 +13,12 @@ import {
     brandFilters,
 } from "@/app/lib/filters";
 
-export default function SideFilters({ filters, setFilters, showFilters, setShowFilters }: SideFiltersProps) {
+export default function SideFilters() {
+
+    const {
+        filters, setFilters,
+        showFilters, setShowFilters,
+    } = useProductStore();
 
     const addOrRemoveFilter = (filterName: string, filterType: keyof Filters) => {
         setFilters((prevFilters) => {

@@ -11,25 +11,19 @@ import Pages from "@/app/ui/products/Pages";
 import { ProductsDisplaySkeleton } from "@/app/ui/Skeletons";
 import { ProductTypes } from "@/app/types/product-types";
 import SadIcon from "@/app/assets/icons/sad.svg";
-
-type ProductsDisplayProps = {
-    filters: Filters;
-    showFilters: boolean;
-    setShowFilters: (value: boolean) => void;
-    sortOptions: SortOptions[];
-    selectedSortingOption: SortOptions;
-    setSelectedSortingOption: (value: SortOptions) => void;
-};
+import { useProductStore } from "@/useProductStore";
 
 
-export default function ProductsDisplay({
-    filters,
-    showFilters,
-    setShowFilters,
-    sortOptions,
-    selectedSortingOption,
-    setSelectedSortingOption,
-}: ProductsDisplayProps) {
+export default function ProductsDisplay() {
+
+    const {
+        filters,
+        showFilters,
+        setShowFilters,
+        sortOptions,
+        selectedSortingOption,
+        setSelectedSortingOption,
+    } = useProductStore();
 
     const [products, setProducts] = useState<ProductTypes[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
