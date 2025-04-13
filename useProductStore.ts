@@ -2,18 +2,36 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { SortOptions } from '@/app/types/sort'
 import { Filters } from "@/app/types/Filters";
+import { ProductTypes } from "@/app/types/product-types";
+
 
 
 interface ProductState {
-    showFilters: boolean
-    setShowFilters: (showFilter: boolean) => void
+    showFilters: boolean;
+    setShowFilters: (showFilter: boolean) => void;
 
-    sortOptions: SortOptions[]
-    selectedSortingOption: SortOptions
-    setSelectedSortingOption: (option: SortOptions) => void
+    sortOptions: SortOptions[];
+    selectedSortingOption: SortOptions;
+    setSelectedSortingOption: (option: SortOptions) => void;
 
-    filters: Filters
+    filters: Filters;
     setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+
+    products: ProductTypes[];
+    setProducts: (products: ProductTypes[]) => void;
+
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
+
+    page: number;
+    setPage: (page: number) => void;
+
+    itemsPerPage: number;
+    setItemsPerPage: (count: number) => void;
+
+    totalPages: number;
+    setTotalPages: (count: number) => void;
+
 }
 
 export const useProductStore = create<ProductState>()(
@@ -42,6 +60,22 @@ export const useProductStore = create<ProductState>()(
             ],
             selectedSortingOption: { name: "Position", value: "position" },
             setSelectedSortingOption: (option) => set({ selectedSortingOption: option }),
+
+            products: [],
+            setProducts: (products) => set({ products }),
+
+            loading: false,
+            setLoading: (loading) => set({ loading }),
+
+            page: 1,
+            setPage: (page) => set({ page }),
+
+            itemsPerPage: 12,
+            setItemsPerPage: (count) => set({ itemsPerPage: count }),
+
+            totalPages: 0,
+            setTotalPages: (count) => set({ totalPages: count }),
+
         }),
         {
             name: 'cart-storage',

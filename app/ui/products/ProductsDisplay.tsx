@@ -3,13 +3,10 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import fetchProducts from "@/app/lib/data";
-import { Filters } from "@/app/types/Filters";
-import { SortOptions } from "@/app/types/sort";
 import Card from "@/app/ui/products/Card";
 import ProductsHeader from "@/app/ui/products/ProductsHeader";
 import Pages from "@/app/ui/products/Pages";
 import { ProductsDisplaySkeleton } from "@/app/ui/Skeletons";
-import { ProductTypes } from "@/app/types/product-types";
 import SadIcon from "@/app/assets/icons/sad.svg";
 import { useProductStore } from "@/useProductStore";
 
@@ -19,33 +16,15 @@ export default function ProductsDisplay() {
     const {
         filters,
         showFilters,
-        setShowFilters,
-        sortOptions,
         selectedSortingOption,
-        setSelectedSortingOption,
+
+        products, 
+        setProducts,
+        loading, setLoading,
+        page,
+        itemsPerPage,
+        setTotalPages,
     } = useProductStore();
-
-    const [products, setProducts] = useState<ProductTypes[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [page, setPage] = useState<number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<number>(12);
-    const [totalPages, setTotalPages] = useState<number>(0);
-
-    const pageForward = () => {
-        if (page === totalPages) {
-            return;
-        }
-
-        setPage(page + 1);
-    }
-
-    const pageBack = () => {
-        if (page === 1) {
-            return;
-        }
-
-        setPage(page - 1);
-    }
 
 
     useEffect(() => {
@@ -78,13 +57,7 @@ export default function ProductsDisplay() {
                 }
             )}
         >
-            <ProductsHeader
-                selectedSortingOption={selectedSortingOption}
-                setSelectedSortingOption={setSelectedSortingOption}
-                sortOptions={sortOptions}
-                showFilters={showFilters}
-                setShowFilters={setShowFilters}
-            />
+            <ProductsHeader />
             <div className="w-full">
                 {loading ? (
                     <ProductsDisplaySkeleton />
@@ -109,13 +82,7 @@ export default function ProductsDisplay() {
             </div>
             {
                 products.length > 0 && (
-                    <Pages
-                        page={page}
-                        setPage={setPage}
-                        totalPages={totalPages}
-                        pageForward={pageForward}
-                        pageBack={pageBack}
-                    />
+                    <Pages />
                 )
             }
         </div>

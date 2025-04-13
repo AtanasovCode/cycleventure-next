@@ -1,16 +1,26 @@
 import clsx from "clsx";
 import ArrowLeft from "@/app/assets/icons/arrow-left.svg";
 import ArrowRight from "@/app/assets/icons/arrow-right.svg";
+import { useProductStore } from "@/useProductStore";
 
-type PageTypes = {
-    page: number;
-    setPage: (page: number) => void;
-    totalPages: number;
-    pageForward: () => void;
-    pageBack: () => void;
-}
+export default function Pages() {
 
-export default function Pages({ page, setPage, totalPages, pageForward, pageBack }: PageTypes) {
+    const {
+        page,
+        setPage,
+        totalPages,
+    } = useProductStore();
+
+    const pageForward = () => {
+        if (page === totalPages) return;
+        setPage(page + 1);
+    }
+
+    const pageBack = () => {
+        if (page === 1) return;
+        setPage(page - 1);
+    }
+
     return (
         <div className="w-full flex items-center justify-start gap-3">
             <div

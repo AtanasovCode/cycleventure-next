@@ -1,23 +1,18 @@
 import clsx from "clsx";
 import DropdownSort from "@/app/ui/products/DropdownSort";
 import Filter from "@/app/assets/icons/filter.svg";
-import { SortOptions } from "@/app/types/sort";
+import { useProductStore } from "@/useProductStore";
 
-type HeaderTypes = {
-    selectedSortingOption: SortOptions;
-    setSelectedSortingOption: (value: SortOptions) => void;
-    sortOptions: SortOptions[];
-    showFilters: boolean;
-    setShowFilters: (value: boolean) => void;
-}
+export default function ProductsHeader() {
 
-export default function ProductsHeader({
-    selectedSortingOption,
-    setSelectedSortingOption,
-    sortOptions,
-    showFilters,
-    setShowFilters,
-}: HeaderTypes) {
+    const {
+        selectedSortingOption,
+        setSelectedSortingOption,
+        sortOptions,
+        showFilters,
+        setShowFilters,
+    } = useProductStore();
+
     return (
         <div className="w-full flex items-center justify-between gap-6">
             <Filter
