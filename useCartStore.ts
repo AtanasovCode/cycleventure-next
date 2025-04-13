@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { UserCartItemProps, CartItemProps } from '@/app/types/cart-types';
+import { Filters } from "@/app/types/Filters";
 
 interface CartState {
   // carts

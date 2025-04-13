@@ -1,15 +1,12 @@
 'use client';
 
 import { useState, useEffect, useMemo } from "react";
-import { createClient } from "@/utils/supabase/client";
-import { User } from "@supabase/supabase-js";
 import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Filters } from "@/app/types/Filters";
-import { SortOptions } from "@/app/types/sort";
 import ProductsDisplay from "@/app/ui/products/ProductsDisplay";
 import Navigation from "@/app/ui/Navigation";
 import SideFilters from "@/app/ui/products/SideFilters";
+import { useProductStore } from "@/useProductStore";
 
 export default function Products() {
     return (
@@ -21,29 +18,15 @@ export default function Products() {
 
 function ProductsPageContent() {
 
-    const supabase = createClient();
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const sortOptions = useMemo(
-        () => [
-            { name: "Position", value: "position" },
-            { name: "Top rated", value: "top-rated" },
-            { name: "Price (low to high)", value: "price-low-to-high" },
-            { name: "Price (high to low)", value: "price-high-to-low" },
-            { name: "A-Z", value: "a-z" },
-            { name: "Z-A", value: "z-a" },
-        ],
-        []
-    );
-
-    const [filters, setFilters] = useState<Filters>({
-        category: [],
-        frameType: [],
-        brand: [],
-    });
-    const [showFilters, setShowFilters] = useState<boolean>(false);
-    const [selectedSortingOption, setSelectedSortingOption] = useState<SortOptions>({ name: "Position", value: "position" })
+    const {
+        sortOptions,
+        showFilters, setShowFilters,
+        filters, setFilters,
+        selectedSortingOption, setSelectedSortingOption, 
+    } = useProductStore();
 
     // Sync URL params with state
     useEffect(() => {
