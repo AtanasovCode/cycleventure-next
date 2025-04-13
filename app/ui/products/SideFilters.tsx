@@ -17,7 +17,7 @@ export default function SideFilters() {
     const {
         filters, setFilters,
         showFilters, setShowFilters,
-        setPage,
+        page, setPage,
     } = useProductStore();
 
     const addOrRemoveFilter = (filterName: string, filterType: keyof Filters) => {
@@ -32,7 +32,7 @@ export default function SideFilters() {
             };
         });
 
-        setPage(1);
+        if (page !== 1) setPage(1);
     };
 
     const checkIfFilterIsSelected = (filterName: string, filterType: keyof Filters): boolean => {
