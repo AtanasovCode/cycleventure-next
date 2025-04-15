@@ -15,7 +15,7 @@ The goal of this project is to create a fully functional online bicycle store wi
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
 - [Screenshots](#screenshots)
-- [Contact](#author)
+- [Author](#author)
 
 ---
 
