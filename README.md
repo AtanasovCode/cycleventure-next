@@ -1,9 +1,8 @@
 ![](./app/assets/photos/header.png)
 
-# 🚴‍♂️ Cycleventure
+# Cycleventure
 
-Welcome to **Cycleventure** — an e-commerce web app built with **Next.js**, **Supabase**, and **Zustand**.  
-The goal of this project is to create a fully functional online bicycle store with features like user authentication, product listings, shopping cart, and (soon) order management.
+Welcome to **Cycleventure** — an e-commerce web app built with **Next.js**, **Supabase**, and **Zustand**. The goal of this project is to create a fully functional online bicycle store with features like user authentication, product listings, shopping cart, and (soon) order management.
 
 ---
 
