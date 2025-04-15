@@ -7,7 +7,7 @@ The goal of this project is to create a fully functional online bicycle store wi
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 - [Introduction](#introduction)
 - [Live Demo](#live-demo)
@@ -15,36 +15,37 @@ The goal of this project is to create a fully functional online bicycle store wi
 - [Technologies Used](#technologies-used)
 - [Getting Started](#getting-started)
 - [Screenshots](#screenshots)
-- [Author](#author)
+- [Contact](#author)
 
 ---
 
-## 🧭 Introduction
+## Introduction
 
 **Cycleventure** is designed to provide a seamless shopping experience for bicycle enthusiasts. It leverages modern web technologies to ensure performance, scalability, and a smooth user experience.
 
 ---
 
-## 🔗 Live Demo
+## Live Demo
 
-Check it out 👉 [Cycleventure Live](https://cycleventure.vercel.app/)
+🔗 Check it out 👉 [Cycleventure Live](https://cycleventure.vercel.app/)
 
 ---
 
-## 🚀 Features
+## Features
 
 - ✅ User authentication and authorization via Supabase  
 - ✅ Product listings with pricing
 - ✅ Product Preview for each bike with detailed info
 - ✅ Sorting and filtering to enhance browsing
 - ✅ Cart support for both guests and signed-in users
+- ✅ Light and Dark themes with animated theme toggle
 - 🛠️ Order management system *(Coming Soon!)*
 - ✅ Fully responsive design (mobile, tablet, desktop)
 - ✅ Real-time state updates using Zustand  
 
 ---
 
-## 🧰 Technologies Used
+## Technologies Used
 
 | Tech         | Purpose                                       |
 |--------------|-----------------------------------------------|
@@ -55,7 +56,7 @@ Check it out 👉 [Cycleventure Live](https://cycleventure.vercel.app/)
 
 ---
 
-## 🛠️ Getting Started
+## Getting Started
 
 ### 1. Clone the repo
 
@@ -91,13 +92,13 @@ Visit: `http://localhost:3000`
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 _Coming soon..._
 
 ---
 
-## 📬 Author
+## Author
 
 Made with ❤️ by [@AtanasovCode](https://github.com/AtanasovCode/)
 
