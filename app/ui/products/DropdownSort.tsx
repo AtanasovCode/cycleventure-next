@@ -7,6 +7,7 @@ import { useProductStore } from "@/useProductStore";
 export default function DropdownSort() {
 
     const {
+        hasHydrated,
         selectedSortingOption,
         setSelectedSortingOption,
         sortOptions,
@@ -20,7 +21,7 @@ export default function DropdownSort() {
             onClick={() => setShowSort(!showSort)}
         >
             <div className="w-full flex items-center justify-between gap-2">
-                <p>{selectedSortingOption["name"]}</p>
+                <p>{hasHydrated && selectedSortingOption["name"]}</p>
                 <ArrowDown className={clsx(
                     "w-4 h-4 transition-transform duration-300 fill-text",
                     {

@@ -7,6 +7,9 @@ import { ProductTypes } from "@/app/types/product-types";
 
 
 interface ProductState {
+    hasHydrated: boolean;
+    setHasHydrated: (value: boolean) => void;
+
     showFilters: boolean;
     setShowFilters: (showFilter: boolean) => void;
 
@@ -39,6 +42,9 @@ interface ProductState {
 export const useProductStore = create<ProductState>()(
     persist(
         (set) => ({
+            hasHydrated: false,
+            setHasHydrated: (value) => set({ hasHydrated: value }),
+
             showFilters: false,
             setShowFilters: (showFilters) => set({ showFilters }),
 
@@ -83,10 +89,13 @@ export const useProductStore = create<ProductState>()(
 
         }),
         {
-            name: 'cart-storage',
+            name: 'product-storage',
             partialize: (state) => ({
                 selectedSortingOption: state.selectedSortingOption,
             }),
+            onRehydrateStorage: () => (state) => {
+                state?.setHasHydrated(true);
+            },
         }
     )
 )
