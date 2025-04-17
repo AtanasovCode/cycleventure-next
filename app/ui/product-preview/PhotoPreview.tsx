@@ -14,7 +14,7 @@ export default function PhotoPreview({
     name,
 }: PhotoProps) {
 
-    const [currentPhotoIdx, setCurrentPhotoIdx] = useState<number>(1);
+    const [currentPhotoIdx, setCurrentPhotoIdx] = useState<number>(0);
 
     const preloadImage = (src: string) => {
         const img = new Image();

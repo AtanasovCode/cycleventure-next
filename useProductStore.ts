@@ -12,31 +12,34 @@ interface ProductState {
 
     showFilters: boolean;
     setShowFilters: (showFilter: boolean) => void;
-
     sortOptions: SortOptions[];
     selectedSortingOption: SortOptions;
     setSelectedSortingOption: (option: SortOptions) => void;
-
     filters: Filters;
     setFilters: React.Dispatch<React.SetStateAction<Filters>>;
-
     products: ProductTypes[];
     setProducts: (products: ProductTypes[]) => void;
-
     loading: boolean;
     setLoading: (loading: boolean) => void;
-
     page: number;
     setPage: (page: number) => void;
-
     itemsPerPage: number;
     setItemsPerPage: (count: number) => void;
-
     totalPages: number;
     setTotalPages: (count: number) => void;
-
     showSort: boolean,
     setShowSort: (showSort: boolean) => void;
+
+    // ProductPreview State
+
+    id: string; // product id
+    setID: (id: string) => void;
+    product: ProductTypes | null;
+    setProduct: (product: ProductTypes) => void;
+    previewLoading: boolean;
+    setPreviewLoading: (previewLoading: boolean) => void;
+    selectedSize: string | null;
+    setSelectedSize: (selectedSize: string) => void;
 }
 
 export const useProductStore = create<ProductState>()(
@@ -85,8 +88,17 @@ export const useProductStore = create<ProductState>()(
             setTotalPages: (count) => set({ totalPages: count }),
 
             showSort: false,
-            setShowSort: (showSort: boolean) => set({ showSort }),
+            setShowSort: (showSort) => set({ showSort }),
 
+            // ProductPreview State
+            id: "",
+            setID: (id: string) => set({ id }),
+            product: null,
+            setProduct: (product) => set({ product }),
+            previewLoading: false,
+            setPreviewLoading: (previewLoading) => set({ previewLoading }),
+            selectedSize: null,
+            setSelectedSize: (selectedSize) => set({ selectedSize }),
         }),
         {
             name: 'product-storage',

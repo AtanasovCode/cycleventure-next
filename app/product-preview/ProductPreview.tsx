@@ -4,7 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductPreviewSkeleton } from "@/app/ui/Skeletons";
-import { User } from "@supabase/supabase-js";
+import { useProductStore } from "@/useProductStore";
 import {
     fetchSelectedProduct,
     fetchUserCart,
@@ -24,14 +24,15 @@ export default function ProductPreview() {
 
 function ProductPreviewPageContent() {
 
-    const supabase = createClient();
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const [id, setID] = useState<string>("");
-    const [product, setProduct] = useState<ProductTypes>();
-    const [loading, setLoading] = useState<boolean>(false);
-    const [selectedSize, setSelectedSize] = useState<string | null>(null);
+    const {
+        id, setID,
+        product, setProduct,
+        previewLoading, setPreviewLoading,
+        selectedSize, setSelectedSize,
+    } = useProductStore();
 
     // sync URL search params with selected bike frame size
     useEffect(() => {
@@ -64,10 +65,10 @@ function ProductPreviewPageContent() {
     useEffect(() => {
         if (id) {
             const fetchProduct = async () => {
-                setLoading(true);
+                setPreviewLoading(true);
                 const data = await fetchSelectedProduct(id);
                 setProduct(data);
-                setLoading(false);
+                setPreviewLoading(false);
             }
 
             fetchProduct();
@@ -79,7 +80,7 @@ function ProductPreviewPageContent() {
             <Navigation />
             <div className="flex-1 w-full flex items-start justify-center lg:items-center">
                 {
-                    loading ? (
+                    previewLoading ? (
                         <ProductPreviewSkeleton />
                     ) : (
                         product ? (
