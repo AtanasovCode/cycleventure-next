@@ -34,9 +34,16 @@ export const useCartStore = create<CartState>()(
       totalCartPrice: 0,
       setTotalCartPrice: (total) => set({ totalCartPrice: total }),
       showAuthCard: false,
-      setShowAuthCard: (toShow) => set({ showAuthCard: toShow }),
       showCart: false,
-      setShowCart: (toShow) => set({ showCart: toShow }),
+      setShowAuthCard: (toShow: boolean) => set((state) => ({
+        showAuthCard: toShow,
+        ...(toShow && state.showCart ? { showCart: false } : {})
+      })),
+      setShowCart: (toShow: boolean) => set((state) => ({
+        showCart: toShow,
+        ...(toShow && state.showAuthCard ? { showAuthCard: false } : {})
+      })),
+
       currentTheme: "system",
       setCurrentTheme: (newTheme) => set({ currentTheme: newTheme }),
     }),
