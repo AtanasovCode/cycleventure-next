@@ -84,11 +84,7 @@ function ProductPreviewPageContent() {
                         <ProductPreviewSkeleton />
                     ) : (
                         product ? (
-                            <Product
-                                product={product}
-                                selectedSize={selectedSize}
-                                setSelectedSize={setSelectedSize}
-                            />
+                            <Product />
                         ) : (
                             <div>
                                 Product not found

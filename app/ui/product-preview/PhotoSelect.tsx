@@ -1,5 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
+import { useProductStore } from "@/useProductStore";
 
 type SelectProps = {
     photos: string[];
@@ -7,14 +8,17 @@ type SelectProps = {
     setCurrentPhotoIdx: (value: number) => void;
 }
 
-export default function PhotoSelect({
-    photos, 
-    currentPhotoIdx,
-    setCurrentPhotoIdx, 
-}: SelectProps) {
+export default function PhotoSelect() {
+
+    const {
+        product,
+        currentPhotoIdx,
+        setCurrentPhotoIdx,
+    } = useProductStore();
+
     return (
         <div className="flex flex-wrap items-center justify-start gap-2">
-            {photos.map((photo, idx) => {
+            {product?.photos.map((photo, idx) => {
                 return (
                     <div
                         key={idx}

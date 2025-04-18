@@ -40,6 +40,8 @@ interface ProductState {
     setPreviewLoading: (previewLoading: boolean) => void;
     selectedSize: string | null;
     setSelectedSize: (selectedSize: string) => void;
+    currentPhotoIdx: number;
+    setCurrentPhotoIdx: (number: number) => void;
 }
 
 export const useProductStore = create<ProductState>()(
@@ -99,6 +101,8 @@ export const useProductStore = create<ProductState>()(
             setPreviewLoading: (previewLoading) => set({ previewLoading }),
             selectedSize: null,
             setSelectedSize: (selectedSize) => set({ selectedSize }),
+            currentPhotoIdx: 0,
+            setCurrentPhotoIdx: (number) => set({ currentPhotoIdx: number }),
         }),
         {
             name: 'product-storage',
