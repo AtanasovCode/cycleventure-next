@@ -46,13 +46,34 @@ export default function MainPhoto() {
             </div>
             {
                 product?.photos[currentPhotoIdx] ? (
-                    <NextImage
-                        src={product?.photos[currentPhotoIdx]}
-                        alt={`Photo of bike: ${product?.name}, bike brand: ${product?.brand}`}
-                        width={1920}
-                        height={1440}
-                        className=""
-                    />
+                    <div
+                        className="relative w-full overflow-hidden group"
+                        onMouseMove={(e) => {
+                            const target = e.currentTarget;
+                            const rect = target.getBoundingClientRect();
+                            const x = ((e.clientX - rect.left) / rect.width) * 100;
+                            const y = ((e.clientY - rect.top) / rect.height) * 100;
+                            const image = target.querySelector("img") as HTMLImageElement;
+                            if (image) {
+                                image.style.transformOrigin = `${x}% ${y}%`;
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            const image = e.currentTarget.querySelector("img") as HTMLImageElement;
+                            if (image) {
+                                image.style.transformOrigin = "center center";
+                            }
+                        }}
+                    >
+                        <NextImage
+                            src={product?.photos[currentPhotoIdx]}
+                            alt={`Photo of bike: ${product?.name}, bike brand: ${product?.brand}`}
+                            width={1920}
+                            height={1440}
+                            className="transition-transform duration-300 ease-in-out scale-100 group-hover:lg:scale-[300%] object-cover w-full h-full"
+                        />
+                    </div>
+
                 ) : (
                     <div>
                         Couldn't find photo
