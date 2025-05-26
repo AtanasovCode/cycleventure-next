@@ -1,29 +1,23 @@
 import clsx from "clsx";
 import { formatMoney } from "@/app/lib/utils";
+import { useProductStore } from "@/useProductStore";
 
-type PriceProps = {
-    price: number;
-    isOnSale: boolean;
-    finalPrice: number;
-}
+export default function ProductPrice() {
 
-export default function ProductPrice({
-    price,
-    finalPrice,
-    isOnSale,
-}: PriceProps) {
+    const { product } = useProductStore();
+
     return (
         <div className="flex items-center justify-start gap-2">
             <div className="text-inherit">
                 {
-                    formatMoney.format(finalPrice)
+                    formatMoney.format(product ? product.final_price : 0)
                 }
             </div>
             <div className={clsx(
                 "text-slate-400 text-xs",
                 {
-                    "hidden": !isOnSale,
-                    "inline-block": isOnSale
+                    "hidden": !product?.isOnSale,
+                    "inline-block": product?.isOnSale
                 }
             )}>
                 ●
@@ -31,12 +25,12 @@ export default function ProductPrice({
             <div className={clsx(
                 "line-through text-slate-400 text-base",
                 {
-                    "hidden": !isOnSale,
-                    "inline-block": isOnSale
+                    "hidden": !product?.isOnSale,
+                    "inline-block": product?.isOnSale
                 }
             )}>
                 {
-                    formatMoney.format(price)
+                    formatMoney.format(product ? product.price : 0)
                 }
             </div>
         </div>

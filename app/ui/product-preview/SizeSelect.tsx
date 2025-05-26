@@ -1,22 +1,24 @@
 import clsx from "clsx";
 import AlertIcon from "@/app/assets/icons/alert-icon.svg";
 import Checkmark from "@/app/assets/icons/checkmark.svg";
+import { useProductStore } from "@/useProductStore";
 
 type SizeProps = {
-    sizes: string[];
-    selectedSize: string | null;
-    setSelectedSize: (value: string) => void;
     sizeError: boolean;
     setSizeError: (value: boolean) => void;
 }
 
 export default function SizeSelect({
-    sizes,
-    selectedSize,
-    setSelectedSize,
     sizeError,
     setSizeError,
 }: SizeProps) {
+
+    const {
+        product,
+        selectedSize,
+        setSelectedSize,
+    } = useProductStore();
+
     return (
         <div className="w-full flex flex-col items-start justify-center gap-4 mt-4">
             <div className="font-bold relative w-full flex flex-col items-start justify-center gap-2">
@@ -40,7 +42,7 @@ export default function SizeSelect({
             </div>
             <div className="grid grid-cols-2 w-full gap-4">
                 {
-                    sizes.map((size) => {
+                    product?.sizes.map((size) => {
                         return (
                             <div
                                 key={size}

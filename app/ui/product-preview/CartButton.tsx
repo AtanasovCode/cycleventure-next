@@ -8,24 +8,24 @@ import { fetchUserCart } from "@/app/lib/data";
 import CartAddIcon from "@/app/assets/icons/cart-add.svg";
 import CartCheckIcon from "@/app/assets/icons/cart-check.svg";
 import { useCartStore } from "@/useCartStore";
+import { useProductStore } from "@/useProductStore";
 
 type ButtonProps = {
-    product: ProductTypes;
-    selectedSize: string | null;
     quantity: number;
     setSizeError: (value: boolean) => void;
-    productID: string;
 }
 
 export default function CartButton({
-    product,
-    selectedSize,
-    quantity,
     setSizeError,
-    productID,
+    quantity,
 }: ButtonProps) {
 
     const supabase = createClient();
+
+    const {
+        product,
+        selectedSize,
+    } = useProductStore();
 
     const {
         userCart, setUserCart,
@@ -49,10 +49,10 @@ export default function CartButton({
         const updatedLocalCart = currentLocalCart ? JSON.parse(currentLocalCart) : [];
 
         const data = {
-            id: product.id,
-            product_id: product.id,
-            name: product.name,
-            final_price: product.final_price * quantity,
+            id: product?.id,
+            product_id: product?.id,
+            name: product?.name,
+            final_price: product?.final_price ? product.final_price * quantity : 0,
             photo: product?.photos[0],
             size: selectedSize,
             quantity: quantity,
@@ -86,23 +86,23 @@ export default function CartButton({
 
         if (itemInCart) return;
 
-        if (!user) {
+        if (!user || !product) {
             console.log("User is not authenticated, storing item to local cart");
             addToCartWithoutAuth();
             return;
         }
 
-        addToCart(user.id, product.id, quantity, selectedSize).then(() => {
+        addToCart(user.id, product?.id, quantity, selectedSize).then(() => {
             refreshCart();
         })
     };
 
     useEffect(() => {
-        const userCartHasItem = userCart?.some((item) => item.product_id === productID);
-        const localCartHasItem = localCart?.some((item) => item.product_id === productID);
+        const userCartHasItem = userCart?.some((item) => item.product_id === product?.id);
+        const localCartHasItem = localCart?.some((item) => item.product_id === product?.id);
 
         setItemInCart(userCartHasItem || localCartHasItem);
-    }, [localCart, userCart, productID])
+    }, [localCart, userCart, product?.id])
 
     return (
         <button
