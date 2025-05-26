@@ -1,18 +1,14 @@
 'use client';
 
-import { Suspense, useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { Suspense, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductPreviewSkeleton } from "@/app/ui/Skeletons";
 import { useProductStore } from "@/useProductStore";
 import {
     fetchSelectedProduct,
-    fetchUserCart,
-    fetchUserData,
 } from "@/app/lib/data";
 import Navigation from "@/app/ui/Navigation";
 import Product from "@/app/ui/product-preview/Product";
-import { ProductTypes } from "@/app/types/product-types";
 
 export default function ProductPreview() {
     return (

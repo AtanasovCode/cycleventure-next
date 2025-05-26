@@ -10,7 +10,6 @@ export default function ProductDetails() {
 
     const {
         product,
-        selectedSize,
     } = useProductStore();
 
     const [sizeNotSelectedError, setSizeNotSelectedError] = useState<boolean>(false);
@@ -25,7 +24,7 @@ export default function ProductDetails() {
                 <ProductCategories />
             </div>
             <div className="font-bold text-2xl text-text">
-                <ProductPrice />
+                {product && <ProductPrice product={product} />}
             </div>
             <div>
                 {product?.description}

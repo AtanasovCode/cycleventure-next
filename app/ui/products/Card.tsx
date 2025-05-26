@@ -42,7 +42,7 @@ export default function Card({ product }: CardType) {
                     <h1 className="font-bold text-xl text-center">{product.name}</h1>
                 </div>
                 <div className="text-sm">
-                    <ProductPrice  />
+                    <ProductPrice product={product} />
                 </div>
             </div>
         </div>
